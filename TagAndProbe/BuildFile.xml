@@ -1,0 +1,10 @@
+<use name="root"/>
+<use name="CLHEP"/>
+<use name="DataFormats/PatCandidates"/>
+<use name="DataFormats/Candidate"/>
+
+<flags CPPDEFINES="CMSSW_VERSION=1300"/>
+
+<export>
+  <lib   name="1"/>
+</export>

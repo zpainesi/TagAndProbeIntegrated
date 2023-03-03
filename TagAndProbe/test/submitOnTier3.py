@@ -33,8 +33,10 @@ parser.add_option("--nJobs",      dest="nJobs",        type=int, default=None, h
 parser.add_option("--run",        dest="run",          type=str, default=None, help="Run2 or Run3 dataset")
 parser.add_option("--queue",      dest="queue",        type=str, default=None, help="long or short queue")
 
+parser.add_option("--objType",    dest="objType",      type=str, default=None, help="ele, or tau objects types")
 parser.add_option("--jobType",    dest="jobType",      type=str, default=None, help="noTagAndProbe, tagAndProbe, reEmulL1_zeroBias, reEmulL1_MC job types")
-parser.add_option("--allBXs",     dest="allBXs",       type=str, default=None, help="Store allBXs or only BX=0? (option valid onluy for reEmulL1_zeroBias jobs)")
+parser.add_option("--allBXs",     dest="allBXs",       type=str, default="0",  help="Store allBXs or only BX=0? (option valid only for reEmulL1_zeroBias jobs)")
+parser.add_option("--simHcalTP",  dest="simHcalTP",    type=str, default="0",  help="Re-emulate HCAL TP from RAW? (option valid only for reEmulL1_zeroBias jobs)")
 parser.add_option("--caloParams", dest="caloParams",   type=str, default=None, help="Which caloParams to use")
 parser.add_option("--globalTag",  dest="globalTag",    type=str, default=None, help="Which globalTag to use")
 
@@ -60,11 +62,10 @@ run = options.run
 queue = options.queue
 
 jobtype = options.jobType
+allBXs = options.allBXs
+simHcalTP = options.simHcalTP
 caloParams = options.caloParams
 globalTag = options.globalTag
-
-isNU = "0"
-if "Neutrino" in options.inFileList: isNU = "1"
 
 os.system('mkdir -p ' + folder)
 files = [f.strip() for f in filelist]
@@ -85,17 +86,18 @@ for idx, block in enumerate(fileblocks):
     jobfilelist.close()
 
     if jobtype == "noTagAndProbe":
-        cmsRun = "cmsRun noTagAndProbe.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" globalTag="+globalTag+" >& "+outLogName
+        cmsRun = "cmsRun "+options.objType+"_noTagAndProbe.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" globalTag="+globalTag+" >& "+outLogName
 
     if jobtype == "tagAndProbe":
-        if run == "Run3": cmsRun = "cmsRun tagAndProbeRun3.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" JSONfile="+JSONfile+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName
-        if run == "Run2": cmsRun = "cmsRun tagAndProbeRun2.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" JSONfile="+JSONfile+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName
+        if run == "Run3": cmsRun = "cmsRun "+options.objType+"_tagAndProbeRun3.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" JSONfile="+JSONfile+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName
+        if run == "Run2": cmsRun = "cmsRun "+options.objType+"_tagAndProbeRun2.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" JSONfile="+JSONfile+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName
 
     if jobtype == "reEmulL1_zeroBias":
-        cmsRun = "cmsRun reEmulL1_zeroBias.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" caloParams="+caloParams+" globalTag="+globalTag+" allBXs="+allBXs+" >& "+outLogName
+        if JSONfile == "None": cmsRun = "cmsRun reEmulL1_zeroBias.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" caloParams="+caloParams+" globalTag="+globalTag+" allBXs="+allBXs+" simHcalTP="+simHcalTP+" >& "+outLogName
+        else:                  cmsRun = "cmsRun reEmulL1_zeroBias.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" caloParams="+caloParams+" globalTag="+globalTag+" allBXs="+allBXs+" simHcalTP="+simHcalTP+" JSONfile="+JSONfile+" >& "+outLogName
 
     if jobtype == "reEmulL1_MC":
-        cmsRun = "cmsRun reEmulL1_MC.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" isNU="+isNU+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName
+        cmsRun = "cmsRun reEmulL1_MC.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName
 
 
     skimjob = open (outJobName, 'w')
@@ -113,3 +115,5 @@ for idx, block in enumerate(fileblocks):
     command = ('/home/llr/cms/motta/t3submit -'+queue+' \'' + outJobName +"\'")
     print(command)
     os.system (command)
+    # break
+

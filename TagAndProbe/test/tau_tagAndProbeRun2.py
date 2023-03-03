@@ -32,7 +32,7 @@ options.parseArguments()
 
 process = cms.Process("TagAndProbe", eras.Run2_2018)
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.load('TagAndProbeIntegrated.TagAndProbe.tagAndProbeRun2_cff')
+process.load('TagAndProbeIntegrated.TagAndProbe.tau_tagAndProbeRun2_cff')
 process.load(options.caloParams)
 
 process.GlobalTag.globaltag = options.globalTag

@@ -4,6 +4,7 @@ import FWCore.ParameterSet.VarParsing as VarParsing
 import FWCore.PythonUtilities.LumiList as LumiList
 import FWCore.ParameterSet.Config as cms
 from Configuration.StandardSequences.Eras import eras
+import os
 
 options = VarParsing.VarParsing ('analysis')
 options.register ('skipEvents',
@@ -16,11 +17,6 @@ options.register ('JSONfile',
                   VarParsing.VarParsing.multiplicity.singleton, # singleton or list
                   VarParsing.VarParsing.varType.string,          # string, int, or float
                   "JSON file (empty for no JSON)")
-options.register ('isNU',
-                  0, # default value
-                  VarParsing.VarParsing.multiplicity.singleton, # singleton or list
-                  VarParsing.VarParsing.varType.int,          # string, int, or float
-                  "is it SingleNeutrino Run3MC?")
 options.register ('caloParams',
                   "", # default value
                   VarParsing.VarParsing.multiplicity.singleton, # singleton or list
@@ -47,8 +43,16 @@ process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cf
 process.load('Configuration.StandardSequences.RawToDigi_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
-if options.isNU: process.load('TagAndProbeIntegrated.TagAndProbe.Run3nuMC_cff')
-else:            process.load('TagAndProbeIntegrated.TagAndProbe.zeroBias_cff')
+process.load('TagAndProbeIntegrated.TagAndProbe.zeroBias_cff')
+
+base = os.environ["CMSSW_BASE"]
+process.GlobalTag.toGet = cms.VPSet(
+        cms.PSet(record = cms.string("GEMeMapRcd"),
+                       tag = cms.string("GEMeMapDummy"),
+                       connect = cms.string("sqlite_file:" + base + "/src/L1Trigger/Configuration/test/GEMeMapDummy.db")
+                )
+)
+process.muonGEMDigis.useDBEMap = True
 
 process.GlobalTag.globaltag = options.globalTag
 
@@ -66,54 +70,6 @@ from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAWSimHcalTP
 process = L1TReEmulMCFromRAWSimHcalTP(process)
 
 process.load(options.caloParams)
-
-############################
-# PFA1' Filter
-# --> HCAL pu mitigation
-
-process.load("SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff")
-
-process.simHcalTriggerPrimitiveDigis.overrideDBweightsAndFilterHB = cms.bool(True)
-process.simHcalTriggerPrimitiveDigis.overrideDBweightsAndFilterHE = cms.bool(True)
-
-process.HcalTPGCoderULUT.overrideDBweightsAndFilterHB = cms.bool(True)
-process.HcalTPGCoderULUT.overrideDBweightsAndFilterHE = cms.bool(True)
-
-process.simHcalTriggerPrimitiveDigis.numberOfFilterPresamplesHBQIE11 = 1
-process.simHcalTriggerPrimitiveDigis.numberOfFilterPresamplesHEQIE11 = 1
-process.simHcalTriggerPrimitiveDigis.weightsQIE11 = {
-    "ieta1" :  [-0.47, 1.0],
-    "ieta2" :  [-0.47, 1.0],
-    "ieta3" :  [-0.47, 1.0],
-    "ieta4" :  [-0.47, 1.0],
-    "ieta5" :  [-0.47, 1.0],
-    "ieta6" :  [-0.47, 1.0],
-    "ieta7" :  [-0.47, 1.0],
-    "ieta8" :  [-0.47, 1.0],
-    "ieta9" :  [-0.47, 1.0],
-    "ieta10" : [-0.47, 1.0],
-    "ieta11" : [-0.47, 1.0],
-    "ieta12" : [-0.47, 1.0],
-    "ieta13" : [-0.47, 1.0],
-    "ieta14" : [-0.47, 1.0],
-    "ieta15" : [-0.47, 1.0],
-    "ieta16" : [-0.47, 1.0],
-    "ieta17" : [-0.47, 1.0],
-    "ieta18" : [-0.47, 1.0],
-    "ieta19" : [-0.47, 1.0],
-    "ieta20" : [-0.47, 1.0],
-    "ieta21" : [-0.43, 1.0],
-    "ieta22" : [-0.43, 1.0],
-    "ieta23" : [-0.43, 1.0],
-    "ieta24" : [-0.43, 1.0],
-    "ieta25" : [-0.43, 1.0],
-    "ieta26" : [-0.43, 1.0],
-    "ieta27" : [-0.43, 1.0],
-    "ieta28" : [-0.43, 1.0]
-}
-
-process.HcalTPGCoderULUT.contain1TSHB = True
-process.HcalTPGCoderULUT.contain1TSHE = True
 
 ############################
 

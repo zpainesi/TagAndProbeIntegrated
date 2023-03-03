@@ -31,9 +31,9 @@ goodTaus = cms.EDFilter("PATTauRefSelector",
                 'pt > 20 && abs(eta) < 2.1 ' #kinematics
                 '&& abs(charge) > 0 && abs(charge) < 2 ' #sometimes 2 prongs have charge != 1
                 '&& tauID("decayModeFinding") > 0.5 ' # tau ID
-                '&& tauID("byCombinedIsolationDeltaBetaCorrRaw3Hits") < 2.5 ' # tau iso - NOTE: can as well use boolean discriminators with WP                
-                '&& tauID("againstMuonTight3") > 0.5 ' # anti Muon tight
-                '&& tauID("againstElectronVLooseMVA6") > 0.5 ' # anti-Ele loose
+                '&& tauID("byMediumDeepTau2017v2p1VSjet") > 0.5 ' # anti-Jet medium
+                '&& tauID("byMediumDeepTau2017v2p1VSmu") > 0.5 ' # anti-Muon tight
+                '&& tauID("byLooseDeepTau2017v2p1VSe") > 0.5 ' # anti-Ele loose
         ),
         filter = cms.bool(True)
 )
@@ -42,8 +42,7 @@ genMatchedTaus = cms.EDFilter("genMatchTauFilter",
         taus = cms.InputTag("goodTaus")
     )
 
-# Ntuplizer.taus = cms.InputTag("genMatchedTaus")
-Ntuplizer_noTagAndProbe = cms.EDAnalyzer("Ntuplizer_noTagAndProbe",
+Ntuplizer_noTagAndProbe = cms.EDAnalyzer("TauNtuplizer_noTagAndProbe",
     treeName = cms.string("TagAndProbe"),
     genCollection = cms.InputTag("generator"),
     taus  = cms.InputTag("genMatchedTaus"),

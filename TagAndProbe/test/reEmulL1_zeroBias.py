@@ -26,6 +26,11 @@ options.register ('globalTag',
                   VarParsing.VarParsing.multiplicity.singleton, # singleton or list
                   VarParsing.VarParsing.varType.string,          # string, int, or float
                   "which globalTag to use?")
+options.register ('simHcalTP',
+                  0, # default value
+                  VarParsing.VarParsing.multiplicity.singleton, # singleton or list
+                  VarParsing.VarParsing.varType.int,          # string, int, or float
+                  "do L1TReEmulFromRAWsimHcalTP?")
 options.register ('allBXs',
                   0, # default value
                   VarParsing.VarParsing.multiplicity.singleton, # singleton or list
@@ -61,61 +66,10 @@ process.source = cms.Source("PoolSource",
 process.schedule = cms.Schedule()
 
 # re-emulate starting from TPs (here we re-emulate also the TPs)
-from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimHcalTP
-process = L1TReEmulFromRAWsimHcalTP(process)
+from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWSimHcalTP
+process = L1TReEmulFromRAWSimHcalTP(process)
 
 process.load(options.caloParams)
-
-############################
-# PFA1' Filter
-# --> HCAL pu mitigation
-
-process.load("SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff")
-
-process.simHcalTriggerPrimitiveDigis.overrideDBweightsAndFilterHB = cms.bool(True)
-process.simHcalTriggerPrimitiveDigis.overrideDBweightsAndFilterHE = cms.bool(True)
-
-process.HcalTPGCoderULUT.overrideDBweightsAndFilterHB = cms.bool(True)
-process.HcalTPGCoderULUT.overrideDBweightsAndFilterHE = cms.bool(True)
-
-process.simHcalTriggerPrimitiveDigis.numberOfFilterPresamplesHBQIE11 = 1
-process.simHcalTriggerPrimitiveDigis.numberOfFilterPresamplesHEQIE11 = 1
-process.simHcalTriggerPrimitiveDigis.weightsQIE11 = {
-    "ieta1" :  [-0.47, 1.0],
-    "ieta2" :  [-0.47, 1.0],
-    "ieta3" :  [-0.47, 1.0],
-    "ieta4" :  [-0.47, 1.0],
-    "ieta5" :  [-0.47, 1.0],
-    "ieta6" :  [-0.47, 1.0],
-    "ieta7" :  [-0.47, 1.0],
-    "ieta8" :  [-0.47, 1.0],
-    "ieta9" :  [-0.47, 1.0],
-    "ieta10" : [-0.47, 1.0],
-    "ieta11" : [-0.47, 1.0],
-    "ieta12" : [-0.47, 1.0],
-    "ieta13" : [-0.47, 1.0],
-    "ieta14" : [-0.47, 1.0],
-    "ieta15" : [-0.47, 1.0],
-    "ieta16" : [-0.47, 1.0],
-    "ieta17" : [-0.47, 1.0],
-    "ieta18" : [-0.47, 1.0],
-    "ieta19" : [-0.47, 1.0],
-    "ieta20" : [-0.47, 1.0],
-    "ieta21" : [-0.43, 1.0],
-    "ieta22" : [-0.43, 1.0],
-    "ieta23" : [-0.43, 1.0],
-    "ieta24" : [-0.43, 1.0],
-    "ieta25" : [-0.43, 1.0],
-    "ieta26" : [-0.43, 1.0],
-    "ieta27" : [-0.43, 1.0],
-    "ieta28" : [-0.43, 1.0]
-}
-
-process.HcalTPGCoderULUT.contain1TSHB = True
-process.HcalTPGCoderULUT.contain1TSHE = True
-
-# process.HcalTPGCoderULUT.containPhaseNSHB = 0.0 # For Run2 2018 Data
-# process.HcalTPGCoderULUT.containPhaseNSHE = 0.0 # For Run2 2018 Data
 
 ############################
 

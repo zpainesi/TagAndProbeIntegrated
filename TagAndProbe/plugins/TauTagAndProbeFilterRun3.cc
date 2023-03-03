@@ -69,7 +69,7 @@ bool TauTagAndProbeFilterRun3::filter(edm::Event & iEvent, edm::EventSetup const
     Handle<edm::View<pat::Electron> > electrons;
     iEvent.getByToken(_electronsTag, electrons);
 
-    // veto events with loose electrons (acytually not super sure that wp80 is loose)
+    // veto events with loose electrons (actually not super sure that wp80 is loose)
     for(const auto& ele : iEvent.get(_electronsTag) )
     {
         int isLooseID = ele.electronID("mvaEleID-Fall17-iso-V2-wp80");
@@ -114,7 +114,7 @@ bool TauTagAndProbeFilterRun3::filter(edm::Event & iEvent, edm::EventSetup const
     if (tausIdxPtVec.size() == 0) return false; // no tau found
     if (tausIdxPtVec.size() > 1) sort(tausIdxPtVec.begin(), tausIdxPtVec.end()); // sort if multiple taus
     int tauIdx = tausIdxPtVec.back().second; // min iso --> max MVA score
-    tau = (*tauHandle)[tauIdx]; // store most isolated tau that wil be used by the Ntuplizer
+    tau = (*tauHandle)[tauIdx]; // store most isolated tau that will be used by the Ntuplizer
 
 
     // ----------------- b-jets veto ---------------------

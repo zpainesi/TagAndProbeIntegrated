@@ -15,32 +15,27 @@ options.register ('JSONfile',
                   VarParsing.VarParsing.multiplicity.singleton, # singleton or list
                   VarParsing.VarParsing.varType.string,          # string, int, or float
                   "JSON file (empty for no JSON)")
-options.register ('caloParams',
-                  "", # default value
-                  VarParsing.VarParsing.multiplicity.singleton, # singleton or list
-                  VarParsing.VarParsing.varType.string,          # string, int, or float
-                  "which caloParams to use?")
 options.register ('globalTag',
                   "", # default value
                   VarParsing.VarParsing.multiplicity.singleton, # singleton or list
                   VarParsing.VarParsing.varType.string,          # string, int, or float
                   "which globalTag to use?")
-options.outputFile = 'NTuple_MC.root'
+options.outputFile = 'NTuple.root'
 options.inputFiles = []
 options.maxEvents  = -999
 options.parseArguments()
 
 process = cms.Process("TagAndProbe", eras.Run3)
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-process.load('TagAndProbeIntegrated.TagAndProbe.tagAndProbeRun3_cff')
-process.load(options.caloParams)
+process.load('TagAndProbeIntegrated.TagAndProbe.tau_noTagAndProbe_MC_cff')
 
 process.GlobalTag.globaltag = options.globalTag
 
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-        '/store/data/Run2016H/SingleMuon/MINIAOD/PromptReco-v2/000/282/092/00000/DE499C8E-1B8B-E611-8C93-02163E014207.root'
-    ),
+        # dummy for creation
+        '/store/mc/Run3Winter20DRPremixMiniAOD/VBFHToTauTau_M125_TuneCUETP8M1_14TeV_powheg_pythia8/MINIAODSIM/110X_mcRun3_2021_realistic_v6-v1/20000/4E5230EB-D05B-2E44-AB12-08F0A27D57A5.root'
+    )
 )
 
 if options.JSONfile:

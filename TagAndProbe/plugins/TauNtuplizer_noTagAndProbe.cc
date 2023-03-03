@@ -1,5 +1,5 @@
-#ifndef NTUPLIZER_NOTAGANDPROBE_H
-#define NTUPLIZER_NOTAGANDPROBE_H
+#ifndef TAUNTUPLIZER_NOTAGANDPROBE_H
+#define TAUNTUPLIZER_NOTAGANDPROBE_H
 
 #include <cmath>
 #include <vector>
@@ -60,12 +60,12 @@
   ██████  ███████  ██████ ███████ ██   ██ ██   ██ ██   ██    ██    ██  ██████  ██   ████
 */
 
-class Ntuplizer_noTagAndProbe : public edm::EDAnalyzer {
+class TauNtuplizer_noTagAndProbe : public edm::EDAnalyzer {
 public:
   /// Constructor
-  explicit Ntuplizer_noTagAndProbe(const edm::ParameterSet&);
+  explicit TauNtuplizer_noTagAndProbe(const edm::ParameterSet&);
   /// Destructor
-  virtual ~Ntuplizer_noTagAndProbe();
+  virtual ~TauNtuplizer_noTagAndProbe();
 
 private:
   //----edm control---
@@ -205,7 +205,7 @@ private:
 */
 
 // ----Constructor and Destructor -----
-Ntuplizer_noTagAndProbe::Ntuplizer_noTagAndProbe(const edm::ParameterSet& iConfig) :
+TauNtuplizer_noTagAndProbe::TauNtuplizer_noTagAndProbe(const edm::ParameterSet& iConfig) :
   _genTag         (consumes<GenEventInfoProduct>                    (iConfig.getParameter<edm::InputTag>("genCollection"))),
   _tauTag         (consumes<pat::TauRefVector>                      (iConfig.getParameter<edm::InputTag>("taus"))),
   _triggerObjects (consumes<pat::TriggerObjectStandAloneCollection> (iConfig.getParameter<edm::InputTag>("triggerSet"))),
@@ -245,10 +245,10 @@ Ntuplizer_noTagAndProbe::Ntuplizer_noTagAndProbe(const edm::ParameterSet& iConfi
   return;
 }
 
-Ntuplizer_noTagAndProbe::~Ntuplizer_noTagAndProbe()
+TauNtuplizer_noTagAndProbe::~TauNtuplizer_noTagAndProbe()
 {}
 
-void Ntuplizer_noTagAndProbe::beginRun(edm::Run const& iRun, edm::EventSetup const& iSetup)
+void TauNtuplizer_noTagAndProbe::beginRun(edm::Run const& iRun, edm::EventSetup const& iSetup)
 {
 
   Bool_t changedConfig = false;
@@ -278,7 +278,7 @@ void Ntuplizer_noTagAndProbe::beginRun(edm::Run const& iRun, edm::EventSetup con
 
 }
 
-void Ntuplizer_noTagAndProbe::Initialize() {
+void TauNtuplizer_noTagAndProbe::Initialize() {
 
   this -> _indexevents = 0;
   this -> _runNumber = 0;
@@ -361,7 +361,7 @@ void Ntuplizer_noTagAndProbe::Initialize() {
 }
 
 
-void Ntuplizer_noTagAndProbe::beginJob()
+void TauNtuplizer_noTagAndProbe::beginJob()
 {
   edm::Service<TFileService> fs;
   this -> _tree = fs -> make<TTree>(this -> _treeName.c_str(), this -> _treeName.c_str());
@@ -449,19 +449,19 @@ void Ntuplizer_noTagAndProbe::beginJob()
 }
 
 
-void Ntuplizer_noTagAndProbe::endJob()
+void TauNtuplizer_noTagAndProbe::endJob()
 {
   return;
 }
 
 
-void Ntuplizer_noTagAndProbe::endRun(edm::Run const& iRun, edm::EventSetup const& iSetup)
+void TauNtuplizer_noTagAndProbe::endRun(edm::Run const& iRun, edm::EventSetup const& iSetup)
 {
   return;
 }
 
 
-void Ntuplizer_noTagAndProbe::analyze(const edm::Event& iEvent, const edm::EventSetup& eSetup)
+void TauNtuplizer_noTagAndProbe::analyze(const edm::Event& iEvent, const edm::EventSetup& eSetup)
 {
   this -> Initialize();
 
@@ -667,7 +667,7 @@ void Ntuplizer_noTagAndProbe::analyze(const edm::Event& iEvent, const edm::Event
 
 }
 
-bool Ntuplizer_noTagAndProbe::hasFilters(const pat::TriggerObjectStandAlone&  obj , const std::vector<std::string>& filtersToLookFor) {
+bool TauNtuplizer_noTagAndProbe::hasFilters(const pat::TriggerObjectStandAlone&  obj , const std::vector<std::string>& filtersToLookFor) {
 
   const std::vector<std::string>& eventLabels = obj.filterLabels();
   for (const std::string& filter : filtersToLookFor)
@@ -690,7 +690,7 @@ bool Ntuplizer_noTagAndProbe::hasFilters(const pat::TriggerObjectStandAlone&  ob
   return true;
 }
 
-int Ntuplizer_noTagAndProbe::FillJet(const edm::View<pat::Jet> *jets, const edm::Event& event){//, JetCorrectionUncertainty* jecUnc){
+int TauNtuplizer_noTagAndProbe::FillJet(const edm::View<pat::Jet> *jets, const edm::Event& event){//, JetCorrectionUncertainty* jecUnc){
   int nJets=0;
   vector <pair<float, int>> softLeptInJet; // pt, idx
   for(edm::View<pat::Jet>::const_iterator ijet = jets->begin(); ijet!=jets->end();++ijet){
@@ -838,6 +838,6 @@ int Ntuplizer_noTagAndProbe::FillJet(const edm::View<pat::Jet> *jets, const edm:
 
 
 #include <FWCore/Framework/interface/MakerMacros.h>
-DEFINE_FWK_MODULE(Ntuplizer_noTagAndProbe);
+DEFINE_FWK_MODULE(TauNtuplizer_noTagAndProbe);
 
-#endif //NTUPLIZER_NOTAGANDPROBE_H
+#endif //TAUNTUPLIZER_NOTAGANDPROBE_H

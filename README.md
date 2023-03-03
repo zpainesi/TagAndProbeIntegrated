@@ -1,5 +1,8 @@
-# TauTagAndProbe
-Set of tools to evaluate eg/tau trigger performance on T&amp;P, and produce Layer-2 calibrations 
+# TagAndProbe
+Set of tools to evaluate eg/tau trigger performance on T&amp;P, and produce Layer-2 calibrations
+This is based on the following two prior tools:
+1. https://github.com/jonamotta/TauTagAndProbe
+2. https://github.com/jonamotta/TauObjectsOptimization
 
 ## Install instructions
 ```bash
@@ -12,7 +15,7 @@ git fetch cms-l1t-offline l1t-integration-CMSSW_13_0_0_pre2
 git cms-merge-topic -u cms-l1t-offline:l1t-integration-v141-CMSSW_13_0_0_pre2
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
 
-git clone git@github.com:jonamotta/TauTagAndProbe2.0.git -b CMSSW_13_0_0_pre2-l1t-integration-v142
+git clone git@github.com:jonamotta/TagAndProbeIntegrated.git -b CMSSW_13_0_0_pre2-l1t-integration-v142
 
 git cms-checkdeps -A -a
 
@@ -47,7 +50,6 @@ Jobs on ***Data*** are submitted using `submitOnTier3_reEmulL1_zeroBias.py` whic
 Before launching this you need to fix
 * the `isMC` flag
 * the input folder and file list
-The datasets that have to be used are among the ones listed here: https://twiki.cern.ch/twiki/bin/viewauth/CMS/TriggerStudiesChangesInDataTaking2018
 
 For Monte Carlo (MC), we implemented a truth matching rather than a Tag & Probe technique which would dramatically and artificially decrease the available statistics.
 
@@ -61,31 +63,4 @@ The optimization is run in several sequential steps:
 * Prodution of turnon curves
 * Evaluation of the L1 rate
 
-All of this steps for the optimization are done using this second tool: https://github.com/jonamotta/TauObjectsOptimization
-
 Due to the package's lack of forward-compatibility with CMSSW, the optimzation is run into CMSSW_11_0_2.
-
-## Ntuples content
-The Ntuple produced that way contain basic tau offline quantities (kinematics, DM, various discriminators) + bits corresponding to various HLT triggers (tauTriggerBits variable) + L1-HLT specific variables (for expert user).
-
-The events stored pass basic mu+tauh T&P selections (OS requirement not applied for filter! isOS variable stored in Ntuple).
-
-The tree triggerNames has the name of all the HLT paths included in the tauTriggerBits variable.
-
-This can be checked for instance with
-```
-triggerNames->Scan("triggerNames","","colsize=100")
-*******************************************************************************************************************
-*    Row   *                                                                                         triggerNames *
-*******************************************************************************************************************
-*        0 *                                                 HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_SingleL1_v *
-*        1 *                                         HLT_IsoMu24_eta2p1_LooseChargedIsoPFTau20_TightID_SingleL1_v *
-*        2 *                                                HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_SingleL1_v *
-*        3 *                                        HLT_IsoMu24_eta2p1_MediumChargedIsoPFTau20_TightID_SingleL1_v *
-*        4 *                                                 HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_SingleL1_v *
-*        5 *                                         HLT_IsoMu24_eta2p1_TightChargedIsoPFTau20_TightID_SingleL1_v *
-...
-```
-The Row of the path correspond to the bit number in the tauTriggerBits variable.
-
-In the example presented here, the decision of the MediumChargedIsoPFTau20 leg can be checked for instance by requiring (tauTriggerBits>>2)&1 (matching with tag muon + offline tau of 0.5 included).

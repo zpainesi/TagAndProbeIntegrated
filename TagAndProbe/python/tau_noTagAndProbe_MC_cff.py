@@ -39,8 +39,8 @@ goodTaus = cms.EDFilter("PATTauRefSelector",
 )
 
 genMatchedTaus = cms.EDFilter("genMatchTauFilter",
-        taus = cms.InputTag("goodTaus")
-    )
+    taus = cms.InputTag("goodTaus")
+)
 
 Ntuplizer_noTagAndProbe = cms.EDAnalyzer("TauNtuplizer_noTagAndProbe",
     treeName = cms.string("TagAndProbe"),

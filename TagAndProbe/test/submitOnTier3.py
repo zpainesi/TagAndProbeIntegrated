@@ -117,7 +117,7 @@ for idx, block in enumerate(fileblocks):
     skimjob.close ()
 
     os.system ('chmod u+rwx ' + outJobName)
-    command = ('/home/llr/cms/motta/t3submit -'+queue+' \'' + outJobName +"\'")
+    command = ('/home/llr/cms/'+user+'/t3submit -'+queue+' \'' + outJobName +"\'")
     print(command)
     if not options.no_exec: os.system (command)
     break

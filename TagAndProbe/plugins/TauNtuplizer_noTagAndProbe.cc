@@ -824,13 +824,13 @@ int TauNtuplizer_noTagAndProbe::FillJet(const edm::View<pat::Jet> *jets, const e
     _jets_leptonPt    .push_back (leptonPt);
     _jets_leptonDeltaR.push_back (leptonDeltaR);
 
-    //cout << "     --> jet pt, eta, phi: " << vJet.Pt() << " " << vJet.Eta() << " " << vJet.Phi() << endl;
-    //cout << "     --> sum pt, eta, phi: " << vSum.Pt() << " " << vSum.Eta() << " " << vSum.Phi() << endl;
-    //if (abs(ijet->hadronFlavour()) == 5 ) cout << "     ------------ THIS WAS A B JET ------------" << endl;
-    //cout << "RAW pt: " << jetRawPt << " | " << jetRawPt2 << " --> " << vSum.Pt() << endl;
-    //jecUnc->setJetEta(ijet->eta());
-    //jecUnc->setJetPt(ijet->pt()); // here you must use the CORRECTED jet pt
-    //_jets_jecUnc.push_back(jecUnc->getUncertainty(true));
+    // cout << "     --> jet pt, eta, phi: " << vJet.Pt() << " " << vJet.Eta() << " " << vJet.Phi() << endl;
+    // cout << "     --> sum pt, eta, phi: " << vSum.Pt() << " " << vSum.Eta() << " " << vSum.Phi() << endl;
+    // if (abs(ijet->hadronFlavour()) == 5 ) cout << "     ------------ THIS WAS A B JET ------------" << endl;
+    // cout << "RAW pt: " << jetRawPt << " | " << jetRawPt2 << " --> " << vSum.Pt() << endl;
+    // jecUnc->setJetEta(ijet->eta());
+    // jecUnc->setJetPt(ijet->pt()); // here you must use the CORRECTED jet pt
+    // _jets_jecUnc.push_back(jecUnc->getUncertainty(true));
   }
 
   return nJets;

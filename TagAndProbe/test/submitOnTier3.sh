@@ -147,7 +147,7 @@ python submitOnTier3.py --inFileList MC_for_taus/GluGluHToTauTau_M-125_TuneCP5_1
                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_cfi
 
 python submitOnTier3.py --inFileList MC_for_taus/GluGluHToTauTau_M-125_TuneCP5_13p6TeV_powheg-pythia8__Run3Summer22EEDR-Poisson70KeepRAW_124X_mcRun3_2022_realistic_postEE_v1-v3__GEN-SIM-RAW.txt \
-                        --outFolder Run3preparation_2023/2023_03_04_optimizationV0/GluGluHToTauTau_Poisson70KeepRAW_124X_mcRun3_2022_realistic_postEE_RAW\
+                        --outFolder Run3preparation_2023/2023_03_04_optimizationV0/GluGluHToTauTau_Poisson70KeepRAW_124X_mcRun3_2022_realistic_postEE_RAW \
                         --jobType reEmulL1_MC \
                         --inJson None \
                         --nJobs 175 \

@@ -32,6 +32,7 @@ parser.add_option("--outFolder",  dest="outFolder",    type=str, default=None, h
 parser.add_option("--nJobs",      dest="nJobs",        type=int, default=None, help="Number of jobs to run per filelist")
 parser.add_option("--run",        dest="run",          type=str, default=None, help="Run2 or Run3 dataset")
 parser.add_option("--queue",      dest="queue",        type=str, default=None, help="long or short queue")
+parser.add_option("--no_exec",    dest="no_exec",      action='store_true', default=False, help="stop execution")
 
 parser.add_option("--objType",    dest="objType",      type=str, default=None, help="ele, or tau objects types")
 parser.add_option("--jobType",    dest="jobType",      type=str, default=None, help="noTagAndProbe, noTagAndProbeMT, tagAndProbe, reEmulL1_zeroBias, reEmulL1_MC job types")
@@ -42,14 +43,15 @@ parser.add_option("--globalTag",  dest="globalTag",    type=str, default=None, h
 
 (options, args) = parser.parse_args()
 
-infile_base  = "/home/llr/cms/motta/Run3preparation/CMSSW_13_0_0_pre2/src/TagAndProbeIntegrated/TagAndProbe/"
-outfile_base = "/data_CMS/cms/motta/Run3preparation/"
+infile_base  = os.getcwd()+'/../'
+user = infile_base.split('/')[5]
+outfile_base = "/data_CMS/cms/"+user+"/Run3preparation/"
 
 ###########
 
-print(infile_base+'inputFiles/'+options.inFileList)
+print(infile_base+'/inputFiles/'+options.inFileList)
 
-filelist = open(infile_base+'inputFiles/'+options.inFileList, 'r')
+filelist = open(infile_base+'/inputFiles/'+options.inFileList, 'r')
 
 # for line in filelist.readlines():
 #     print(line.strip())
@@ -117,6 +119,6 @@ for idx, block in enumerate(fileblocks):
     os.system ('chmod u+rwx ' + outJobName)
     command = ('/home/llr/cms/motta/t3submit -'+queue+' \'' + outJobName +"\'")
     print(command)
-    os.system (command)
-    # break
+    if not options.no_exec: os.system (command)
+    break
 

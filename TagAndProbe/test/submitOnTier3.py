@@ -120,5 +120,5 @@ for idx, block in enumerate(fileblocks):
     command = ('/home/llr/cms/'+user+'/t3submit -'+queue+' \'' + outJobName +"\'")
     print(command)
     if not options.no_exec: os.system (command)
-    break
+    # break
 

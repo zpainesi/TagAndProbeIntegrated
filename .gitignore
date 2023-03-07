@@ -8,3 +8,7 @@ fit.exe
 *#*
 *.d
 *._*
+*/.DS_Store
+.DS_Store
+__pycache__
+__init__.py

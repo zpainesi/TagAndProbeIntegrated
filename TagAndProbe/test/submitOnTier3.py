@@ -34,7 +34,7 @@ parser.add_option("--run",        dest="run",          type=str, default=None, h
 parser.add_option("--queue",      dest="queue",        type=str, default=None, help="long or short queue")
 
 parser.add_option("--objType",    dest="objType",      type=str, default=None, help="ele, or tau objects types")
-parser.add_option("--jobType",    dest="jobType",      type=str, default=None, help="noTagAndProbe, tagAndProbe, reEmulL1_zeroBias, reEmulL1_MC job types")
+parser.add_option("--jobType",    dest="jobType",      type=str, default=None, help="noTagAndProbe, noTagAndProbeMT, tagAndProbe, reEmulL1_zeroBias, reEmulL1_MC job types")
 parser.add_option("--allBXs",     dest="allBXs",       type=str, default="0",  help="Store allBXs or only BX=0? (option valid only for reEmulL1_zeroBias jobs)")
 parser.add_option("--simHcalTP",  dest="simHcalTP",    type=str, default="0",  help="Re-emulate HCAL TP from RAW? (option valid only for reEmulL1_zeroBias jobs)")
 parser.add_option("--caloParams", dest="caloParams",   type=str, default=None, help="Which caloParams to use")
@@ -87,6 +87,9 @@ for idx, block in enumerate(fileblocks):
 
     if jobtype == "noTagAndProbe":
         cmsRun = "cmsRun "+options.objType+"_noTagAndProbe.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" globalTag="+globalTag+" >& "+outLogName
+
+    if jobtype == "noTagAndProbeMT":
+        cmsRun = "cmsRun "+options.objType+"_noTagAndProbe_multipleTaus.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" globalTag="+globalTag+" >& "+outLogName
 
     if jobtype == "tagAndProbe":
         if run == "Run3": cmsRun = "cmsRun "+options.objType+"_tagAndProbeRun3.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" JSONfile="+JSONfile+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName

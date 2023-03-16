@@ -26,11 +26,6 @@ options.register ('globalTag',
                   VarParsing.VarParsing.multiplicity.singleton, # singleton or list
                   VarParsing.VarParsing.varType.string,          # string, int, or float
                   "which globalTag to use?")
-options.register ('simHcalTP',
-                  0, # default value
-                  VarParsing.VarParsing.multiplicity.singleton, # singleton or list
-                  VarParsing.VarParsing.varType.int,          # string, int, or float
-                  "do L1TReEmulFromRAWsimHcalTP?")
 options.register ('allBXs',
                   0, # default value
                   VarParsing.VarParsing.multiplicity.singleton, # singleton or list
@@ -66,8 +61,8 @@ process.source = cms.Source("PoolSource",
 process.schedule = cms.Schedule()
 
 # re-emulate starting from TPs (here we re-emulate also the TPs)
-from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWSimHcalTP
-process = L1TReEmulFromRAWSimHcalTP(process)
+from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimHcalTP
+process = L1TReEmulFromRAWsimHcalTP(process)
 
 process.load(options.caloParams)
 

@@ -35,9 +35,8 @@ parser.add_option("--queue",      dest="queue",        type=str, default=None, h
 parser.add_option("--no_exec",    dest="no_exec",      action='store_true', default=False, help="stop execution")
 
 parser.add_option("--objType",    dest="objType",      type=str, default=None, help="ele, or tau objects types")
-parser.add_option("--jobType",    dest="jobType",      type=str, default=None, help="noTagAndProbe, noTagAndProbeMT, tagAndProbe, reEmulL1_zeroBias, reEmulL1_MC job types")
+parser.add_option("--jobType",    dest="jobType",      type=str, default=None, help="AOD2MINIAOD, noTagAndProbe, noTagAndProbeAOD, noTagAndProbeMT, tagAndProbe, reEmulL1_zeroBias, reEmulL1_MC job types")
 parser.add_option("--allBXs",     dest="allBXs",       type=str, default="0",  help="Store allBXs or only BX=0? (option valid only for reEmulL1_zeroBias jobs)")
-parser.add_option("--simHcalTP",  dest="simHcalTP",    type=str, default="0",  help="Re-emulate HCAL TP from RAW? (option valid only for reEmulL1_zeroBias jobs)")
 parser.add_option("--caloParams", dest="caloParams",   type=str, default=None, help="Which caloParams to use")
 parser.add_option("--globalTag",  dest="globalTag",    type=str, default=None, help="Which globalTag to use")
 
@@ -59,13 +58,12 @@ filelist = open(infile_base+'/inputFiles/'+options.inFileList, 'r')
 
 folder = outfile_base+options.outFolder
 njobs = options.nJobs
-JSONfile = infile_base+'/DataCertificationJsons/'+options.inJson
+JSONfile = infile_base+'/DataCertificationJsons/'+str(options.inJson)
 run = options.run
 queue = options.queue
 
 jobtype = options.jobType
 allBXs = options.allBXs
-simHcalTP = options.simHcalTP
 caloParams = options.caloParams
 globalTag = options.globalTag
 
@@ -79,6 +77,7 @@ fileblocks = splitInBlocks (files, njobs)
 
 for idx, block in enumerate(fileblocks):
     outRootName = folder + '/Ntuple_' + str(idx) + '.root'
+    if jobtype == "AOD2MINIAOD": outRootName = folder + '/MiniAOD_Ntuple_' + str(idx) + '.root'
     outJobName  = folder + '/job_' + str(idx) + '.sh'
     outListName = folder + "/filelist_" + str(idx) + ".txt"
     outLogName  = folder + "/log_" + str(idx) + ".txt"
@@ -93,17 +92,21 @@ for idx, block in enumerate(fileblocks):
     if jobtype == "noTagAndProbeMT":
         cmsRun = "cmsRun "+options.objType+"_noTagAndProbe_multipleTaus.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" globalTag="+globalTag+" >& "+outLogName
 
+    if jobtype == "noTagAndProbeAOD":
+        cmsRun = "cmsRun "+options.objType+"_noTagAndProbe_AOD.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" globalTag="+globalTag+" >& "+outLogName
+
     if jobtype == "tagAndProbe":
         if run == "Run3": cmsRun = "cmsRun "+options.objType+"_tagAndProbeRun3.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" JSONfile="+JSONfile+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName
         if run == "Run2": cmsRun = "cmsRun "+options.objType+"_tagAndProbeRun2.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" JSONfile="+JSONfile+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName
 
     if jobtype == "reEmulL1_zeroBias":
-        if JSONfile == "None": cmsRun = "cmsRun reEmulL1_zeroBias.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" caloParams="+caloParams+" globalTag="+globalTag+" allBXs="+allBXs+" simHcalTP="+simHcalTP+" >& "+outLogName
-        else:                  cmsRun = "cmsRun reEmulL1_zeroBias.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" caloParams="+caloParams+" globalTag="+globalTag+" allBXs="+allBXs+" simHcalTP="+simHcalTP+" JSONfile="+JSONfile+" >& "+outLogName
+        cmsRun = "cmsRun reEmulL1_zeroBias.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" caloParams="+caloParams+" globalTag="+globalTag+" allBXs="+allBXs+" >& "+outLogName
 
     if jobtype == "reEmulL1_MC":
         cmsRun = "cmsRun reEmulL1_MC.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName
 
+    if jobtype == "AOD2MINIAOD":
+        cmsRun = "cmsRun "+options.objType+"_AOD2MINIAOD.py maxEvents=8000 inputFiles_load="+outListName+" outputFile="+outRootName+" >& "+outLogName
 
     skimjob = open (outJobName, 'w')
     skimjob.write ('#!/bin/bash\n')

@@ -2,5 +2,5 @@
 while :
 do
     source resubmitFileOpenError.sh
-    sleep 600
+    sleep 180
 done

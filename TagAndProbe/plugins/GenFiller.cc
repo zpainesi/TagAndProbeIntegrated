@@ -10,7 +10,7 @@
 #define DEBUG false
 
 #include <FWCore/Framework/interface/Frameworkfwd.h>
-#include <FWCore/Framework/interface/EDProducer.h>
+#include <FWCore/Framework/interface/one/EDProducer.h>
 #include <FWCore/Framework/interface/Event.h>
 #include <FWCore/Framework/interface/ESHandle.h>
 #include <FWCore/MessageLogger/interface/MessageLogger.h>
@@ -27,7 +27,7 @@ using namespace edm;
 using namespace std;
 using namespace reco;
 
-class GenFiller : public edm::EDProducer {
+class GenFiller : public edm::one::EDProducer<> {
  public:
   /// Constructor
   explicit GenFiller(const edm::ParameterSet&);

@@ -13,7 +13,7 @@
 #include <bitset>
 
 
-#include "FWCore/Framework/interface/EDAnalyzer.h"
+#include "FWCore/Framework/interface/one/EDAnalyzer.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include <FWCore/Framework/interface/Frameworkfwd.h>
 #include <FWCore/Framework/interface/Event.h>
@@ -45,7 +45,7 @@
 ██████  ███████  ██████ ███████ ██   ██ ██   ██ ██   ██    ██    ██  ██████  ██   ████
 */
 
-class EleNtuplizer_noTagAndProbe : public edm::EDAnalyzer {
+class EleNtuplizer_noTagAndProbe : public edm::one::EDAnalyzer<> {
     public:
         /// Constructor
         explicit EleNtuplizer_noTagAndProbe(const edm::ParameterSet&);

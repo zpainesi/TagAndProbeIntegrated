@@ -6,16 +6,16 @@ This is based on the following two prior tools:
 
 ## Install instructions
 ```bash
-cmsrel CMSSW_13_0_0_pre2
-cd CMSSW_13_0_0_pre2/src
+cmsrel CMSSW_13_0_0_pre4
+cd CMSSW_13_0_0_pre4/src
 cmsenv
 git cms-init
 git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
-git fetch cms-l1t-offline l1t-integration-CMSSW_13_0_0_pre2
-git cms-merge-topic -u cms-l1t-offline:l1t-integration-v141-CMSSW_13_0_0_pre2
+git fetch cms-l1t-offline l1t-integration-CMSSW_13_0_0_pre4
+git cms-merge-topic -u cms-l1t-offline:l1t-integration-v147
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
 
-git clone git@github.com:jonamotta/TagAndProbeIntegrated.git -b CMSSW_13_0_0_pre2-l1t-integration-v142
+git clone git@github.com:jonamotta/TagAndProbeIntegrated.git -b CMSSW_13_0_0_pre4-l1t-integration-v147
 
 git cms-checkdeps -A -a
 

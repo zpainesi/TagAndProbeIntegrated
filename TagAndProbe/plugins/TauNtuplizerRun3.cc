@@ -13,7 +13,7 @@
 #include <bitset>
 
 
-#include "FWCore/Framework/interface/EDAnalyzer.h"
+#include "FWCore/Framework/interface/one/EDAnalyzer.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include <FWCore/Framework/interface/Frameworkfwd.h>
 #include <FWCore/Framework/interface/Event.h>
@@ -55,7 +55,7 @@
 ██████  ███████  ██████ ███████ ██   ██ ██   ██ ██   ██    ██    ██  ██████  ██   ████
 */
 
-class TauNtuplizerRun3 : public edm::EDAnalyzer {
+class TauNtuplizerRun3 : public edm::one::EDAnalyzer<> {
     public:
         /// Constructor
         explicit TauNtuplizerRun3(const edm::ParameterSet&);

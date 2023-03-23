@@ -66,11 +66,11 @@ process.source = cms.Source("PoolSource",
 process.schedule = cms.Schedule()
     
 ## re-emulate starting from TPs (here we re-emulate also the TPs)
-# from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAWSimHcalTP
-# process = L1TReEmulMCFromRAWSimHcalTP(process)
+from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAWSimHcalTP
+process = L1TReEmulMCFromRAWSimHcalTP(process)
 
-from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAW
-process = L1TReEmulMCFromRAW(process)
+# from L1Trigger.Configuration.customiseReEmul import L1TReEmulMCFromRAW
+# process = L1TReEmulMCFromRAW(process)
 
 process.load(options.caloParams)
 

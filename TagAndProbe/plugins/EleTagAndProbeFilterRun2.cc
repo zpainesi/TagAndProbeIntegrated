@@ -1,7 +1,7 @@
 #ifndef ELETAGANDPROBEFILTER_H
 #define ELETAGANDPROBEFILTER_H
 
-#include "FWCore/Framework/interface/EDFilter.h"
+#include "FWCore/Framework/interface/one/EDFilter.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include <FWCore/Framework/interface/Frameworkfwd.h>
 #include <FWCore/Framework/interface/Event.h>
@@ -23,7 +23,7 @@ using namespace std;
 // using namespace reco;
 
 
-class EleTagAndProbeFilter : public edm::EDFilter {
+class EleTagAndProbeFilter : public edm::one::EDFilter<> {
 
     public:
         EleTagAndProbeFilter(const edm::ParameterSet &);

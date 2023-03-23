@@ -1,7 +1,7 @@
 #ifndef TAUTAGANDPROBEFILTERRUN2_H
 #define TAUTAGANDPROBEFILTERRUN2_H
 
-#include "FWCore/Framework/interface/EDFilter.h"
+#include "FWCore/Framework/interface/one/EDFilter.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include <FWCore/Framework/interface/Frameworkfwd.h>
 #include <FWCore/Framework/interface/Event.h>
@@ -24,7 +24,7 @@ using namespace std;
 // using namespace reco;
 
 
-class TauTagAndProbeFilterRun2 : public edm::EDFilter {
+class TauTagAndProbeFilterRun2 : public edm::one::EDFilter<> {
 
     public:
         TauTagAndProbeFilterRun2(const edm::ParameterSet &);

@@ -1,7 +1,7 @@
 #ifndef MUONNUMBERFILTER_H
 #define MUONNUMBERFILTER_H
 
-#include "FWCore/Framework/interface/EDFilter.h"
+#include "FWCore/Framework/interface/one/EDFilter.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include <FWCore/Framework/interface/Frameworkfwd.h>
 #include <FWCore/Framework/interface/Event.h>
@@ -17,7 +17,7 @@ using namespace std;
 // using namespace reco;
 
  
-class muonNumberFilter : public edm::EDFilter {
+class muonNumberFilter : public edm::one::EDFilter<> {
 
     public:
         muonNumberFilter(const edm::ParameterSet &);

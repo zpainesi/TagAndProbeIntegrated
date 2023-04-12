@@ -214,19 +214,19 @@ class TauNtuplizerRun3 : public edm::one::EDAnalyzer<> {
 
 // ----Constructor and Destructor -----
 TauNtuplizerRun3::TauNtuplizerRun3(const edm::ParameterSet& iConfig) :
-_genTag         (consumes<GenEventInfoProduct>                    (iConfig.getParameter<edm::InputTag>("genCollection"))),
-_genPartTag     (consumes<edm::View<pat::GenericParticle>>        (iConfig.getParameter<edm::InputTag>("genPartCollection"))),
-_muonsTag       (consumes<pat::MuonRefVector>                     (iConfig.getParameter<edm::InputTag>("muons"))),
-_tauTag         (consumes<pat::TauRefVector>                      (iConfig.getParameter<edm::InputTag>("taus"))),
-_metTag         (consumes<pat::METCollection>                     (iConfig.getParameter<edm::InputTag>("met"))),
-_triggerObjects (consumes<pat::TriggerObjectStandAloneCollection> (iConfig.getParameter<edm::InputTag>("triggerSet"))),
-_triggerBits    (consumes<edm::TriggerResults>                    (iConfig.getParameter<edm::InputTag>("triggerResultsLabel"))),
-_L1TauTag       (consumes<l1t::TauBxCollection>                   (iConfig.getParameter<edm::InputTag>("L1Tau"))),
-_L1EmuTauTag    (consumes<l1t::TauBxCollection>                   (iConfig.getParameter<edm::InputTag>("L1EmuTau"))),
-_VtxTag         (consumes<std::vector<reco::Vertex>>              (iConfig.getParameter<edm::InputTag>("Vertexes"))),
-_puTag          (consumes<std::vector<PileupSummaryInfo>>         (iConfig.getParameter<edm::InputTag>("puInfo"))),
-_hltL2CaloJet_ForIsoPix_Tag(consumes<reco::CaloJetCollection>     (iConfig.getParameter<edm::InputTag>("L2CaloJet_ForIsoPix_Collection"))),
-_hltL2CaloJet_ForIsoPix_IsoTag(consumes<reco::JetTagCollection>   (iConfig.getParameter<edm::InputTag>("L2CaloJet_ForIsoPix_IsoCollection")))
+_genTag                        (consumes<GenEventInfoProduct>                    (iConfig.getParameter<edm::InputTag>("genCollection"))),
+_genPartTag                    (consumes<edm::View<pat::GenericParticle>>        (iConfig.getParameter<edm::InputTag>("genPartCollection"))),
+_muonsTag                      (consumes<pat::MuonRefVector>                     (iConfig.getParameter<edm::InputTag>("muons"))),
+_tauTag                        (consumes<pat::TauRefVector>                      (iConfig.getParameter<edm::InputTag>("taus"))),
+_metTag                        (consumes<pat::METCollection>                     (iConfig.getParameter<edm::InputTag>("met"))),
+_triggerObjects                (consumes<pat::TriggerObjectStandAloneCollection> (iConfig.getParameter<edm::InputTag>("triggerSet"))),
+_triggerBits                   (consumes<edm::TriggerResults>                    (iConfig.getParameter<edm::InputTag>("triggerResultsLabel"))),
+_L1TauTag                      (consumes<l1t::TauBxCollection>                   (iConfig.getParameter<edm::InputTag>("L1Tau"))),
+_L1EmuTauTag                   (consumes<l1t::TauBxCollection>                   (iConfig.getParameter<edm::InputTag>("L1EmuTau"))),
+_VtxTag                        (consumes<std::vector<reco::Vertex>>              (iConfig.getParameter<edm::InputTag>("Vertexes"))),
+_puTag                         (consumes<std::vector<PileupSummaryInfo>>         (iConfig.getParameter<edm::InputTag>("puInfo"))),
+_hltL2CaloJet_ForIsoPix_Tag    (consumes<reco::CaloJetCollection>                (iConfig.getParameter<edm::InputTag>("L2CaloJet_ForIsoPix_Collection"))),
+_hltL2CaloJet_ForIsoPix_IsoTag (consumes<reco::JetTagCollection>                 (iConfig.getParameter<edm::InputTag>("L2CaloJet_ForIsoPix_IsoCollection")))
 {
 
     _isMC = iConfig.getParameter<bool>("isMC");
@@ -299,7 +299,7 @@ void TauNtuplizerRun3::beginRun(edm::Run const& iRun, edm::EventSetup const& iSe
         bool found = false;
         for(unsigned int j=0; j < triggerNames.size(); j++)
         {
-      //std::cout << triggerNames[j] << std::endl;
+            //std::cout << triggerNames[j] << std::endl;
             if (triggerNames[j].find(hltPath) != std::string::npos) {
                 found = true;
                 parameter.hltPathIndex = j;
@@ -309,8 +309,6 @@ void TauNtuplizerRun3::beginRun(edm::Run const& iRun, edm::EventSetup const& iSe
         }
         if (!found) parameter.hltPathIndex = -1;
     }
-
-
 
     std::cout << " ===== LOOKING FOR THE PATH INDEXES FOR TAG=====" << std::endl;
     for (tParameterSet& parameter : _parameters_Tag){
@@ -318,7 +316,7 @@ void TauNtuplizerRun3::beginRun(edm::Run const& iRun, edm::EventSetup const& iSe
         bool found = false;
         for(unsigned int j=0; j < triggerNames.size(); j++)
         {
-      // std::cout << triggerNames[j] << std::endl;
+            // std::cout << triggerNames[j] << std::endl;
             if (triggerNames[j].find(hltPath) != std::string::npos) {
                 found = true;
                 parameter.hltPathIndex = j;
@@ -328,7 +326,6 @@ void TauNtuplizerRun3::beginRun(edm::Run const& iRun, edm::EventSetup const& iSe
         }
         if (!found) parameter.hltPathIndex = -1;
     }
-
 }
 
 void TauNtuplizerRun3::Initialize() {
@@ -713,12 +710,9 @@ void TauNtuplizerRun3::analyze(const edm::Event& iEvent, const edm::EventSetup& 
         const float dR = deltaR(*tau, *bx0TauIt);
         const l1t::Tau& l1tTau = *bx0TauIt;
 
-        //cout<<"FW Tau, pT = "<<l1tTau.pt()<<", eta = "<<l1tTau.eta()<<", phi = "<<l1tTau.phi()<<endl;
-
-        if (dR < minDR) //Uncomment for new match algo
-        //if (dR < 0.5) //Uncomment for old match algo
+        if (dR < minDR)
         {
-            minDR = dR; //Uncomment for new match algo
+            minDR = dR;
             _l1tPt = l1tTau.pt();
             _l1tEta = l1tTau.eta();
             _l1tPhi = l1tTau.phi();

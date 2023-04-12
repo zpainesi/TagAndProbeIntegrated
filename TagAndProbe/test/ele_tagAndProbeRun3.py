@@ -1,7 +1,6 @@
 import FWCore.ParameterSet.VarParsing as VarParsing
 import FWCore.PythonUtilities.LumiList as LumiList
 import FWCore.ParameterSet.Config as cms
-import FWCore.Utilities.FileUtils as FileUtils
 from Configuration.StandardSequences.Eras import eras
 from Configuration.AlCa.autoCond import autoCond
 
@@ -45,7 +44,13 @@ process.load(options.caloParams)
 
 process.GlobalTag.globaltag = options.globalTag
 process.load('TagAndProbeIntegrated.TagAndProbe.ele_tagAndProbe_cff')
-process.load('TagAndProbeIntegrated.TagAndProbe.ele_IDconfiguration_cff')
+process.load("RecoEgamma.ElectronIdentification.egmGsfElectronIDs_cff")
+process.egmGsfElectronIDs.physicsObjectSrc = cms.InputTag('slimmedElectrons')
+
+from PhysicsTools.SelectorUtils.tools.vid_id_tools import *
+my_id_modules =['RecoEgamma.ElectronIdentification.Identification.mvaElectronID_Fall17_iso_V2_cff']
+for idmod in my_id_modules: setupAllVIDIdsInModule(process, idmod, setupVIDElectronSelection)
+
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
         '/store/data/Run2022F/EGamma/MINIAOD/PromptReco-v1/000/362/154/00000/045d56d5-569d-4380-907a-e251680f98fe.root'

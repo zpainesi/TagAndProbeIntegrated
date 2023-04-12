@@ -171,6 +171,8 @@ private:
   std::vector<int> _l1tEmuEGTowerIPhi;
   std::vector<int> _l1tEmuEGRawEt;
   std::vector<int> _l1tEmuEGIsoEt;
+  std::vector<int> _l1tEmuEGShape;
+  std::vector<int> _l1tEmuEGhoe;
 
   std::vector<int> _l1tMuQual;
   std::vector<float> _l1tMuPt;
@@ -514,6 +516,8 @@ void ZeroBias::Initialize() {
   this -> _l1tEmuEGTowerIPhi .clear();
   this -> _l1tEmuEGRawEt .clear();
   this -> _l1tEmuEGIsoEt .clear();
+  this -> _l1tEmuEGShape .clear();
+  this -> _l1tEmuEGhoe .clear();
 
   this -> _l1tMuPt .clear();
   this -> _l1tMuEta .clear();
@@ -702,6 +706,8 @@ void ZeroBias::beginJob()
   this -> _tree -> Branch("l1tEmuEGTowerIPhi", &_l1tEmuEGTowerIPhi);
   this -> _tree -> Branch("l1tEmuEGRawEt", &_l1tEmuEGRawEt);
   this -> _tree -> Branch("l1tEmuEGIsoEt", &_l1tEmuEGIsoEt);
+  this -> _tree -> Branch("l1tEmuEGShape", &_l1tEmuEGShape);
+  this -> _tree -> Branch("l1tEmuEGhoe", &_l1tEmuEGhoe);
 
   this -> _tree -> Branch("l1tMuPt",  &_l1tMuPt);
   this -> _tree -> Branch("l1tMuEta", &_l1tMuEta);
@@ -1012,6 +1018,8 @@ void ZeroBias::analyze(const edm::Event& iEvent, const edm::EventSetup& eSetup)
           this -> _l1tEmuEGTowerIPhi.push_back(l1tEmuEG.towerIPhi());
           this -> _l1tEmuEGRawEt    .push_back(l1tEmuEG.rawEt());
           this -> _l1tEmuEGIsoEt    .push_back(l1tEmuEG.isoEt());
+          this -> _l1tEmuEGShape    .push_back(l1tEmuEG.shape());
+          this -> _l1tEmuEGhoe      .push_back(l1tEmuEG.towerHoE());
         }
     }
 

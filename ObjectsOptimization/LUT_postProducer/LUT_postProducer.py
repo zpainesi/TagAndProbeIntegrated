@@ -39,9 +39,13 @@ if options.type == 'pad':
             if int(tokens[1]) < previousIso and int(tokens[-1]) > previousnTT:
                 tokens[1] = str(previousIso)
 
-            # write the new LUT entries 
+            # write the new LUT entries
+            last = len(tokens)
+            cntr = 0
             for token in tokens:
-                outFile.write(token+' ')
+                cntr += 1
+                if cntr < last: outFile.write(token+' ')
+                else:           outFile.write(token)
 
             # add newline
             outFile.write('\n')

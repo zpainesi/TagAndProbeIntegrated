@@ -12,3 +12,4 @@ fit.exe
 .DS_Store
 __pycache__
 __init__.py
+TagAndProbe/python/__pycache__/

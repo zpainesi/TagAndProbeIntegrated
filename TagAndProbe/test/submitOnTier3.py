@@ -102,6 +102,9 @@ for idx, block in enumerate(fileblocks):
     if jobtype == "reEmulL1_zeroBias":
         cmsRun = "cmsRun reEmulL1_zeroBias.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" caloParams="+caloParams+" globalTag="+globalTag+" allBXs="+allBXs+" >& "+outLogName
 
+    if jobtype == "timing_zeroBias":
+        cmsRun = "cmsRun timing_zeroBias.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" globalTag="+globalTag+" >& "+outLogName
+
     if jobtype == "reEmulL1_MC":
         cmsRun = "cmsRun reEmulL1_MC.py maxEvents=-1 inputFiles_load="+outListName+" outputFile="+outRootName+" caloParams="+caloParams+" globalTag="+globalTag+" >& "+outLogName
 

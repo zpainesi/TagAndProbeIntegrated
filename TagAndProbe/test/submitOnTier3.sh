@@ -565,8 +565,18 @@ source /opt/exp_soft/cms/t3/t3setup
 #                         --nJobs 279 \
 #                         --run Run3 \
 #                         --queue short \
-#                         --globalTag 124X_dataRun3_Prompt_v10 \
+#                         --globalTag 130X_dataRun3_Prompt_v1 \
 #                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_cfi
+
+# python submitOnTier3.py --inFileList EphemeralZeroBias_Run3/EphemeralZeroBias0__Run2022G-v1__Run362616__RAW.txt \
+#                         --outFolder Run3preparation_2023/EphemeralZeroBias0__Run2022G_Run362616__RAW__ZS0p5 \
+#                         --jobType reEmulL1_zeroBias \
+#                         --inJson None \
+#                         --nJobs 279 \
+#                         --run Run3 \
+#                         --queue short \
+#                         --globalTag 130X_dataRun3_Prompt_v1 \
+#                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_modZS0p5_cfi
 
 # python submitOnTier3.py --inFileList EphemeralZeroBias_Run3/EphemeralZeroBias0__Run2022G-v1__Run362617__RAW.txt \
 #                         --outFolder Run3preparation_2023/EphemeralZeroBias0__Run2022G_Run362617__RAW \
@@ -575,31 +585,92 @@ source /opt/exp_soft/cms/t3/t3setup
 #                         --nJobs 245 \
 #                         --run Run3 \
 #                         --queue short \
-#                         --globalTag 124X_dataRun3_Prompt_v10 \
+#                         --globalTag 130X_dataRun3_Prompt_v1 \
 #                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_cfi
 
-
-##############################################################################################
-####################################### EGamma 13.6TeV #######################################
-##############################################################################################
-
-# python submitOnTier3.py --inFileList egamma_datasets_Run3/EGamma__Run2022G-PromptReco-v1__Run362616__MINIAOD.txt \
-#                         --outFolder Run3preparation_2023/2023_03_30_ELEoptimizationV0/EGamma__Run2022G-PromptReco-v1__Run362616__MINIAOD \
-#                         --jobType  tagAndProbe \
-#                         --objType ele \
-#                         --inJson Cert_Collisions2022_355100_362760_Golden.json \
+# python submitOnTier3.py --inFileList EphemeralZeroBias_Run3/EphemeralZeroBias0__Run2022G-v1__Run362617__RAW.txt \
+#                         --outFolder Run3preparation_2023/EphemeralZeroBias0__Run2022G_Run362617__RAW__ZS0p5 \
+#                         --jobType reEmulL1_zeroBias \
+#                         --inJson None \
 #                         --nJobs 245 \
+#                         --run Run3 \
+#                         --queue short \
+#                         --globalTag 130X_dataRun3_Prompt_v1 \
+#                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_modZS0p5_cfi
+
+# python submitOnTier3.py --inFileList EphemeralZeroBias_Run3/EphemeralZeroBias0__Run2023A-v1__RAW.txt \
+#                         --outFolder Run3preparation_2023/EphemeralZeroBias0__Run2023A-v1__RAW \
+#                         --jobType reEmulL1_zeroBias \
+#                         --allBXs 1 \
+#                         --inJson Cert_Collisions2023A_365753_365889_900GeV_DCSOnly_TkPx.json \
+#                         --nJobs 5000 \
 #                         --run Run3 \
 #                         --queue short \
 #                         --globalTag 130X_dataRun3_Prompt_v1 \
 #                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_cfi
 
-python submitOnTier3.py --inFileList egamma_datasets_Run3/EGamma__Run2022G-PromptReco-v1__Run362616__RAW.txt \
-                        --outFolder Run3preparation_2023/2023_03_30_ELEoptimizationV0/EGamma__Run2022G-PromptReco-v1__Run362616__RAW \
-                        --jobType reEmulL1_zeroBias \
-                        --allBXs 0 \
-                        --inJson Cert_Collisions2022_355100_362760_Golden.json \
-                        --nJobs 352 \
+# python submitOnTier3.py --inFileList EphemeralZeroBias_Run3/EphemeralZeroBias__Run2023A-PromptReco-v1__MINIAOD.txt \
+#                         --outFolder Run3preparation_2023/EphemeralZeroBias__Run2023A-PromptReco-v1__MINIAOD \
+#                         --jobType timing_zeroBias \
+#                         --inJson None \
+#                         --nJobs 932 \
+#                         --run Run3 \
+#                         --queue short \
+#                         --globalTag 130X_dataRun3_Prompt_v1 \
+#                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_cfi
+
+# python submitOnTier3.py --inFileList EphemeralZeroBias_Run3/EphemeralZeroBias__Run2023B-PromptReco-v1__MINIAOD.txt \
+#                         --outFolder Run3preparation_2023/EphemeralZeroBias__Run2023B-PromptReco-v1__MINIAOD \
+#                         --jobType timing_zeroBias \
+#                         --inJson None \
+#                         --nJobs 750 \
+#                         --run Run3 \
+#                         --queue short \
+#                         --globalTag 130X_dataRun3_Prompt_v1 \
+#                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_cfi
+
+python submitOnTier3.py --inFileList egamma_datasets_Run3/EGamma__Run2023B-PromptReco-v1__MINIAOD.txt \
+                        --outFolder Run3preparation_2023/EGamma__Run2023B-PromptReco-v1__MINIAOD \
+                        --jobType timing_zeroBias \
+                        --inJson None \
+                        --nJobs 30 \
+                        --run Run3 \
                         --queue short \
                         --globalTag 130X_dataRun3_Prompt_v1 \
                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_cfi
+
+##############################################################################################
+####################################### EGamma 13.6TeV #######################################
+##############################################################################################
+
+# python submitOnTier3.py --inFileList egamma_datasets_Run3/EGamma__Run2022G-PromptReco-v1__Run362616-362617-362618__MINIAOD.txt \
+#                         --outFolder Run3preparation_2023/2023_04_13_ELEoptimizationV1/EGamma__Run2022G-PromptReco-v1__Run362616-362617-362618__MINIAOD \
+#                         --jobType  tagAndProbe \
+#                         --objType ele \
+#                         --inJson Cert_Collisions2022_355100_362760_Golden.json \
+#                         --nJobs 200 \
+#                         --run Run3 \
+#                         --queue short \
+#                         --globalTag 130X_dataRun3_Prompt_v1 \
+#                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_cfi
+
+# python submitOnTier3.py --inFileList egamma_datasets_Run3/EGamma__Run2022G-v1__Run362616-362617-362618__RAW.txt \
+#                         --outFolder Run3preparation_2023/2023_04_13_ELEoptimizationV1/EGamma__Run2022G-v1__Run362616-362617-362618__RAW \
+#                         --jobType reEmulL1_zeroBias \
+#                         --allBXs 0 \
+#                         --inJson Cert_Collisions2022_355100_362760_Golden.json \
+#                         --nJobs 150 \
+#                         --queue long \
+#                         --globalTag 130X_dataRun3_Prompt_v1 \
+#                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_cfi
+
+# python submitOnTier3.py --inFileList egamma_datasets_Run3/EGamma__Run2022G-v1__Run362616-362617-362618__RAW.txt \
+#                         --outFolder Run3preparation_2023/2023_04_13_ELEoptimizationV2/EGamma__Run2022G-v1__Run362616-362617-362618__RAW__ZS0p5 \
+#                         --jobType reEmulL1_zeroBias \
+#                         --allBXs 0 \
+#                         --inJson Cert_Collisions2022_355100_362760_Golden.json \
+#                         --nJobs 150 \
+#                         --queue long \
+#                         --globalTag 130X_dataRun3_Prompt_v1 \
+#                         --caloParams L1Trigger.L1TCalorimeter.caloParams_2022_v0_6_modZS0p5_cfi
+

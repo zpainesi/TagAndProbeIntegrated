@@ -90,28 +90,37 @@ private:
   Int_t           _lumi;
   unsigned long _EventTriggerBits;
 
-  std::vector<int> _bit21;
-  std::vector<int> _bit168;
-  std::vector<int> _bit169;
-  std::vector<int> _bit170;
-  std::vector<int> _bit171;
-  std::vector<int> _bit172;
-  std::vector<int> _bit178;
-  std::vector<int> _bit192;
-  std::vector<int> _bit194;
-  std::vector<int> _bit196;
-  std::vector<int> _bit218;
-  std::vector<int> _bit219;
-  std::vector<int> _bit220;
-  std::vector<int> _bit262;
-  std::vector<int> _bit263;
-  std::vector<int> _bit264;
-  std::vector<int> _bit267;
-  std::vector<int> _bit270;
-  std::vector<int> _bit271;
-  std::vector<int> _bit272;
-  std::vector<int> _bit273;
-  std::vector<int> _bit459;
+  std::vector<int> _bit21;  // L1_SingleMu22
+  std::vector<int> _bit25;  // L1_SingleMu25
+  std::vector<int> _bit168; // L1_SingleEG36er2p5
+  std::vector<int> _bit169; // L1_SingleEG38er2p5
+  std::vector<int> _bit170; // L1_SingleEG40er2p5
+  std::vector<int> _bit171; // L1_SingleEG42er2p5
+  std::vector<int> _bit172; // L1_SingleEG45er2p5
+  std::vector<int> _bit178; // L1_SingleLooseIsoEG28er2p5
+  std::vector<int> _bit192; // L1_SingleIsoEG30er2p5
+  std::vector<int> _bit194; // L1_SingleIsoEG32er2p5
+  std::vector<int> _bit196; // L1_SingleIsoEG34er2p5
+  std::vector<int> _bit218; // L1_DoubleEG_25_12_er2p5
+  std::vector<int> _bit219; // L1_DoubleEG_25_12_er2p5
+  std::vector<int> _bit220; // L1_DoubleEG_25_12_er2p5
+  std::vector<int> _bit262; // L1_SingleIsoTau32er2p1
+  std::vector<int> _bit263; // L1_SingleTau70er2p1
+  std::vector<int> _bit264; // L1_SingleTau120er2p1
+  std::vector<int> _bit267; // L1_DoubleTau70er2p1
+  std::vector<int> _bit270; // L1_DoubleIsoTau32er2p1
+  std::vector<int> _bit271; // L1_DoubleIsoTau34er2p1
+  std::vector<int> _bit272; // L1_DoubleIsoTau35er2p1
+  std::vector<int> _bit273; // L1_DoubleIsoTau36er2p1
+  std::vector<int> _bit309; // L1_SingleJet35
+  std::vector<int> _bit310; // L1_SingleJet60
+  std::vector<int> _bit398; // L1_HTT120er
+  std::vector<int> _bit418; // L1_ETMHF70
+  std::vector<int> _bit420; // L1_ETMHF90
+  std::vector<int> _bit459; // L1_ZeroBias
+  std::vector<int> _bit478; // L1_LastCollisionInTrain
+  std::vector<int> _bit479; // L1_FirstCollisionInTrain
+  std::vector<int> _bit480; // L1_FirstCollisionInOrbit
 
   std::vector< std::vector<float> > _ugtTauPt;
   std::vector< std::vector<float> > _ugtTauEta;
@@ -138,35 +147,35 @@ private:
   std::vector< std::vector<int> > _l1tEmuTauRawEt;
   std::vector< std::vector<int> > _l1tEmuTauIsoEt;
         
-  std::vector<int> _l1tQualJet;
-  std::vector<float> _l1tPtJet;
-  std::vector<float> _l1tEtaJet;
-  std::vector<float> _l1tPhiJet;
-  std::vector<int> _l1tIsoJet;
-  std::vector<int> _l1tTowerIEtaJet;
-  std::vector<int> _l1tTowerIPhiJet;
-  std::vector<int> _l1tRawEtJet;  
+  std::vector< std::vector<int> > _l1tQualJet;
+  std::vector< std::vector<float> > _l1tPtJet;
+  std::vector< std::vector<float> > _l1tEtaJet;
+  std::vector< std::vector<float> > _l1tPhiJet;
+  std::vector< std::vector<int> > _l1tIsoJet;
+  std::vector< std::vector<int> > _l1tTowerIEtaJet;
+  std::vector< std::vector<int> > _l1tTowerIPhiJet;
+  std::vector< std::vector<int> > _l1tRawEtJet;  
         
-  std::vector<int> _l1tEmuQualJet;
-  std::vector<float> _l1tEmuPtJet;
-  std::vector<float> _l1tEmuEtaJet;
-  std::vector<float> _l1tEmuPhiJet;
-  std::vector<int> _l1tEmuIsoJet;
-  std::vector<int> _l1tEmuTowerIEtaJet;
-  std::vector<int> _l1tEmuTowerIPhiJet;
-  std::vector<int> _l1tEmuRawEtJet; 
+  std::vector< std::vector<int> > _l1tEmuQualJet;
+  std::vector< std::vector<float> > _l1tEmuPtJet;
+  std::vector< std::vector<float> > _l1tEmuEtaJet;
+  std::vector< std::vector<float> > _l1tEmuPhiJet;
+  std::vector< std::vector<int> > _l1tEmuIsoJet;
+  std::vector< std::vector<int> > _l1tEmuTowerIEtaJet;
+  std::vector< std::vector<int> > _l1tEmuTowerIPhiJet;
+  std::vector< std::vector<int> > _l1tEmuRawEtJet; 
 
-  std::vector<short int> _l1tSumType;
-  std::vector<float> _l1tSumEt;
-  std::vector<float> _l1tSumPhi;
-  std::vector<float> _l1tSumIEt;
-  std::vector<float> _l1tSumIPhi;
+  std::vector< std::vector<short int> > _l1tSumType;
+  std::vector< std::vector<float> > _l1tSumEt;
+  std::vector< std::vector<float> > _l1tSumPhi;
+  std::vector< std::vector<float> > _l1tSumIEt;
+  std::vector< std::vector<float> > _l1tSumIPhi;
 
-  std::vector<short int> _l1tEmuSumType;
-  std::vector<float> _l1tEmuSumEt;
-  std::vector<float> _l1tEmuSumPhi;
-  std::vector<float> _l1tEmuSumIEt;
-  std::vector<float> _l1tEmuSumIPhi;
+  std::vector< std::vector<short int> > _l1tEmuSumType;
+  std::vector< std::vector<float> > _l1tEmuSumEt;
+  std::vector< std::vector<float> > _l1tEmuSumPhi;
+  std::vector< std::vector<float> > _l1tEmuSumIEt;
+  std::vector< std::vector<float> > _l1tEmuSumIPhi;
 
   std::vector< std::vector<int> >  _l1tEGQual;
   std::vector< std::vector<float> >  _l1tEGPt;
@@ -190,11 +199,11 @@ private:
   std::vector< std::vector<float> > _l1tMuEta;
   std::vector< std::vector<float> > _l1tMuPhi;
 
-  std::vector<int> _l1tEmuMuQual;
-  std::vector<float> _l1tEmuMuPt;
-  std::vector<float> _l1tEmuMuEta;
-  std::vector<float> _l1tEmuMuPhi;
-  std::vector<int> _l1tEmuMuIso;
+  std::vector< std::vector<int> > _l1tEmuMuQual;
+  std::vector< std::vector<float> > _l1tEmuMuPt;
+  std::vector< std::vector<float> > _l1tEmuMuEta;
+  std::vector< std::vector<float> > _l1tEmuMuPhi;
+  std::vector< std::vector<int> > _l1tEmuMuIso;
 
   std::vector<float> _hltTauPt;
   std::vector<float> _hltTauEta;
@@ -447,6 +456,7 @@ void ZeroBias_allBX::Initialize() {
   this -> _lumi = 0;
 
   this -> _bit21.clear();
+  this -> _bit25.clear();
   this -> _bit168.clear();
   this -> _bit169.clear();
   this -> _bit170.clear();
@@ -467,7 +477,15 @@ void ZeroBias_allBX::Initialize() {
   this -> _bit271.clear();
   this -> _bit272.clear();
   this -> _bit273.clear();
+  this -> _bit309.clear();
+  this -> _bit310.clear();
+  this -> _bit398.clear();
+  this -> _bit418.clear();
+  this -> _bit420.clear();
   this -> _bit459.clear();
+  this -> _bit478.clear();
+  this -> _bit479.clear();
+  this -> _bit480.clear();
 
   this -> _ugtTauPt.clear();
   this -> _ugtTauEta.clear();
@@ -648,6 +666,7 @@ void ZeroBias_allBX::beginJob()
   this -> _tree -> Branch("EventTriggerBits", &_EventTriggerBits, "EventTriggerBits/L");
 
   this -> _tree -> Branch("bit21",  &_bit21);
+  this -> _tree -> Branch("bit25",  &_bit25);
   this -> _tree -> Branch("bit168", &_bit168);
   this -> _tree -> Branch("bit169", &_bit169);
   this -> _tree -> Branch("bit170", &_bit170);
@@ -668,7 +687,15 @@ void ZeroBias_allBX::beginJob()
   this -> _tree -> Branch("bit271", &_bit271);
   this -> _tree -> Branch("bit272", &_bit272);
   this -> _tree -> Branch("bit273", &_bit273);
+  this -> _tree -> Branch("bit309", &_bit309);
+  this -> _tree -> Branch("bit310", &_bit310);
+  this -> _tree -> Branch("bit398", &_bit398);
+  this -> _tree -> Branch("bit418", &_bit418);
+  this -> _tree -> Branch("bit420", &_bit420);
   this -> _tree -> Branch("bit459", &_bit459);
+  this -> _tree -> Branch("bit478", &_bit478);
+  this -> _tree -> Branch("bit479", &_bit479);
+  this -> _tree -> Branch("bit480", &_bit480);
 
   this -> _tree -> Branch("ugtTauPt",  &_ugtTauPt);
   this -> _tree -> Branch("ugtTauEta",  &_ugtTauEta);
@@ -867,36 +894,42 @@ void ZeroBias_allBX::analyze(const edm::Event& iEvent, const edm::EventSetup& eS
           for (BXVector<GlobalAlgBlk>::const_iterator bxUgtIt = ugtHandle->begin(ibx); bxUgtIt != ugtHandle->end(ibx) ; bxUgtIt++)
             {
               const GlobalAlgBlk& ugt =  *bxUgtIt;
-              // ugt.print(std::cout);
 
-              this -> _bit21.push_back(  ugt.getAlgoDecisionFinal(21) );
-              this -> _bit168.push_back( ugt.getAlgoDecisionFinal(168) );
-              this -> _bit169.push_back( ugt.getAlgoDecisionFinal(169) );
-              this -> _bit170.push_back( ugt.getAlgoDecisionFinal(170) );
-              this -> _bit171.push_back( ugt.getAlgoDecisionFinal(171) );
-              this -> _bit172.push_back( ugt.getAlgoDecisionFinal(172) );
-              this -> _bit178.push_back( ugt.getAlgoDecisionFinal(178) );
-              this -> _bit192.push_back( ugt.getAlgoDecisionFinal(192) );
-              this -> _bit194.push_back( ugt.getAlgoDecisionFinal(194) );
-              this -> _bit196.push_back( ugt.getAlgoDecisionFinal(196) );
-              this -> _bit218.push_back( ugt.getAlgoDecisionFinal(218) );
-              this -> _bit219.push_back( ugt.getAlgoDecisionFinal(219) );
-              this -> _bit220.push_back( ugt.getAlgoDecisionFinal(220) );
-              this -> _bit262.push_back( ugt.getAlgoDecisionFinal(262) );
-              this -> _bit263.push_back( ugt.getAlgoDecisionFinal(263) );
-              this -> _bit264.push_back( ugt.getAlgoDecisionFinal(264) );
-              this -> _bit267.push_back( ugt.getAlgoDecisionFinal(267) );
-              this -> _bit270.push_back( ugt.getAlgoDecisionFinal(270) );
-              this -> _bit271.push_back( ugt.getAlgoDecisionFinal(271) );
-              this -> _bit272.push_back( ugt.getAlgoDecisionFinal(272) );
-              this -> _bit273.push_back( ugt.getAlgoDecisionFinal(273) );
-              this -> _bit459.push_back( ugt.getAlgoDecisionFinal(459) );
+              this -> _bit21.push_back(  ugt.getAlgoDecisionFinal(21) );  // L1_SingleMu22
+              this -> _bit25.push_back(  ugt.getAlgoDecisionFinal(25) );  // L1_SingleMu25
+              this -> _bit168.push_back( ugt.getAlgoDecisionFinal(168) ); // L1_SingleEG36er2p5
+              this -> _bit169.push_back( ugt.getAlgoDecisionFinal(169) ); // L1_SingleEG38er2p5
+              this -> _bit170.push_back( ugt.getAlgoDecisionFinal(170) ); // L1_SingleEG40er2p5
+              this -> _bit171.push_back( ugt.getAlgoDecisionFinal(171) ); // L1_SingleEG42er2p5
+              this -> _bit172.push_back( ugt.getAlgoDecisionFinal(172) ); // L1_SingleEG45er2p5
+              this -> _bit178.push_back( ugt.getAlgoDecisionFinal(178) ); // L1_SingleLooseIsoEG28er2p5
+              this -> _bit192.push_back( ugt.getAlgoDecisionFinal(192) ); // L1_SingleIsoEG30er2p5
+              this -> _bit194.push_back( ugt.getAlgoDecisionFinal(194) ); // L1_SingleIsoEG32er2p5
+              this -> _bit196.push_back( ugt.getAlgoDecisionFinal(196) ); // L1_SingleIsoEG34er2p5
+              this -> _bit218.push_back( ugt.getAlgoDecisionFinal(218) ); // L1_DoubleEG_25_12_er2p5
+              this -> _bit219.push_back( ugt.getAlgoDecisionFinal(219) ); // L1_DoubleEG_25_12_er2p5
+              this -> _bit220.push_back( ugt.getAlgoDecisionFinal(220) ); // L1_DoubleEG_25_12_er2p5
+              this -> _bit262.push_back( ugt.getAlgoDecisionFinal(262) ); // L1_SingleIsoTau32er2p1
+              this -> _bit263.push_back( ugt.getAlgoDecisionFinal(263) ); // L1_SingleTau70er2p1
+              this -> _bit264.push_back( ugt.getAlgoDecisionFinal(264) ); // L1_SingleTau120er2p1
+              this -> _bit267.push_back( ugt.getAlgoDecisionFinal(267) ); // L1_DoubleTau70er2p1
+              this -> _bit270.push_back( ugt.getAlgoDecisionFinal(270) ); // L1_DoubleIsoTau32er2p1
+              this -> _bit271.push_back( ugt.getAlgoDecisionFinal(271) ); // L1_DoubleIsoTau34er2p1
+              this -> _bit272.push_back( ugt.getAlgoDecisionFinal(272) ); // L1_DoubleIsoTau35er2p1
+              this -> _bit273.push_back( ugt.getAlgoDecisionFinal(273) ); // L1_DoubleIsoTau36er2p1
+              this -> _bit309.push_back( ugt.getAlgoDecisionFinal(309) ); // L1_SingleJet35
+              this -> _bit310.push_back( ugt.getAlgoDecisionFinal(310) ); // L1_SingleJet60
+              this -> _bit398.push_back( ugt.getAlgoDecisionFinal(398) ); // L1_HTT120er
+              this -> _bit418.push_back( ugt.getAlgoDecisionFinal(418) ); // L1_ETMHF70
+              this -> _bit420.push_back( ugt.getAlgoDecisionFinal(420) ); // L1_ETMHF90
+              this -> _bit459.push_back( ugt.getAlgoDecisionFinal(459) ); // L1_ZeroBias
+              this -> _bit478.push_back( ugt.getAlgoDecisionFinal(478) ); // L1_LastCollisionInTrain
+              this -> _bit479.push_back( ugt.getAlgoDecisionFinal(479) ); // L1_FirstCollisionInTrain
+              this -> _bit480.push_back( ugt.getAlgoDecisionFinal(480) ); // L1_FirstCollisionInOrbit
             }
         }
     }
 
-
-  // edm::Handle<l1t::TauBxCollection> L1uGTTauHandle;
   edm::Handle< BXVector<l1t::Tau> >  L1uGTTauHandle;
   try {iEvent.getByToken(_ugt_tauTag, L1uGTTauHandle);}  catch (...) {;}
 
@@ -914,8 +947,6 @@ void ZeroBias_allBX::analyze(const edm::Event& iEvent, const edm::EventSetup& eS
             {
               const l1t::Tau& l1tTau = *bxTauIt;
               
-              //cout<<"FW Tau, pT = "<<l1tTau.pt()<<", eta = "<<l1tTau.eta()<<", phi = "<<l1tTau.phi()<<endl;
-              
               tmp_l1tTauPt.push_back(l1tTau.pt());
               tmp_l1tTauEta.push_back(l1tTau.eta());
               tmp_l1tTauPhi.push_back(l1tTau.phi());
@@ -931,8 +962,6 @@ void ZeroBias_allBX::analyze(const edm::Event& iEvent, const edm::EventSetup& eS
         }
     }
 
-  
-  // edm::Handle<l1t::TauBxCollection> L1TauHandle;
   edm::Handle< BXVector<l1t::Tau> >  L1TauHandle;
   try {iEvent.getByToken(_L1TauTag, L1TauHandle);}  catch (...) {;}
 
@@ -949,8 +978,6 @@ void ZeroBias_allBX::analyze(const edm::Event& iEvent, const edm::EventSetup& eS
           for (l1t::TauBxCollection::const_iterator bxTauIt = L1TauHandle->begin(ibx); bxTauIt != L1TauHandle->end(ibx) ; bxTauIt++)
             {
               const l1t::Tau& l1tTau = *bxTauIt;
-              
-              //cout<<"FW Tau, pT = "<<l1tTau.pt()<<", eta = "<<l1tTau.eta()<<", phi = "<<l1tTau.phi()<<endl;
               
               tmp_l1tTauPt.push_back(l1tTau.pt());
               tmp_l1tTauEta.push_back(l1tTau.eta());
@@ -992,8 +1019,6 @@ void ZeroBias_allBX::analyze(const edm::Event& iEvent, const edm::EventSetup& eS
             {
               const l1t::Tau& l1tEmuTau = *bxEmuTauIt;
                 
-              //cout<<"Emul Tau, pT = "<<l1tEmuTau.pt()<<", eta = "<<l1tEmuTau.eta()<<", phi = "<<l1tEmuTau.phi()<<endl;
-                
               tmp_l1tEmuTauPt.push_back(l1tEmuTau.pt());
               tmp_l1tEmuTauEta.push_back(l1tEmuTau.eta());
               tmp_l1tEmuTauPhi.push_back(l1tEmuTau.phi());
@@ -1026,64 +1051,137 @@ void ZeroBias_allBX::analyze(const edm::Event& iEvent, const edm::EventSetup& eS
   edm::Handle<BXVector<l1t::Jet>> l1tJetHandle;
   try {iEvent.getByToken(this -> _l1tJetTag, l1tJetHandle);}  catch (...) {;}
 
-  if(l1tJetHandle.isValid()){
-    for(BXVector<l1t::Jet>::const_iterator jet = l1tJetHandle -> begin(0); jet != l1tJetHandle -> end(0) ; jet++)
+  if(l1tJetHandle.isValid())
+  {
+    for (int ibx = l1tJetHandle->getFirstBX(); ibx <= l1tJetHandle->getLastBX(); ++ibx)
       {
-        this -> _l1tPtJet        . push_back(jet -> pt());
-        this -> _l1tEtaJet       . push_back(jet -> eta());
-        this -> _l1tPhiJet       . push_back(jet -> phi());
-        this -> _l1tIsoJet       . push_back(jet -> hwIso());
-        this -> _l1tQualJet      . push_back(jet -> hwQual());
-        this -> _l1tTowerIEtaJet . push_back(jet -> towerIEta());
-        this -> _l1tTowerIPhiJet . push_back(jet -> towerIPhi());
-        this -> _l1tRawEtJet     . push_back(jet -> rawEt());
+        std::vector<float> tmp_l1tPtJet;
+        std::vector<float> tmp_l1tEtaJet;
+        std::vector<float> tmp_l1tPhiJet;
+        std::vector<int>   tmp_l1tIsoJet;
+        std::vector<int>   tmp_l1tQualJet;
+        std::vector<int>   tmp_l1tTowerIEtaJet;
+        std::vector<int>   tmp_l1tTowerIPhiJet;
+        std::vector<int>   tmp_l1tRawEtJet;
+        
+        for(BXVector<l1t::Jet>::const_iterator jet = l1tJetHandle -> begin(ibx); jet != l1tJetHandle -> end(ibx) ; jet++)
+          {
+            tmp_l1tPtJet.push_back(jet->pt());
+            tmp_l1tEtaJet.push_back(jet->eta());
+            tmp_l1tPhiJet.push_back(jet->phi());
+            tmp_l1tIsoJet.push_back(jet->hwIso());
+            tmp_l1tQualJet.push_back(jet->hwQual());
+            tmp_l1tTowerIEtaJet.push_back(jet->towerIEta());
+            tmp_l1tTowerIPhiJet.push_back(jet->towerIPhi());
+            tmp_l1tRawEtJet.push_back(jet->rawEt());
+          }
+        this -> _l1tPtJet        . push_back(tmp_l1tPtJet);
+        this -> _l1tEtaJet       . push_back(tmp_l1tEtaJet);
+        this -> _l1tPhiJet       . push_back(tmp_l1tPhiJet);
+        this -> _l1tIsoJet       . push_back(tmp_l1tIsoJet);
+        this -> _l1tQualJet      . push_back(tmp_l1tQualJet);
+        this -> _l1tTowerIEtaJet . push_back(tmp_l1tTowerIEtaJet);
+        this -> _l1tTowerIPhiJet . push_back(tmp_l1tTowerIPhiJet);
+        this -> _l1tRawEtJet     . push_back(tmp_l1tRawEtJet);
       }
   }
 
   edm::Handle<BXVector<l1t::Jet> > l1tEmuJetHandle;  
   try {iEvent.getByToken(this -> _l1tEmuJetTag, l1tEmuJetHandle);}  catch (...) {;}
 
-  if (l1tEmuJetHandle.isValid()){
-
-    for(BXVector<l1t::Jet>::const_iterator jet = l1tEmuJetHandle -> begin(0); jet != l1tEmuJetHandle -> end(0) ; jet++)
+  if (l1tEmuJetHandle.isValid())
+  {
+    for (int ibx = l1tEmuJetHandle->getFirstBX(); ibx <= l1tEmuJetHandle->getLastBX(); ++ibx)
       {
-        this -> _l1tEmuPtJet        . push_back(jet -> pt());
-        this -> _l1tEmuEtaJet       . push_back(jet -> eta());
-        this -> _l1tEmuPhiJet       . push_back(jet -> phi());
-        this -> _l1tEmuIsoJet       . push_back(jet -> hwIso());
-        this -> _l1tEmuQualJet      . push_back(jet -> hwQual());
-        this -> _l1tEmuTowerIEtaJet . push_back(jet -> towerIEta());
-        this -> _l1tEmuTowerIPhiJet . push_back(jet -> towerIPhi());
-        this -> _l1tEmuRawEtJet     . push_back(jet -> rawEt());
+        std::vector<float> tmp_l1tEmuPtJet;
+        std::vector<float> tmp_l1tEmuEtaJet;
+        std::vector<float> tmp_l1tEmuPhiJet;
+        std::vector<int> tmp_l1tEmuIsoJet;
+        std::vector<int> tmp_l1tEmuQualJet;
+        std::vector<int> tmp_l1tEmuTowerIEtaJet;
+        std::vector<int> tmp_l1tEmuTowerIPhiJet;
+        std::vector<int> tmp_l1tEmuRawEtJet;
+
+        for(BXVector<l1t::Jet>::const_iterator jet = l1tEmuJetHandle->begin(ibx); jet != l1tEmuJetHandle->end(ibx) ; jet++)
+          {
+            tmp_l1tEmuPtJet.push_back(jet -> pt());
+            tmp_l1tEmuEtaJet.push_back(jet -> eta());
+            tmp_l1tEmuPhiJet.push_back(jet -> phi());
+            tmp_l1tEmuIsoJet.push_back(jet -> hwIso());
+            tmp_l1tEmuQualJet.push_back(jet -> hwQual());
+            tmp_l1tEmuTowerIEtaJet.push_back(jet -> towerIEta());
+            tmp_l1tEmuTowerIPhiJet.push_back(jet -> towerIPhi());
+            tmp_l1tEmuRawEtJet.push_back(jet -> rawEt());
+          }
+
+        this -> _l1tEmuPtJet        . push_back(tmp_l1tEmuPtJet);
+        this -> _l1tEmuEtaJet       . push_back(tmp_l1tEmuEtaJet);
+        this -> _l1tEmuPhiJet       . push_back(tmp_l1tEmuPhiJet);
+        this -> _l1tEmuIsoJet       . push_back(tmp_l1tEmuIsoJet);
+        this -> _l1tEmuQualJet      . push_back(tmp_l1tEmuQualJet);
+        this -> _l1tEmuTowerIEtaJet . push_back(tmp_l1tEmuTowerIEtaJet);
+        this -> _l1tEmuTowerIPhiJet . push_back(tmp_l1tEmuTowerIPhiJet);
+        this -> _l1tEmuRawEtJet     . push_back(tmp_l1tEmuRawEtJet);
       }
-    
   }
   
   edm::Handle<BXVector<l1t::EtSum>> l1tSumHandle;
   try {iEvent.getByToken(this -> _l1tSumTag, l1tSumHandle);}  catch (...) {;}
 
-  if(l1tSumHandle.isValid()){
-    for(BXVector<l1t::EtSum>::const_iterator sum = l1tSumHandle -> begin(0); sum != l1tSumHandle -> end(0) ; sum++)
+  if(l1tSumHandle.isValid())
+  {
+    for (int ibx = l1tSumHandle->getFirstBX(); ibx <= l1tSumHandle->getLastBX(); ++ibx)
       {
-        this -> _l1tSumType.push_back(sum -> getType());
-        this -> _l1tSumEt  .  push_back(sum -> et());
-        this -> _l1tSumPhi . push_back(sum -> phi());
-        this -> _l1tSumIEt . push_back(sum -> hwPt());
-        this -> _l1tSumIPhi. push_back(sum -> hwPhi());
+        std::vector<short int> tmp_l1tSumType;
+        std::vector<float>     tmp_l1tSumEt;
+        std::vector<float>     tmp_l1tSumPhi;
+        std::vector<float>     tmp_l1tSumIEt;
+        std::vector<float>     tmp_l1tSumIPhi;
+
+        for(BXVector<l1t::EtSum>::const_iterator sum = l1tSumHandle->begin(ibx); sum != l1tSumHandle->end(ibx) ; sum++)
+          {
+            tmp_l1tSumType.push_back(sum -> getType());
+            tmp_l1tSumEt.push_back(sum -> et());
+            tmp_l1tSumPhi.push_back(sum -> phi());
+            tmp_l1tSumIEt.push_back(sum -> hwPt());
+            tmp_l1tSumIPhi.push_back(sum -> hwPhi());
+          }
+        
+        this -> _l1tSumType.push_back(tmp_l1tSumType);
+        this -> _l1tSumEt  .  push_back(tmp_l1tSumEt);
+        this -> _l1tSumPhi . push_back(tmp_l1tSumPhi);
+        this -> _l1tSumIEt . push_back(tmp_l1tSumIEt);
+        this -> _l1tSumIPhi. push_back(tmp_l1tSumIPhi);
       }
   }
 
   edm::Handle<BXVector<l1t::EtSum>> l1tEmuSumHandle;
   try {iEvent.getByToken(this -> _l1tEmuSumTag, l1tEmuSumHandle);}  catch (...) {;}
 
-  if(l1tEmuSumHandle.isValid()){
-    for(BXVector<l1t::EtSum>::const_iterator sum = l1tEmuSumHandle -> begin(0); sum != l1tEmuSumHandle -> end(0) ; sum++)
+  if(l1tEmuSumHandle.isValid())
+  {
+    for (int ibx = l1tEmuSumHandle->getFirstBX(); ibx <= l1tEmuSumHandle->getLastBX(); ++ibx)
       {
-        this -> _l1tEmuSumType.push_back(sum -> getType());
-        this -> _l1tEmuSumEt  .  push_back(sum -> et());
-        this -> _l1tEmuSumPhi . push_back(sum -> phi());
-        this -> _l1tEmuSumIEt . push_back(sum -> hwPt());
-        this -> _l1tEmuSumIPhi. push_back(sum -> hwPhi());
+        std::vector<short int> tmp_l1tEmuSumType;
+        std::vector<float>     tmp_l1tEmuSumEt;
+        std::vector<float>     tmp_l1tEmuSumPhi;
+        std::vector<float>     tmp_l1tEmuSumIEt;
+        std::vector<float>     tmp_l1tEmuSumIPhi;
+
+        for(BXVector<l1t::EtSum>::const_iterator sum = l1tEmuSumHandle->begin(ibx); sum != l1tEmuSumHandle->end(ibx) ; sum++)
+          {
+            tmp_l1tEmuSumType.push_back(sum -> getType());
+            tmp_l1tEmuSumEt.push_back(sum -> et());
+            tmp_l1tEmuSumPhi.push_back(sum -> phi());
+            tmp_l1tEmuSumIEt.push_back(sum -> hwPt());
+            tmp_l1tEmuSumIPhi.push_back(sum -> hwPhi());
+          }
+
+        this -> _l1tEmuSumType.push_back(tmp_l1tEmuSumType);
+        this -> _l1tEmuSumEt  .  push_back(tmp_l1tEmuSumEt);
+        this -> _l1tEmuSumPhi . push_back(tmp_l1tEmuSumPhi);
+        this -> _l1tEmuSumIEt . push_back(tmp_l1tEmuSumIEt);
+        this -> _l1tEmuSumIPhi. push_back(tmp_l1tEmuSumIPhi);
       }
   }
 
@@ -1103,8 +1201,6 @@ void ZeroBias_allBX::analyze(const edm::Event& iEvent, const edm::EventSetup& eS
           for (l1t::EGammaBxCollection::const_iterator bxEGIt = L1EGHandle->begin(ibx); bxEGIt != L1EGHandle->end(ibx) ; bxEGIt++)
             {
               const l1t::EGamma& l1tEG = *bxEGIt;
-              
-              //cout<<"FW EG, pT = "<<l1tEG.pt()<<", eta = "<<l1tEG.eta()<<", phi = "<<l1tEG.phi()<<endl;
               
               tmp_l1tEGPt.push_back(l1tEG.pt());
               tmp_l1tEGEta.push_back(l1tEG.eta());
@@ -1184,7 +1280,7 @@ void ZeroBias_allBX::analyze(const edm::Event& iEvent, const edm::EventSetup& eS
           std::vector<float> tmp_l1tMuPt;
           std::vector<float> tmp_l1tMuEta;
           std::vector<float> tmp_l1tMuPhi;
-          std::vector<int> tmp_l1tMuQual;
+          std::vector<int>   tmp_l1tMuQual;
 
           for (l1t::MuonBxCollection::const_iterator bx0MuIt = L1MuHandle->begin(ibx); bx0MuIt != L1MuHandle->end(ibx) ; bx0MuIt++)
             {
@@ -1210,22 +1306,30 @@ void ZeroBias_allBX::analyze(const edm::Event& iEvent, const edm::EventSetup& eS
 
   if (L1EmuMuHandle.isValid())
     { 
-      for (l1t::MuonBxCollection::const_iterator bx0EmuMuIt = L1EmuMuHandle->begin(0); bx0EmuMuIt != L1EmuMuHandle->end(0) ; bx0EmuMuIt++)
+      for (int ibx = L1EmuMuHandle->getFirstBX(); ibx <= L1EmuMuHandle->getLastBX(); ++ibx)
         {
-          const l1t::Muon& l1tEmuMu = *bx0EmuMuIt;
+          std::vector<float> tmp_l1tEmuMuPt;
+          std::vector<float> tmp_l1tEmuMuEta;
+          std::vector<float> tmp_l1tEmuMuPhi;
+          std::vector<int>   tmp_l1tEmuMuQual;
+          
+          for (l1t::MuonBxCollection::const_iterator bx0EmuMuIt = L1EmuMuHandle->begin(ibx); bx0EmuMuIt != L1EmuMuHandle->end(ibx) ; bx0EmuMuIt++)
+            {
+              const l1t::Muon& l1tEmuMu = *bx0EmuMuIt;
+              
+              tmp_l1tEmuMuPt.push_back(l1tEmuMu.pt());
+              tmp_l1tEmuMuEta.push_back(l1tEmuMu.eta());
+              tmp_l1tEmuMuPhi.push_back(l1tEmuMu.phi());
+              tmp_l1tEmuMuQual.push_back(l1tEmuMu.hwQual());
+
+            }
             
-          //cout<<"Emul Mu, pT = "<<l1tEmuMu.pt()<<", eta = "<<l1tEmuMu.eta()<<", phi = "<<l1tEmuMu.phi()<<endl;
-            
-          this -> _l1tEmuMuPt       .push_back(l1tEmuMu.pt());
-          this -> _l1tEmuMuEta      .push_back(l1tEmuMu.eta());
-          this -> _l1tEmuMuPhi      .push_back(l1tEmuMu.phi());
-          this -> _l1tEmuMuQual     .push_back(l1tEmuMu.hwQual());
+          this -> _l1tEmuMuPt       .push_back(tmp_l1tEmuMuPt);
+          this -> _l1tEmuMuEta      .push_back(tmp_l1tEmuMuEta);
+          this -> _l1tEmuMuPhi      .push_back(tmp_l1tEmuMuPhi);
+          this -> _l1tEmuMuQual     .push_back(tmp_l1tEmuMuQual);
         }
     }
-
-
-
-
 
 
   edm::Handle<edm::TriggerResults> triggerBits;

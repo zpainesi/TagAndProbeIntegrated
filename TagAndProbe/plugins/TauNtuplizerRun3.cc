@@ -548,6 +548,8 @@ void TauNtuplizerRun3::analyze(const edm::Event& iEvent, const edm::EventSetup& 
     _lumi = iEvent.luminosityBlock();
     if(!_isMC) _PS_column = _hltPrescale->prescaleSet(iEvent,eSetup);
 
+    std::cout << " --> " << _runNumber << " - " << _indexevents << " - " << _lumi << " - " << _PS_column << std::endl;
+
     edm::Handle<GenEventInfoProduct> genEvt;
     try {iEvent.getByToken(_genTag, genEvt);}  catch (...) {;}
     if(genEvt.isValid()) _MC_weight = genEvt->weight();

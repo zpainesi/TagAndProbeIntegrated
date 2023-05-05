@@ -45,7 +45,7 @@ process.GlobalTag.globaltag = options.globalTag
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
         # dummy for creation
-        '/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/02506E54-CE47-A649-9F80-117E978DC69E.root'
+        '/store/data/Run2023B/EphemeralZeroBias0/MINIAOD/PromptReco-v1/000/366/403/00000/8067c998-36ea-4137-8e82-17b0b0bb0271.root'
     ),
 )
 

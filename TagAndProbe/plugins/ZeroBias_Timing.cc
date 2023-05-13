@@ -460,7 +460,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
   iEvent.getByToken(metFiltersPatTag_, METFilterResults);
   if(!(METFilterResults.isValid())) iEvent.getByToken(metFiltersRecoTag_, METFilterResults);
 
-//  if (GetMETFilterDecision(iEvent,METFilterResults,"Flag_goodVertices"))
+  if (GetMETFilterDecision(iEvent,METFilterResults,"Flag_goodVertices"))
     {
       _indexevents = iEvent.id().event();
       _runNumber = iEvent.id().run();

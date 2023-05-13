@@ -22,7 +22,7 @@ goodTaus = cms.EDFilter("PATTauRefSelector",
 goodEles = cms.EDFilter("PATElectronSelector",
     src = cms.InputTag("slimmedElectrons"),
     cut = cms.string(
-        'pt>10 && ( abs(eta)<1.4442 || ( abs(eta)>1.566 && abs(eta)<2.5 ) )'
+        'pt>20 && ( abs(eta)<1.4442 || ( abs(eta)>1.566 && abs(eta)<2.5 ) ) '
     ),
     filter = cms.bool(False)
 )

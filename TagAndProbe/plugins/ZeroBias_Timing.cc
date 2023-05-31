@@ -712,7 +712,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
                     {
                       const reco::GsfElectron& ele = *eleIt;
-                      if (deltaR(ele, l1tEG)<0.5)
+                      if (deltaR(ele, l1tEG)<0.5 && l1tEG.pt()>15 && l1tEG.pt()<26)
                         {
                           matchFound = true;
                           _egBxMatched->Fill(ibx);

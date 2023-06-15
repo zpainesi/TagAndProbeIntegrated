@@ -608,7 +608,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                     {
                       const pat::Jet& jet = *jetIt;
 
-                      if (deltaR(jet, l1tJet)<0.5)
+                      if (deltaR(jet, l1tJet)<0.5 && (l1tJet.pt()>100. && l1tJet.pt()<150.))
                         { 
                           matchFound = true;
                           _jetBxMatched->Fill(ibx);
@@ -712,7 +712,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
                     {
                       const reco::GsfElectron& ele = *eleIt;
-                      if (deltaR(ele, l1tEG)<0.5 && l1tEG.pt()>15 && l1tEG.pt()<26)
+                      if (deltaR(ele, l1tEG)<0.5 && l1tEG.pt()>15. && l1tEG.pt()<26.)
                         {
                           matchFound = true;
                           _egBxMatched->Fill(ibx);
@@ -789,7 +789,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   for (pat::MuonRefVector::const_iterator muIt = muonHandle->begin(); muIt != muonHandle->end(); ++muIt)
                   {
                     const pat::MuonRef& mu = *muIt;
-                    if (deltaR(*mu, l1tMu)<0.5)
+                    if (deltaR(*mu, l1tMu)<0.5 && (l1tMu.pt()>10. && l1tMu.pt()<21.))
                       {
                         matchFound = true;
                         _muBxMatched->Fill(ibx);

@@ -158,6 +158,8 @@ private:
   std::vector< std::vector<int> >    _l1tEgIso;
   std::vector< std::vector<int> >    _l1tEgQual;
   std::vector< std::vector<int> >    _l1tEgIsMatched;
+  std::vector< std::vector<int> >    _l1tEgBx;
+
 
   std::vector<float> _muPt;
   std::vector<float> _muEta;
@@ -321,6 +323,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tEgQual      . clear();
   this -> _l1tEgIso       . clear();
   this -> _l1tEgIsMatched . clear();
+  this -> _l1tEgBx        . clear();
 
   this -> _muPt  . clear();
   this -> _muEta . clear();
@@ -420,7 +423,8 @@ void ZeroBias_Timing::beginJob()
   this -> _tree -> Branch("l1tEgQual",      &_l1tEgQual);
   this -> _tree -> Branch("l1tEgIso",       &_l1tEgIso);
   this -> _tree -> Branch("l1tEgIsMatched", &_l1tEgIsMatched);
-
+  this -> _tree -> Branch("l1tEgBx", &_l1tEgBx);
+  
   this -> _tree -> Branch("muPt",  &_muPt);
   this -> _tree -> Branch("muEta", &_muEta);
   this -> _tree -> Branch("muPhi", &_muPhi);
@@ -697,6 +701,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
               std::vector<int>    tmp_l1tEGIso;
               std::vector<int>    tmp_l1tEGQual;
               std::vector<int>    tmp_l1tEGIsMatched;
+              std::vector<int>    tmp_l1tEGBx;
 
               for (l1t::EGammaBxCollection::const_iterator bxEGIt = L1EGHandle->begin(ibx); bxEGIt != L1EGHandle->end(ibx) ; bxEGIt++)
                 {
@@ -707,6 +712,8 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   tmp_l1tEGPhi  . push_back(l1tEG.phi());
                   tmp_l1tEGIso  . push_back(l1tEG.hwIso());
                   tmp_l1tEGQual . push_back(l1tEG.hwQual());
+                  tmp_l1tEGBx   . push_back(ibx);
+                  std::cout << std::endl << "The BX of eg is " << ibx;
 
                   bool matchFound = false;
                   for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
@@ -730,6 +737,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
               this -> _l1tEgIso         . push_back(tmp_l1tEGIso);
               this -> _l1tEgQual        . push_back(tmp_l1tEGQual);
               this -> _l1tEgIsMatched   . push_back(tmp_l1tEGIsMatched);
+              this -> _l1tEgBx   . push_back(tmp_l1tEGBx);
             }
 
             edm::Handle<edm::ValueMap<bool> > eleTightIdHandle;

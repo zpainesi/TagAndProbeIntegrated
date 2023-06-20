@@ -713,16 +713,19 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   tmp_l1tEGIso  . push_back(l1tEG.hwIso());
                   tmp_l1tEGQual . push_back(l1tEG.hwQual());
                   tmp_l1tEGBx   . push_back(ibx);
-                  std::cout << std::endl << "The BX of eg is " << ibx;
+                  std::cout << std::endl << "OUT: The BX of eg is " << ibx;
+
 
                   bool matchFound = false;
                   for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
                     {
                       const reco::GsfElectron& ele = *eleIt;
-                      if (deltaR(ele, l1tEG)<0.5 && l1tEG.pt()>15. && l1tEG.pt()<26.)
+                      if (deltaR(ele, l1tEG)<0.5)
                         {
                           matchFound = true;
                           _egBxMatched->Fill(ibx);
+                          std::cout << std::endl << "IN: The BX of eg is " << ibx;
+
                           break;
                         }
                     }

@@ -175,6 +175,12 @@ private:
   TH1F* _egBxMatched  = new TH1F("egBxMatched",  "egBxMatched",  5, -2.5, 2.5);
   TH1F* _tauBxMatched = new TH1F("tauBxMatched", "tauBxMatched", 5, -2.5, 2.5);
   TH1F* _jetBxMatched = new TH1F("jetBxMatched", "jetBxMatched", 5, -2.5, 2.5);
+  //TH2F* _muBxMatched_eta_phi = new TH2F("muBxMatched_eta_phi","muBxMatched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
+  TH2F* _egBx0Matched_eta_phi = new TH2F("egBx0Matched_eta_phi","egBx0Matched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
+  TH2F* _egBxMin1Matched_eta_phi = new TH2F("egBxMin1Matched_eta_phi","egBxMin1Matched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
+  TH2F* _egBxPlus1Matched_eta_phi = new TH2F("egBxPlus1Matched_eta_phi","egBxPlus1Matched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
+  //TH2F* _tauBxMatched_eta_phi = new TH2F("tauBxMatched_eta_phi","tauBxMatched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
+  //TH2F* _jetBxMatched_eta_phi = new TH2F("jetBxMatched_eta_phi","jetBxMatched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
 
   edm::EDGetTokenT<GlobalAlgBlkBxCollection> _ugtTag;
 
@@ -451,7 +457,10 @@ void ZeroBias_Timing::endRun(edm::Run const& iRun, edm::EventSetup const& iSetup
   this -> _egBxMatched  -> Write();
   this -> _tauBxMatched -> Write();
   this -> _jetBxMatched -> Write();
-  
+  this -> _egBxMin1Matched_eta_phi -> Write();
+  this -> _egBx0Matched_eta_phi -> Write();
+  this -> _egBxPlus1Matched_eta_phi -> Write();
+
   return;
 }
 
@@ -713,7 +722,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   tmp_l1tEGIso  . push_back(l1tEG.hwIso());
                   tmp_l1tEGQual . push_back(l1tEG.hwQual());
                   tmp_l1tEGBx   . push_back(ibx);
-                  std::cout << std::endl << "OUT: The BX of eg is " << ibx;
+                  //std::cout << std::endl << "OUT: The BX of eg is " << ibx;
 
 
                   bool matchFound = false;
@@ -723,8 +732,12 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                       if (deltaR(ele, l1tEG)<0.5)
                         {
                           matchFound = true;
+                          if(ibx==-1)_egBxMin1Matched_eta_phi->Fill(l1tEG.eta() ,l1tEG.phi() );
+                          if(ibx==0)_egBx0Matched_eta_phi->Fill(l1tEG.eta() ,l1tEG.phi() );
+                          if(ibx==1)_egBxPlus1Matched_eta_phi->Fill(l1tEG.eta() ,l1tEG.phi() );
+                          
                           _egBxMatched->Fill(ibx);
-                          std::cout << std::endl << "IN: The BX of eg is " << ibx;
+                          //std::cout << std::endl << "IN: The BX of eg is " << ibx;
 
                           break;
                         }

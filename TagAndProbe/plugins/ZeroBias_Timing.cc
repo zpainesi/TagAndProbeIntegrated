@@ -737,7 +737,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                       
                       if (deltaR(ele, l1tEG)<0.5)
                         {
-                          std::cout<<std::endl
+                          std::cout<<std::endl<<" WE HAVE A MATCH ! ! ! ";
                           matchFound = true;
                           tmp_l1tEGPt   . push_back(l1tEG.pt());
                   tmp_l1tEGEta  . push_back(l1tEG.eta());
@@ -764,8 +764,8 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                         }
                     }
 
-                  if (matchFound) { tmp_l1tEGIsMatched.push_back(1); }
-                  else            { tmp_l1tEGIsMatched.push_back(0); }
+    //              if (matchFound) { tmp_l1tEGIsMatched.push_back(1); }
+      //            else            { tmp_l1tEGIsMatched.push_back(0); }
                 }
 
               this -> _l1tEgPt          . push_back(tmp_l1tEGPt);

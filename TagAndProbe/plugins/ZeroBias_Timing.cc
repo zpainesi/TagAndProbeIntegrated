@@ -176,9 +176,9 @@ private:
   TH1F* _tauBxMatched = new TH1F("tauBxMatched", "tauBxMatched", 5, -2.5, 2.5);
   TH1F* _jetBxMatched = new TH1F("jetBxMatched", "jetBxMatched", 5, -2.5, 2.5);
   //TH2F* _muBxMatched_eta_phi = new TH2F("muBxMatched_eta_phi","muBxMatched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
-  TH1F* _egBx0Matched_eta = new TH2F("egBx0Matched_eta","egBx0Matched_eta", 100, -5 , 5);
-  TH1F* _egBxMin1Matched_eta = new TH2F("egBxMin1Matched_eta","egBxMin1Matched_eta", 100, -5 , 5);
-  TH1F* _egBxPlus1Matched_eta = new TH2F("egBxPlus1Matched_eta","egBxPlus1Matched_eta", 100, -5 , 5);
+  TH1F* _egBx0Matched_eta = new TH1F("egBx0Matched_eta","egBx0Matched_eta", 100, -5 , 5);
+  TH1F* _egBxMin1Matched_eta = new TH1F("egBxMin1Matched_eta","egBxMin1Matched_eta", 100, -5 , 5);
+  TH1F* _egBxPlus1Matched_eta = new TH1F("egBxPlus1Matched_eta","egBxPlus1Matched_eta", 100, -5 , 5);
   //TH2F* _tauBxMatched_eta_phi = new TH2F("tauBxMatched_eta_phi","tauBxMatched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
   //TH2F* _jetBxMatched_eta_phi = new TH2F("jetBxMatched_eta_phi","jetBxMatched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
 

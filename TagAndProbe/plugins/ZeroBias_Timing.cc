@@ -457,9 +457,9 @@ void ZeroBias_Timing::endRun(edm::Run const& iRun, edm::EventSetup const& iSetup
   this -> _egBxMatched  -> Write();
   this -> _tauBxMatched -> Write();
   this -> _jetBxMatched -> Write();
-  this -> _egBxMin1Matched_eta_phi -> Write();
-  this -> _egBx0Matched_eta_phi -> Write();
-  this -> _egBxPlus1Matched_eta_phi -> Write();
+  this -> _egBxMin1Matched_eta -> Write();
+  this -> _egBx0Matched_eta -> Write();
+  this -> _egBxPlus1Matched_eta -> Write();
 
   return;
 }
@@ -741,9 +741,9 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                       if (deltaR(ele, l1tEG)<0.5)
                         {
                           matchFound = true;
-                          if(ibx==-1)_egBxMin1Matched_eta_phi->Fill(l1tEG.eta());
-                          if(ibx==0)_egBx0Matched_eta_phi->Fill(l1tEG.eta());
-                          if(ibx==1)_egBxPlus1Matched_eta_phi->Fill(l1tEG.eta() );
+                          if(ibx==-1)_egBxMin1Matched_eta->Fill(l1tEG.eta());
+                          if(ibx==0)_egBx0Matched_eta->Fill(l1tEG.eta());
+                          if(ibx==1)_egBxPlus1Matched_eta->Fill(l1tEG.eta() );
                           
                           _egBxMatched->Fill(ibx);
                           //std::cout << std::endl << "IN: The BX of eg is " << ibx;

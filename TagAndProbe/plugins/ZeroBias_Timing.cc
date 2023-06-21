@@ -12,6 +12,7 @@
 #include <TString.h>
 #include <bitset>
 #include "TH1F.h"
+#include "TH1.h"
 
 
 #include "FWCore/Framework/interface/one/EDAnalyzer.h"

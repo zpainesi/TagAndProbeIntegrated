@@ -719,12 +719,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                 {
                   const l1t::EGamma& l1tEG = *bxEGIt;
                   counter_haris++;
-                  tmp_l1tEGPt   . push_back(l1tEG.pt());
-                  tmp_l1tEGEta  . push_back(l1tEG.eta());
-                  tmp_l1tEGPhi  . push_back(l1tEG.phi());
-                  tmp_l1tEGIso  . push_back(l1tEG.hwIso());
-                  tmp_l1tEGQual . push_back(l1tEG.hwQual());
-                  tmp_l1tEGBx   . push_back(ibx);
+                  
                   std::cout << std::endl << "OUT: Count= "<< counter_haris;
                   std::cout << std::endl << "OUT: The pt of eg is " << l1tEG.pt();
                   std::cout << std::endl << "OUT: The eta of eg is " << l1tEG.eta();
@@ -739,15 +734,27 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                     {
                       const reco::GsfElectron& ele = *eleIt;
 
-                      std::cout << std::endl << "IN: The OFFLINE pt of eg is " << ele.pt();
-                std::cout << std::endl << "IN: The OFFLINE eta of eg is " << ele.eta();
-                std::cout << std::endl << "IN: The OFFLINE phi of eg is " << ele.phi();
+                      
                       if (deltaR(ele, l1tEG)<0.5)
                         {
+                          std::cout<<std::endl
                           matchFound = true;
+                          tmp_l1tEGPt   . push_back(l1tEG.pt());
+                  tmp_l1tEGEta  . push_back(l1tEG.eta());
+                  tmp_l1tEGPhi  . push_back(l1tEG.phi());
+                  tmp_l1tEGIso  . push_back(l1tEG.hwIso());
+                  tmp_l1tEGQual . push_back(l1tEG.hwQual());
+                  tmp_l1tEGBx   . push_back(ibx);
+                          _egPt  . push_back(ele.pt());
+                _egEta . push_back(ele.eta());
+                _egPhi . push_back(ele.phi());
                           if(ibx==-1)_egBxMin1Matched_eta->Fill(l1tEG.eta());
                           if(ibx==0)_egBx0Matched_eta->Fill(l1tEG.eta());
                           if(ibx==1)_egBxPlus1Matched_eta->Fill(l1tEG.eta() );
+
+                          std::cout << std::endl << "IN: The OFFLINE pt of eg is " << ele.pt();
+                std::cout << std::endl << "IN: The OFFLINE eta of eg is " << ele.eta();
+                std::cout << std::endl << "IN: The OFFLINE phi of eg is " << ele.phi();
                           
                           
                           _egBxMatched->Fill(ibx);
@@ -778,7 +785,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
             iEvent.getByToken(_eleLooseIdTag,  eleLooseIdHandle);
             
             // short int idx = 0;
-          int counter_offl=0;
+/*          int counter_offl=0;
             for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
               {
                 const reco::GsfElectron& ele = *eleIt;
@@ -798,7 +805,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                 // _egIsMedium . push_back( (*eleMediumIdHandle)[*elePtr] );
                 // _egIsLoose  . push_back( (*eleLooseIdHandle)[*elePtr] );
               }
-        }
+   */     }
 
       //------------------------------------------------------------------------------------------------
 

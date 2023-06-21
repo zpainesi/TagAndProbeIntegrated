@@ -783,9 +783,9 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                 _egEta . push_back(ele.eta());
                 _egPhi . push_back(ele.phi());
                 std::cout<<std::endl<<"Offline counter: "<<counter_offl;
-                std::cout << std::endl << "The offl pt of eg is " << ele.pt();
-                std::cout << std::endl << "The offl eta of eg is " << ele.eta();
-                std::cout << std::endl << "The offl phi of eg is " << ele.phi();
+                std::cout << std::endl << "The OFFLINE pt of eg is " << ele.pt();
+                std::cout << std::endl << "The OFFLINE eta of eg is " << ele.eta();
+                std::cout << std::endl << "The OFFLINE phi of eg is " << ele.phi();
 
                 
 

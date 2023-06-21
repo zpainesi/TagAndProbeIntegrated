@@ -773,14 +773,21 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
             iEvent.getByToken(_eleLooseIdTag,  eleLooseIdHandle);
             
             // short int idx = 0;
+          int counter_offl=0;
             for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
               {
                 const reco::GsfElectron& ele = *eleIt;
                 // const auto elePtr = eleHandle->ptrAt(idx); ++idx;
-
+                counter_offl++;
                 _egPt  . push_back(ele.pt());
                 _egEta . push_back(ele.eta());
                 _egPhi . push_back(ele.phi());
+                std::cout<<std::endl<<"Offline counter: "<<counter_offl;
+                std::cout << std::endl << "The offl pt of eg is " << ele.pt();
+                std::cout << std::endl << "The offl eta of eg is " << ele.eta();
+                std::cout << std::endl << "The offl phi of eg is " << ele.phi();
+
+                
 
                 // _egIsTight  . push_back( (*eleTightIdHandle)[*elePtr] );
                 // _egIsMedium . push_back( (*eleMediumIdHandle)[*elePtr] );

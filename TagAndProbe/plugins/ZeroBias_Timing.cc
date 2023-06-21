@@ -714,18 +714,16 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
               std::vector<int>    tmp_l1tEGQual;
               std::vector<int>    tmp_l1tEGIsMatched;
               std::vector<int>    tmp_l1tEGBx;
-              int counter_haris=0;
               for (l1t::EGammaBxCollection::const_iterator bxEGIt = L1EGHandle->begin(ibx); bxEGIt != L1EGHandle->end(ibx) ; bxEGIt++)
                 {
                   const l1t::EGamma& l1tEG = *bxEGIt;
-                  counter_haris++;
-            /*      tmp_l1tEGPt   . push_back(l1tEG.pt());
+                  tmp_l1tEGPt   . push_back(l1tEG.pt());
                   tmp_l1tEGEta  . push_back(l1tEG.eta());
                   tmp_l1tEGPhi  . push_back(l1tEG.phi());
                   tmp_l1tEGIso  . push_back(l1tEG.hwIso());
                   tmp_l1tEGQual . push_back(l1tEG.hwQual());
                   tmp_l1tEGBx   . push_back(ibx);
-                  std::cout << std::endl << "OUT: Count= "<< counter_haris;
+                  /*
                   std::cout << std::endl << "OUT: The pt of eg is " << l1tEG.pt();
                   std::cout << std::endl << "OUT: The eta of eg is " << l1tEG.eta();
                   std::cout << std::endl << "OUT: The phi of eg is " << l1tEG.phi();
@@ -738,24 +736,16 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
                     {
                       const reco::GsfElectron& ele = *eleIt;
-                      if (deltaR(ele, l1tEG)<0.5)
+                      if (deltaR(ele, l1tEG)<0.5 && l1tEG.pt()>15. && l1tEG.pt()<26.)
                         {
                           matchFound = true;
-                          tmp_l1tEGPt   . push_back(l1tEG.pt());
-                          tmp_l1tEGEta  . push_back(l1tEG.eta());
-                          tmp_l1tEGPhi  . push_back(l1tEG.phi());
-                          tmp_l1tEGIso  . push_back(l1tEG.hwIso());
-                          tmp_l1tEGQual . push_back(l1tEG.hwQual());
-                          tmp_l1tEGBx   . push_back(ibx);
-                          _egPt  . push_back(ele.pt());
-                          _egEta . push_back(ele.eta());
-                          _egPhi . push_back(ele.phi());
+                          
+                       
                           if(ibx==-1)_egBxMin1Matched_eta->Fill(ele.eta());
                           if(ibx==0)_egBx0Matched_eta->Fill(ele.eta());
                           if(ibx==1)_egBxPlus1Matched_eta->Fill(ele.eta() );
                           
                           _egBxMatched->Fill(ibx);
-                          //std::cout << std::endl << "IN: The BX of eg is " << ibx;
 
                           break;
                         }
@@ -784,7 +774,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
             iEvent.getByToken(_eleLooseIdTag,  eleLooseIdHandle);
             
             // short int idx = 0;
-  /*          for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
+            for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
               {
                 const reco::GsfElectron& ele = *eleIt;
                 // const auto elePtr = eleHandle->ptrAt(idx); ++idx;
@@ -797,7 +787,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                 // _egIsMedium . push_back( (*eleMediumIdHandle)[*elePtr] );
                 // _egIsLoose  . push_back( (*eleLooseIdHandle)[*elePtr] );
               }
-       */ }
+        }
 
       //------------------------------------------------------------------------------------------------
 

@@ -744,6 +744,9 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           if(ibx==-1)_egBxMin1Matched_eta->Fill(l1tEG.eta());
                           if(ibx==0)_egBx0Matched_eta->Fill(l1tEG.eta());
                           if(ibx==1)_egBxPlus1Matched_eta->Fill(l1tEG.eta() );
+                          std::cout << std::endl << "IN: The OFFLINE pt of eg is " << ele.pt();
+                std::cout << std::endl << "IN: The OFFLINE eta of eg is " << ele.eta();
+                std::cout << std::endl << "IN: The OFFLINE phi of eg is " << ele.phi();
                           
                           _egBxMatched->Fill(ibx);
                           //std::cout << std::endl << "IN: The BX of eg is " << ibx;

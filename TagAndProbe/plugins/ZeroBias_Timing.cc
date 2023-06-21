@@ -702,8 +702,11 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
 
       if(L1EGHandle.isValid() && eleHandle.isValid())
         {
+          int counter_bx_haris=0;
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)
             {
+              counter_bx_haris++;
+              std::cout << std::endl << "OUT: bxCount= "<< counter_bx_haris;
               std::vector<float>  tmp_l1tEGPt;
               std::vector<float>  tmp_l1tEGEta;
               std::vector<float>  tmp_l1tEGPhi;
@@ -711,18 +714,24 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
               std::vector<int>    tmp_l1tEGQual;
               std::vector<int>    tmp_l1tEGIsMatched;
               std::vector<int>    tmp_l1tEGBx;
-
+              int counter_haris=0;
               for (l1t::EGammaBxCollection::const_iterator bxEGIt = L1EGHandle->begin(ibx); bxEGIt != L1EGHandle->end(ibx) ; bxEGIt++)
                 {
                   const l1t::EGamma& l1tEG = *bxEGIt;
-                  
+                  counter_haris++;
                   tmp_l1tEGPt   . push_back(l1tEG.pt());
                   tmp_l1tEGEta  . push_back(l1tEG.eta());
                   tmp_l1tEGPhi  . push_back(l1tEG.phi());
                   tmp_l1tEGIso  . push_back(l1tEG.hwIso());
                   tmp_l1tEGQual . push_back(l1tEG.hwQual());
                   tmp_l1tEGBx   . push_back(ibx);
-                  //std::cout << std::endl << "OUT: The BX of eg is " << ibx;
+                  std::cout << std::endl << "OUT: Count= "<< counter_haris;
+                  std::cout << std::endl << "OUT: The pt of eg is " << l1tEG.pt();
+                  std::cout << std::endl << "OUT: The eta of eg is " << l1tEG.eta();
+                  std::cout << std::endl << "OUT: The phi of eg is " << l1tEG.phi();
+                  std::cout << std::endl << "OUT: The iso of eg is " << l1tEG.hwIso();
+                  std::cout << std::endl << "OUT: The qual of eg is " << l1tEG.hwQual();
+                  std::cout << std::endl << "OUT: The BX of eg is " << ibx;
 
 
                   bool matchFound = false;

@@ -182,13 +182,13 @@ private:
   //TH2F* _tauBxMatched_eta_phi = new TH2F("tauBxMatched_eta_phi","tauBxMatched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
   //TH2F* _jetBxMatched_eta_phi = new TH2F("jetBxMatched_eta_phi","jetBxMatched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
 
-_muBxMatched->Sumw2();
-_egBxMatched->Sumw2();
-_tauBxMatched->Sumw2();
-_jetBxMatched->Sumw2();
-_egBx0Matched_eta->Sumw2();
-_egBxMin1Matched_eta->Sumw2();
-_egBxPlus1Matched_eta->Sumw2();
+_muBxMatched->TH1::Sumw2();
+_egBxMatched->TH1::Sumw2();
+_tauBxMatched->TH1::Sumw2();
+_jetBxMatched->TH1::Sumw2();
+_egBx0Matched_eta->TH1::Sumw2();
+_egBxMin1Matched_eta->TH1::Sumw2();
+_egBxPlus1Matched_eta->TH1::Sumw2();
 
   edm::EDGetTokenT<GlobalAlgBlkBxCollection> _ugtTag;
 

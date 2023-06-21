@@ -714,7 +714,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)
             {
               counter_bx_haris++;
-              std::cout << std::endl << "OUT: bxCount= "<< counter_bx_haris;
+             // std::cout << std::endl << "OUT: bxCount= "<< counter_bx_haris;
               std::vector<float>  tmp_l1tEGPt;
               std::vector<float>  tmp_l1tEGEta;
               std::vector<float>  tmp_l1tEGPhi;

@@ -702,9 +702,11 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
 
       if(L1EGHandle.isValid() && eleHandle.isValid())
         {
+          int counter_bx_haris=0;
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)
             {
-             
+              counter_bx_haris++;
+              std::cout << std::endl << "OUT: bxCount= "<< counter_bx_haris;
               std::vector<float>  tmp_l1tEGPt;
               std::vector<float>  tmp_l1tEGEta;
               std::vector<float>  tmp_l1tEGPhi;
@@ -712,46 +714,55 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
               std::vector<int>    tmp_l1tEGQual;
               std::vector<int>    tmp_l1tEGIsMatched;
               std::vector<int>    tmp_l1tEGBx;
+              int counter_haris=0;
               for (l1t::EGammaBxCollection::const_iterator bxEGIt = L1EGHandle->begin(ibx); bxEGIt != L1EGHandle->end(ibx) ; bxEGIt++)
                 {
                   const l1t::EGamma& l1tEG = *bxEGIt;
-                
-                  bool matchFound = false;
-                  for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
-                    {
-                      const reco::GsfElectron& ele = *eleIt;
-
-                      
-                      if (deltaR(ele, l1tEG)<0.5)
-                        {
-                          std::cout<<std::endl<<" WE HAVE A MATCH ! ! ! "<<std::endl;
-                          matchFound = true;
-                          tmp_l1tEGPt   . push_back(l1tEG.pt());
+                  counter_haris++;
+            /*      tmp_l1tEGPt   . push_back(l1tEG.pt());
                   tmp_l1tEGEta  . push_back(l1tEG.eta());
                   tmp_l1tEGPhi  . push_back(l1tEG.phi());
                   tmp_l1tEGIso  . push_back(l1tEG.hwIso());
                   tmp_l1tEGQual . push_back(l1tEG.hwQual());
                   tmp_l1tEGBx   . push_back(ibx);
-                          _egPt  . push_back(ele.pt());
-                _egEta . push_back(ele.eta());
-                _egPhi . push_back(ele.phi());
-                          if(ibx==-1)_egBxMin1Matched_eta->Fill(l1tEG.eta());
-                          if(ibx==0)_egBx0Matched_eta->Fill(l1tEG.eta());
-                          if(ibx==1)_egBxPlus1Matched_eta->Fill(l1tEG.eta() );
+                  std::cout << std::endl << "OUT: Count= "<< counter_haris;
+                  std::cout << std::endl << "OUT: The pt of eg is " << l1tEG.pt();
+                  std::cout << std::endl << "OUT: The eta of eg is " << l1tEG.eta();
+                  std::cout << std::endl << "OUT: The phi of eg is " << l1tEG.phi();
+                  std::cout << std::endl << "OUT: The iso of eg is " << l1tEG.hwIso();
+                  std::cout << std::endl << "OUT: The qual of eg is " << l1tEG.hwQual();
+                  std::cout << std::endl << "OUT: The BX of eg is " << ibx;
+*/
 
-                          std::cout << std::endl << "IN: The OFFLINE pt of eg is " << ele.pt();
-                std::cout << std::endl << "IN: The OFFLINE eta of eg is " << ele.eta();
-                std::cout << std::endl << "IN: The OFFLINE phi of eg is " << ele.phi();
-                          
+                  bool matchFound = false;
+                  for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
+                    {
+                      const reco::GsfElectron& ele = *eleIt;
+                      if (deltaR(ele, l1tEG)<0.5)
+                        {
+                          matchFound = true;
+                          tmp_l1tEGPt   . push_back(l1tEG.pt());
+                          tmp_l1tEGEta  . push_back(l1tEG.eta());
+                          tmp_l1tEGPhi  . push_back(l1tEG.phi());
+                          tmp_l1tEGIso  . push_back(l1tEG.hwIso());
+                          tmp_l1tEGQual . push_back(l1tEG.hwQual());
+                          tmp_l1tEGBx   . push_back(ibx);
+                          _egPt  . push_back(ele.pt());
+                          _egEta . push_back(ele.eta());
+                          _egPhi . push_back(ele.phi());
+                          if(ibx==-1)_egBxMin1Matched_eta->Fill(ele.eta());
+                          if(ibx==0)_egBx0Matched_eta->Fill(ele.eta());
+                          if(ibx==1)_egBxPlus1Matched_eta->Fill(ele.eta() );
                           
                           _egBxMatched->Fill(ibx);
+                          //std::cout << std::endl << "IN: The BX of eg is " << ibx;
 
                           break;
                         }
                     }
 
-    //              if (matchFound) { tmp_l1tEGIsMatched.push_back(1); }
-      //            else            { tmp_l1tEGIsMatched.push_back(0); }
+                  if (matchFound) { tmp_l1tEGIsMatched.push_back(1); }
+                  else            { tmp_l1tEGIsMatched.push_back(0); }
                 }
 
               this -> _l1tEgPt          . push_back(tmp_l1tEGPt);
@@ -761,6 +772,8 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
               this -> _l1tEgQual        . push_back(tmp_l1tEGQual);
               this -> _l1tEgIsMatched   . push_back(tmp_l1tEGIsMatched);
               this -> _l1tEgBx   . push_back(tmp_l1tEGBx);
+      
+              
             }
 
             edm::Handle<edm::ValueMap<bool> > eleTightIdHandle;
@@ -771,24 +784,20 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
             iEvent.getByToken(_eleLooseIdTag,  eleLooseIdHandle);
             
             // short int idx = 0;
-   /*         for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
+  /*          for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
               {
                 const reco::GsfElectron& ele = *eleIt;
                 // const auto elePtr = eleHandle->ptrAt(idx); ++idx;
+
                 _egPt  . push_back(ele.pt());
                 _egEta . push_back(ele.eta());
                 _egPhi . push_back(ele.phi());
-                std::cout << std::endl << "The OFFLINE pt of eg is " << ele.pt();
-                std::cout << std::endl << "The OFFLINE eta of eg is " << ele.eta();
-                std::cout << std::endl << "The OFFLINE phi of eg is " << ele.phi();
-
-                
 
                 // _egIsTight  . push_back( (*eleTightIdHandle)[*elePtr] );
                 // _egIsMedium . push_back( (*eleMediumIdHandle)[*elePtr] );
                 // _egIsLoose  . push_back( (*eleLooseIdHandle)[*elePtr] );
               }
-   */     }
+       */ }
 
       //------------------------------------------------------------------------------------------------
 

@@ -173,7 +173,8 @@ private:
   std::vector< std::vector<int> >   _l1tMuQual;
   std::vector< std::vector<int> >   _l1tMuIsMatched;
 
-  TH1F* _muBxMatched  = new TH1F("muBxMatched",  "muBxMatched",  5, -2.5, 2.5);
+  TH1F* _muBxMatched_g20  = new TH1F("muBxMatched_g20",  "muBxMatched_g20",  5, -2.5, 2.5);
+  TH1F* _muBxMatched_8_25  = new TH1F("muBxMatched_8_25",  "muBxMatched_8_25",  5, -2.5, 2.5);
   TH1F* _egBxMatched  = new TH1F("egBxMatched",  "egBxMatched",  5, -2.5, 2.5);
   TH1F* _tauBxMatched = new TH1F("tauBxMatched", "tauBxMatched", 5, -2.5, 2.5);
   TH1F* _jetBxMatched = new TH1F("jetBxMatched", "jetBxMatched", 5, -2.5, 2.5);
@@ -455,7 +456,8 @@ void ZeroBias_Timing::endJob()
 
 void ZeroBias_Timing::endRun(edm::Run const& iRun, edm::EventSetup const& iSetup)
 {
-  this -> _muBxMatched  -> Write();
+  this -> _muBxMatched_8_25  -> Write();
+  this -> _muBxMatched_g20  -> Write();
   this -> _egBxMatched  -> Write();
   this -> _tauBxMatched -> Write();
   this -> _jetBxMatched -> Write();
@@ -825,12 +827,25 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   for (pat::MuonRefVector::const_iterator muIt = muonHandle->begin(); muIt != muonHandle->end(); ++muIt)
                   {
                     const pat::MuonRef& mu = *muIt;
-                    if (deltaR(*mu, l1tMu)<0.5 && (l1tMu.pt()>10. && l1tMu.pt()<21.))
+                    if (deltaR(*mu, l1tMu)<0.5 && (l1tMu.pt()>10. && l1tMu.pt()<21.) && (mu->pt()<25.) )
                       {
                         matchFound = true;
-                        _muBxMatched->Fill(ibx);
+                        _muBxMatched_8_25->Fill(ibx);
+                        break;
+                      }                   
+                  }
+                  
+                  for (pat::MuonRefVector::const_iterator muIt = muonHandle->begin(); muIt != muonHandle->end(); ++muIt)
+                  {
+                    const pat::MuonRef& mu = *muIt;
+                    if (deltaR(*mu, l1tMu)<0.5 && (l1tMu.pt()>22.) && (mu->pt()>20.))
+                      {
+                        matchFound = true;
+                        _muBxMatched_g20->Fill(ibx);
                         break;
                       }
+                    
+                      
                   }
 
                   if (matchFound) { tmp_l1tMuIsMatched.push_back(1); }

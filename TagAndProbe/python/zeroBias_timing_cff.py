@@ -32,7 +32,7 @@ goodEles = cms.EDFilter("PATElectronSelector",
 goodMus = cms.EDFilter("PATMuonRefSelector",
     src = cms.InputTag("slimmedMuons"),
     cut = cms.string(
-        'abs(dB)<0.2'
+        'abs(dB)<0.2 && pt>8.'
         # 'pt>10 && abs(eta)<2.4'
         # '&& (isPFMuon>0) && (isGlobalMuon = 1) && (numberOfMatchedStations() > 1)'
         # '&& (abs(dB)<0.2)  && ((isolationR03().sumPt/pt)<0.1)'
@@ -76,7 +76,7 @@ goodMus = cms.EDFilter("PATMuonRefSelector",
 goodJets = cms.EDFilter("PATJetSelector",
     src = cms.InputTag("slimmedJets"),
     cut = cms.string(
-        'pt>20.'
+        'pt>90. && pt<160.'
         # 'pt>30 && abs(eta)<5.2'
         # '&& isPFJet > 0.5 '
     ),

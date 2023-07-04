@@ -173,6 +173,101 @@ private:
   std::vector< std::vector<int> >   _l1tMuQual;
   std::vector< std::vector<int> >   _l1tMuIsMatched;
 
+///// variables to be filled in the second tree (L1BX)
+ULong64_t _indexevents2;
+  Int_t     _runNumber2;
+  Int_t     _lumi2;
+
+  Int_t _bit21_;  // L1_SingleMu22
+  Int_t _bit25_;  // L1_SingleMu25
+  Int_t _bit168_; // L1_SingleEG36er2p5
+  Int_t _bit169_; // L1_SingleEG38er2p5
+  Int_t _bit170_; // L1_SingleEG40er2p5
+  Int_t _bit171_; // L1_SingleEG42er2p5
+  Int_t _bit172_; // L1_SingleEG45er2p5
+  Int_t _bit178; // L1_SingleLooseIsoEG28er2p5
+  Int_t _bit192_; // L1_SingleIsoEG30er2p5
+  Int_t _bit194_; // L1_SingleIsoEG32er2p5
+  Int_t _bit196_; // L1_SingleIsoEG34er2p5
+  Int_t _bit218_; // L1_DoubleEG_25_12_er2p5
+  Int_t _bit219_; // L1_DoubleEG_25_12_er2p5
+  Int_t _bit220_; // L1_DoubleEG_25_12_er2p5
+  Int_t _bit262_; // L1_SingleIsoTau32er2p1
+  Int_t _bit263_; // L1_SingleTau70er2p1
+  Int_t _bit264_; // L1_SingleTau120er2p1
+  Int_t _bit267_; // L1_DoubleTau70er2p1
+  Int_t _bit270_; // L1_DoubleIsoTau32er2p1
+  Int_t _bit271_; // L1_DoubleIsoTau34er2p1
+  Int_t _bit272_; // L1_DoubleIsoTau35er2p1
+  Int_t _bit273_; // L1_DoubleIsoTau36er2p1
+  Int_t _bit309_; // L1_SingleJet35
+  Int_t _bit310_; // L1_SingleJet60
+  Int_t _bit398_; // L1_HTT120er
+  Int_t _bit418_; // L1_ETMHF70
+  Int_t _bit420_; // L1_ETMHF90
+  Int_t _bit459_; // L1_ZeroBias
+  Int_t _bit478_; // L1_LastCollisionInTrain
+  Int_t _bit479_; // L1_FirstCollisionInTrain
+  Int_t _bit480_; // L1_FirstCollisionInOrbit
+
+  float _tauPt;
+  float _tauEta;
+  float _tauPhi;
+
+  float _l1tTauPt;
+  float _l1tTauEta;
+  float _l1tTauPhi;
+  Int_t   _l1tTauQual;
+  Int_t   _l1tTauIso;
+  Int_t   _l1tTauIsMatched;
+
+  float _jetPt;
+  float _jetEta;
+  float _jetPhi;
+
+  float _l1tJetPt;
+  float _l1tJetEta;
+  float _l1tJetPhi;
+  Int_t  _l1tJetQual;
+  Int_t   _l1tJetIso;
+  Int_t  _l1tJetIsMatched;
+
+  float _metEt;
+  float _metPhi;
+
+  Int_t _l1tSumType;
+  float    _l1tSumEt;
+  float     _l1tSumPhi;
+  float   _l1tSumIEt;
+  float    _l1tSumIPhi;
+
+  float _egPt;
+  float _egEta;
+  float _egPhi;
+  Int_t   _egIsTight;
+  Int_t  _egIsMedium;
+  Int_t  _egIsLoose;
+
+  float  _l1tEgPt;
+  float  _l1tEgEta;
+  float  _l1tEgPhi;
+  Int_t   _l1tEgIso;
+  Int_t   _l1tEgQual;
+  Int_t   _l1tEgIsMatched;
+  Int_t    _l1tEgBx;
+
+
+  float _muPt;
+  float _muEta;
+  float _muPhi;
+
+  float _l1tMuPt;
+  float _l1tMuEta;
+  float _l1tMuPhi;
+  Int_t   _l1tMuQual;
+  Int_t  _l1tMuIsMatched;
+
+//// histos to be filled in the output
   TH1F* _muBxMatched_g20  = new TH1F("muBxMatched_g20",  "muBxMatched_g20",  5, -2.5, 2.5);
   TH1F* _muBxMatched_8_25  = new TH1F("muBxMatched_8_25",  "muBxMatched_8_25",  5, -2.5, 2.5);
   TH1F* _egBxMatched  = new TH1F("egBxMatched",  "egBxMatched",  5, -2.5, 2.5);

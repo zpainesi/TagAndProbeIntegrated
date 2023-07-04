@@ -210,62 +210,62 @@ ULong64_t _indexevents2;
   Int_t _bit479_; // L1_FirstCollisionInTrain
   Int_t _bit480_; // L1_FirstCollisionInOrbit
 
-  float _tauPt;
-  float _tauEta;
-  float _tauPhi;
+  float _tauPt2;
+  float _tauEta2;
+  float _tauPhi2;
 
-  float _l1tTauPt;
-  float _l1tTauEta;
-  float _l1tTauPhi;
-  Int_t   _l1tTauQual;
-  Int_t   _l1tTauIso;
-  Int_t   _l1tTauIsMatched;
+  float _l1tTauPt2;
+  float _l1tTauEta2;
+  float _l1tTauPhi2;
+  Int_t   _l1tTauQual2;
+  Int_t   _l1tTauIso2;
+  Int_t   _l1tTauIsMatched2;
 
-  float _jetPt;
-  float _jetEta;
-  float _jetPhi;
+  float _jetPt2;
+  float _jetEta2;
+  float _jetPhi2;
 
-  float _l1tJetPt;
-  float _l1tJetEta;
-  float _l1tJetPhi;
-  Int_t  _l1tJetQual;
-  Int_t   _l1tJetIso;
-  Int_t  _l1tJetIsMatched;
+  float _l1tJetPt2;
+  float _l1tJetEta2;
+  float _l1tJetPhi2;
+  Int_t  _l1tJetQual2;
+  Int_t   _l1tJetIso2;
+  Int_t  _l1tJetIsMatched2;
 
-  float _metEt;
-  float _metPhi;
+  float _metEt2;
+  float _metPhi2;
 
-  Int_t _l1tSumType;
-  float    _l1tSumEt;
-  float     _l1tSumPhi;
-  float   _l1tSumIEt;
-  float    _l1tSumIPhi;
+  Int_t _l1tSumType2;
+  float    _l1tSumEt2;
+  float     _l1tSumPhi2;
+  float   _l1tSumIEt2;
+  float    _l1tSumIPhi2;
 
-  float _egPt;
-  float _egEta;
-  float _egPhi;
-  Int_t   _egIsTight;
-  Int_t  _egIsMedium;
-  Int_t  _egIsLoose;
+  float _egPt2;
+  float _egEta2;
+  float _egPhi2;
+  Int_t   _egIsTight2;
+  Int_t  _egIsMedium2;
+  Int_t  _egIsLoose2;
 
-  float  _l1tEgPt;
-  float  _l1tEgEta;
-  float  _l1tEgPhi;
-  Int_t   _l1tEgIso;
-  Int_t   _l1tEgQual;
-  Int_t   _l1tEgIsMatched;
-  Int_t    _l1tEgBx;
+  float  _l1tEgPt2;
+  float  _l1tEgEta2;
+  float  _l1tEgPhi2;
+  Int_t   _l1tEgIso2;
+  Int_t   _l1tEgQual2;
+  Int_t   _l1tEgIsMatched2;
+  Int_t    _l1tEgBx2;
 
 
-  float _muPt;
-  float _muEta;
-  float _muPhi;
+  float _muPt2;
+  float _muEta2;
+  float _muPhi2;
 
-  float _l1tMuPt;
-  float _l1tMuEta;
-  float _l1tMuPhi;
-  Int_t   _l1tMuQual;
-  Int_t  _l1tMuIsMatched;
+  float _l1tMuPt2;
+  float _l1tMuEta2;
+  float _l1tMuPhi2;
+  Int_t   _l1tMuQual2;
+  Int_t  _l1tMuIsMatched2;
 
 //// histos to be filled in the output
   TH1F* _muBxMatched_g20  = new TH1F("muBxMatched_g20",  "muBxMatched_g20",  5, -2.5, 2.5);

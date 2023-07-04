@@ -343,6 +343,99 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tMuPhi       . clear();
   this -> _l1tMuQual      . clear();
   this -> _l1tMuIsMatched . clear();
+
+  //second tree (L1BX)
+  this -> _indexevents2 = 0;
+  this -> _runNumber2   = 0;
+  this -> _lumi2        = 0;
+
+  this -> _bit21_  = 0;
+  this -> _bit25_  = 0;
+  this -> _bit168_ = 0;
+  this -> _bit169_ = 0;
+  this -> _bit170_ = 0;
+  this -> _bit171_ = 0;
+  this -> _bit172_ = 0;
+  this -> _bit178_ = 0;
+  this -> _bit192_ = 0;
+  this -> _bit194_ = 0;
+  this -> _bit196_ = 0;
+  this -> _bit218_ = 0;
+  this -> _bit219_ = 0;
+  this -> _bit220_ = 0;
+  this -> _bit262_ = 0;
+  this -> _bit263_ = 0;
+  this -> _bit264_ = 0;
+  this -> _bit267_ = 0;
+  this -> _bit270_ = 0;
+  this -> _bit271_ = 0;
+  this -> _bit272_ = 0;
+  this -> _bit273_ = 0;
+  this -> _bit309_ = 0;
+  this -> _bit310_ = 0;
+  this -> _bit398_ = 0;
+  this -> _bit418_ = 0;
+  this -> _bit420_ = 0;
+  this -> _bit459_ = 0;
+  this -> _bit478_ = 0;
+  this -> _bit479_ = 0;
+  this -> _bit480_ = 0;
+
+  this -> _tauPt2  = 0;
+  this -> _tauEta2 = 0;
+  this -> _tauPhi2 = 0;
+
+  this -> _l1tTauPt2       = 0;
+  this -> _l1tTauEta2      = 0;
+  this -> _l1tTauPhi2      = 0;
+  this -> _l1tTauQual2    = 0;
+  this -> _l1tTauIso2     = 0;
+  this -> _l1tTauIsMatched2 = 0;
+
+  this -> _jetPt2  = 0;
+  this -> _jetEta2 = 0;
+  this -> _jetPhi2 = 0;
+
+  this -> _l1tJetPt2        = 0;
+  this -> _l1tJetEta2      = 0;
+  this -> _l1tJetPhi2       = 0;
+  this -> _l1tJetQual2   = 0;
+  this -> _l1tJetIso2     = 0;
+  this -> _l1tJetIsMatched2 = 0;
+
+  this -> _metEt2  = -1.;
+  this -> _metPhi2 = -1.;
+
+  this -> _l1tSumType2= 0;
+  this -> _l1tSumEt2= 0;
+  this -> _l1tSumPhi2= 0;
+  this -> _l1tSumIEt2= 0;
+  this -> _l1tSumIPhi2= 0;
+
+  this -> _egPt2       = 0;
+  this -> _egEta2     = 0;
+  this -> _egPhi2     = 0;
+  this -> _egIsTight2  = 0;
+  this -> _egIsMedium2 = 0;
+  this -> _egIsLoose2  = 0;
+
+  this -> _l1tEgPt2       = 0;
+  this -> _l1tEgEta2     = 0;
+  this -> _l1tEgPhi2       = 0;
+  this -> _l1tEgQual2    = 0;
+  this -> _l1tEgIso2   = 0;
+  this -> _l1tEgIsMatched2 = 0;
+  this -> _l1tEgBx2        = 0;
+
+  this -> _muPt2  = 0;
+  this -> _muEta2 = 0;
+  this -> _muPhi2 = 0;
+
+  this -> _l1tMuPt2        = 0;
+  this -> _l1tMuEta2     = 0;
+  this -> _l1tMuPhi2       = 0;
+  this -> _l1tMuQual2      = 0;
+  this -> _l1tMuIsMatched2 = 0;
 }
 
 
@@ -350,8 +443,9 @@ void ZeroBias_Timing::beginJob()
 {
   edm::Service<TFileService> fs;
   this -> _tree = fs -> make<TTree>(this -> _treeName.c_str(), this -> _treeName.c_str());
+  this -> _tree2 = fs -> make<TTree>("L1BX","L1BX");
 
-  //Branches
+  //Branches of first tree (ZeroBias_Timing)
   this -> _tree -> Branch("EventNumber",  &_indexevents);
   this -> _tree -> Branch("RunNumber",  &_runNumber);
   this -> _tree -> Branch("lumi",  &_lumi);
@@ -444,6 +538,88 @@ void ZeroBias_Timing::beginJob()
   this -> _tree -> Branch("l1tMuQual", &_l1tMuQual);
   this -> _tree -> Branch("l1tMuIsMatched", &_l1tMuIsMatched);
 
+  //Branches of second tree (L1BX)
+  this -> _tree2 -> Branch("EventNumber",  &_indexevents2);
+  this -> _tree2 -> Branch("RunNumber",  &_runNumber2);
+  this -> _tree2 -> Branch("lumi",  &_lumi2);
+
+  this -> _tree2 -> Branch("bit21",  &_bit21_);
+  this -> _tree2 -> Branch("bit25",  &_bit25_);
+  this -> _tree2 -> Branch("bit168", &_bit168_);
+  this -> _tree2 -> Branch("bit169", &_bit169_);
+  this -> _tree2 -> Branch("bit170", &_bit170_);
+  this -> _tree2 -> Branch("bit171", &_bit171_);
+  this -> _tree2 -> Branch("bit172", &_bit172_);
+  this -> _tree2 -> Branch("bit178", &_bit178_);
+  this -> _tree2 -> Branch("bit192", &_bit192_);
+  this -> _tree2 -> Branch("bit194", &_bit194_);
+  this -> _tree2 -> Branch("bit196", &_bit196_);
+  this -> _tree2 -> Branch("bit218", &_bit218_);
+  this -> _tree2 -> Branch("bit219", &_bit219_);
+  this -> _tree2 -> Branch("bit220", &_bit220_);
+  this -> _tree2 -> Branch("bit262", &_bit262_);
+  this -> _tree2 -> Branch("bit263", &_bit263_);
+  this -> _tree2 -> Branch("bit264", &_bit264_);
+  this -> _tree2 -> Branch("bit267", &_bit267_);
+  this -> _tree2 -> Branch("bit270", &_bit270_);
+  this -> _tree2 -> Branch("bit271", &_bit271_);
+  this -> _tree2 -> Branch("bit272", &_bit272_);
+  this -> _tree2 -> Branch("bit273", &_bit273_);
+  this -> _tree2 -> Branch("bit309", &_bit309_);
+  this -> _tree2 -> Branch("bit310", &_bit310_);
+  this -> _tree2 -> Branch("bit398", &_bit398_);
+  this -> _tree2 -> Branch("bit418", &_bit418_);
+  this -> _tree2 -> Branch("bit420", &_bit420_);
+  this -> _tree2 -> Branch("bit459", &_bit459_);
+  this -> _tree2 -> Branch("bit478", &_bit478_);
+  this -> _tree2 -> Branch("bit479", &_bit479_);
+  this -> _tree2 -> Branch("bit480", &_bit480_);
+
+  this -> _tree2 -> Branch("jetPt",  &_jetPt2);
+  this -> _tree2 -> Branch("jetEta", &_jetEta2);
+  this -> _tree2 -> Branch("jetPhi", &_jetPhi2);
+
+  this -> _tree2 -> Branch("l1tJetPt",  &_l1tJetPt2);
+  this -> _tree2 -> Branch("l1tJetEta", &_l1tJetEta2);
+  this -> _tree2 -> Branch("l1tJetPhi", &_l1tJetPhi2);
+  this -> _tree2 -> Branch("l1tJetQual", &_l1tJetQual2);
+  this -> _tree2 -> Branch("l1tJetIso", &_l1tJetIso2);
+  this -> _tree2 -> Branch("l1tJetIsMatched", &_l1tJetIsMatched2);
+
+  this -> _tree2 -> Branch("metEt",  &_metEt2);
+  this -> _tree2 -> Branch("metPhi",  &_metPhi2);
+
+  this -> _tree2 -> Branch("l1tSumType", &_l1tSumType2);
+  this -> _tree2 -> Branch("l1tSumEt", &_l1tSumEt2);
+  this -> _tree2 -> Branch("l1tSumPhi", &_l1tSumPhi2);
+  this -> _tree2 -> Branch("l1tSumIEt", &_l1tSumIEt2);
+  this -> _tree2 -> Branch("l1tSumIPhi", &_l1tSumIPhi2);
+
+  this -> _tree2 -> Branch("egPt",       &_egPt2);
+  this -> _tree2 -> Branch("egEta",      &_egEta2);
+  this -> _tree2 -> Branch("egPhi",      &_egPhi2);
+  this -> _tree2 -> Branch("egIsTight",  &_egIsTight2);
+  this -> _tree2 -> Branch("egIsMedium", &_egIsMedium2);
+  this -> _tree2 -> Branch("egIsLoose",  &_egIsLoose2);
+
+  this -> _tree2 -> Branch("l1tEgPt",        &_l1tEgPt2);
+  this -> _tree2 -> Branch("l1tEgEta",       &_l1tEgEta2);
+  this -> _tree2 -> Branch("l1tEgPhi",       &_l1tEgPhi2);
+  this -> _tree2 -> Branch("l1tEgQual",      &_l1tEgQual2);
+  this -> _tree2 -> Branch("l1tEgIso",       &_l1tEgIso2);
+  this -> _tree2 -> Branch("l1tEgIsMatched", &_l1tEgIsMatched2);
+  this -> _tree2 -> Branch("l1tEgBx", &_l1tEgBx2);
+  
+  this -> _tree2 -> Branch("muPt",  &_muPt2);
+  this -> _tree2 -> Branch("muEta", &_muEta2);
+  this -> _tree2 -> Branch("muPhi", &_muPhi2);
+
+  this -> _tree2 -> Branch("l1tMuPt",  &_l1tMuPt2);
+  this -> _tree2 -> Branch("l1tMuEta", &_l1tMuEta2);
+  this -> _tree2 -> Branch("l1tMuPhi", &_l1tMuPhi2);
+  this -> _tree2 -> Branch("l1tMuQual", &_l1tMuQual2);
+  this -> _tree2 -> Branch("l1tMuIsMatched", &_l1tMuIsMatched2);
+  
   return;
 }
 

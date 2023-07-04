@@ -76,6 +76,7 @@ private:
   void Initialize();
 
   TTree *_tree;
+  TTree *_tree2;
   std::string _treeName;
 
   // -------------------------------------
@@ -185,7 +186,7 @@ ULong64_t _indexevents2;
   Int_t _bit170_; // L1_SingleEG40er2p5
   Int_t _bit171_; // L1_SingleEG42er2p5
   Int_t _bit172_; // L1_SingleEG45er2p5
-  Int_t _bit178; // L1_SingleLooseIsoEG28er2p5
+  Int_t _bit178_; // L1_SingleLooseIsoEG28er2p5
   Int_t _bit192_; // L1_SingleIsoEG30er2p5
   Int_t _bit194_; // L1_SingleIsoEG32er2p5
   Int_t _bit196_; // L1_SingleIsoEG34er2p5

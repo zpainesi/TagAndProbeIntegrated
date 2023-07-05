@@ -940,7 +940,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
         }
 
       //------------------------------------------------------------------------------------------------
-
+/*
       edm::Handle<pat::METCollection> metHandle;
       try {iEvent.getByToken (_metTag, metHandle); }  catch (...) {;}
       const pat::MET met = (*metHandle)[0];
@@ -1153,7 +1153,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
               }
 
         }
-
+*/
      // this -> _tree -> Fill();
     }
 }

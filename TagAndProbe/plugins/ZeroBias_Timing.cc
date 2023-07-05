@@ -810,14 +810,14 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
       
       edm::Handle< BXVector<l1t::EGamma> >  L1EGHandle;
       try {iEvent.getByToken(_L1EGTag, L1EGHandle);}  catch (...) {;}
-
+/*
             edm::Handle<edm::ValueMap<bool> > eleTightIdHandle;
             edm::Handle<edm::ValueMap<bool> > eleMediumIdHandle;
             edm::Handle<edm::ValueMap<bool> > eleLooseIdHandle;
             iEvent.getByToken(_eleTightIdTag,  eleTightIdHandle); 
             iEvent.getByToken(_eleMediumIdTag, eleMediumIdHandle);
             iEvent.getByToken(_eleLooseIdTag,  eleLooseIdHandle);
-          
+  */        
       if(L1EGHandle.isValid() && eleHandle.isValid())
         {
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)
@@ -841,9 +841,9 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _l1tEgIsMatched2=1;
                             _l1tEgBx2=ibx;
                           
-                          _egIsTight2=(*eleTightIdHandle)[*elePtr];
-                          _egIsMedium2=(*eleMediumIdHandle)[*elePtr];
-                          _egIsLoose2=(*eleLooseIdHandle)[*elePtr]; 
+                       //   _egIsTight2=(*eleTightIdHandle)[*elePtr];
+                       //   _egIsMedium2=(*eleMediumIdHandle)[*elePtr];
+                       //   _egIsLoose2=(*eleLooseIdHandle)[*elePtr]; 
                           _egPt2=ele.pt();
                           _egEta2=ele.eta();
                             _egPhi2=ele.phi();  
@@ -892,7 +892,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                         _l1tMuPhi2=l1tMu.phi();
                             _l1tMuQual2=l1tMu.hwQual();
                         _l1tMuIsMatched2=1;
-                        _l1tMuBx=ibx;
+                        _l1tMuBx2=ibx;
                         
                         _muPt2=mu->pt();
                         _muEta2=mu->eta();

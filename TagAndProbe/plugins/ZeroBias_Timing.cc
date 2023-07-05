@@ -746,9 +746,18 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
 
   if (GetMETFilterDecision(iEvent,METFilterResults,"Flag_goodVertices"))
     {
-      _indexevents = iEvent.id().event();
-      _runNumber = iEvent.id().run();
-      _lumi = iEvent.luminosityBlock();
+      //_indexevents = iEvent.id().event();
+      //_runNumber = iEvent.id().run();
+      //_lumi = iEvent.luminosityBlock();
+      _indexevents2 = iEvent.id().event();
+      _runNumber2 = iEvent.id().run();
+      _lumi2 = iEvent.luminosityBlock();
+      _indexevents3 = iEvent.id().event();
+      _runNumber3 = iEvent.id().run();
+      _lumi3 = iEvent.luminosityBlock();
+      _indexevents4 = iEvent.id().event();
+      _runNumber4 = iEvent.id().run();
+      _lumi4 = iEvent.luminosityBlock();
 
       //------------------------------------------------------------------------------------------------
 

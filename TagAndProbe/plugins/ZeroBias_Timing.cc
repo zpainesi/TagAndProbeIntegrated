@@ -898,9 +898,6 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                         _muEta2=mu->eta();
                         _muPhi2=mu->phi();
 
-  
-
-                        
                         if(l1tMu.pt()>10. && l1tMu.pt()<21. && mu->pt()>8. && mu->pt()<25. )_muBxMatched_8_25->Fill(ibx);
                         if(l1tMu.pt()>22.) && (mu->pt()>20.))_muBxMatched_g20->Fill(ibx);
 
@@ -908,17 +905,9 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                       }                   
                   }
                   
-                  
-
-                  if (matchFound) { tmp_l1tMuIsMatched.push_back(1); }
-                  else            { tmp_l1tMuIsMatched.push_back(0); }
                 }
 
-              this -> _l1tMuPt        . push_back(tmp_l1tMuPt);
-              this -> _l1tMuEta       . push_back(tmp_l1tMuEta);
-              this -> _l1tMuPhi       . push_back(tmp_l1tMuPhi);
-              this -> _l1tMuQual      . push_back(tmp_l1tMuQual);  
-              this -> _l1tMuIsMatched . push_back(tmp_l1tMuIsMatched);
+            
             }
 
            }

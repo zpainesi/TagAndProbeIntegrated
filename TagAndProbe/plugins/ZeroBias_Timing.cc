@@ -557,9 +557,9 @@ void ZeroBias_Timing::beginJob()
 {
   edm::Service<TFileService> fs;
   //this -> _tree = fs -> make<TTree>(this -> _treeName.c_str(), this -> _treeName.c_str());
-  this -> _tree2 = fs -> make<TTree>("L1egBX","L1egBX");
-  this -> _tree3 = fs -> make<TTree>("L1muBX","L1muBX");
-  this -> _tree4 = fs -> make<TTree>("L1jetBX","L1jetBX");
+  this -> _tree2 = fs -> make<TTree>("EG","EG");
+  this -> _tree3 = fs -> make<TTree>("Mu","Mu");
+  this -> _tree4 = fs -> make<TTree>("Jet","Jet");
 
 
 
@@ -709,8 +709,6 @@ void ZeroBias_Timing::beginJob()
   this -> _tree4 -> Branch("l1tJetIsMatched", &_l1tJetIsMatched2);
   this -> _tree4 -> Branch("l1tJetBx", &_l1tJetBx2);
 
- 
-  
   return;
 }
 
@@ -1011,14 +1009,14 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   tmp_l1tEGIso  . push_back(l1tEG.hwIso());
                   tmp_l1tEGQual . push_back(l1tEG.hwQual());
                   tmp_l1tEGBx   . push_back(ibx);
-                  /*
+                
                   std::cout << std::endl << "OUT: The pt of eg is " << l1tEG.pt();
                   std::cout << std::endl << "OUT: The eta of eg is " << l1tEG.eta();
                   std::cout << std::endl << "OUT: The phi of eg is " << l1tEG.phi();
                   std::cout << std::endl << "OUT: The iso of eg is " << l1tEG.hwIso();
                   std::cout << std::endl << "OUT: The qual of eg is " << l1tEG.hwQual();
                   std::cout << std::endl << "OUT: The BX of eg is " << ibx;
-*/
+
 
                   bool matchFound = false;
                   for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
@@ -1153,7 +1151,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
               }
 
         }
-*/
+
      // this -> _tree -> Fill();
     }
 }

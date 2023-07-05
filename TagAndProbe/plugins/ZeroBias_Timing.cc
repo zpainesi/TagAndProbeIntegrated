@@ -667,9 +667,9 @@ void ZeroBias_Timing::beginJob()
   this -> _tree2 -> Branch("egPt",       &_egPt2);
   this -> _tree2 -> Branch("egEta",      &_egEta2);
   this -> _tree2 -> Branch("egPhi",      &_egPhi2);
-  this -> _tree2 -> Branch("egIsTight",  &_egIsTight2);
-  this -> _tree2 -> Branch("egIsMedium", &_egIsMedium2);
-  this -> _tree2 -> Branch("egIsLoose",  &_egIsLoose2);
+  //this -> _tree2 -> Branch("egIsTight",  &_egIsTight2);
+  //this -> _tree2 -> Branch("egIsMedium", &_egIsMedium2);
+  //this -> _tree2 -> Branch("egIsLoose",  &_egIsLoose2);
 
   this -> _tree2 -> Branch("l1tEgPt",        &_l1tEgPt2);
   this -> _tree2 -> Branch("l1tEgEta",       &_l1tEgEta2);

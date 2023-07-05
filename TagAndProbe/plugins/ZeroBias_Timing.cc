@@ -847,7 +847,8 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                        //   _egIsLoose2=(*eleLooseIdHandle)[*elePtr]; 
                           _egPt2=ele.pt();
                           _egEta2=ele.eta();
-                            _egPhi2=ele.phi();  
+                            _egPhi2=ele.phi(); 
+                          this -> _tree2 -> Fill();
                           
                           if(l1tEG.pt()>15. && l1tEG.pt()<26. && ele.pt()>12. && ele.pt()<23.){
                               _egBxMatched->Fill(ibx);
@@ -898,6 +899,8 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                         _muPt2=mu->pt();
                         _muEta2=mu->eta();
                         _muPhi2=mu->phi();
+
+                        this -> _tree3 -> Fill();
 
                         if(l1tMu.pt()>10. && l1tMu.pt()<21. && mu->pt()>8. && mu->pt()<25. )_muBxMatched_8_25->Fill(ibx);
                         if(l1tMu.pt()>22. && mu->pt()>20.)_muBxMatched_g20->Fill(ibx);

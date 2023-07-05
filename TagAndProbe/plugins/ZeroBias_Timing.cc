@@ -899,7 +899,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                         _muPhi2=mu->phi();
 
                         if(l1tMu.pt()>10. && l1tMu.pt()<21. && mu->pt()>8. && mu->pt()<25. )_muBxMatched_8_25->Fill(ibx);
-                        if(l1tMu.pt()>22.) && (mu->pt()>20.))_muBxMatched_g20->Fill(ibx);
+                        if(l1tMu.pt()>22. && mu->pt()>20.)_muBxMatched_g20->Fill(ibx);
 
                         break;
                       }                   

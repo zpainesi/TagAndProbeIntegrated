@@ -811,6 +811,13 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
       edm::Handle< BXVector<l1t::EGamma> >  L1EGHandle;
       try {iEvent.getByToken(_L1EGTag, L1EGHandle);}  catch (...) {;}
 
+            edm::Handle<edm::ValueMap<bool> > eleTightIdHandle;
+            edm::Handle<edm::ValueMap<bool> > eleMediumIdHandle;
+            edm::Handle<edm::ValueMap<bool> > eleLooseIdHandle;
+            iEvent.getByToken(_eleTightIdTag,  eleTightIdHandle); 
+            iEvent.getByToken(_eleMediumIdTag, eleMediumIdHandle);
+            iEvent.getByToken(_eleLooseIdTag,  eleLooseIdHandle);
+          
       if(L1EGHandle.isValid() && eleHandle.isValid())
         {
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)
@@ -827,8 +834,8 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                       if (deltaR(ele, l1tEG)<0.5 && l1tEG.pt()>15. && l1tEG.pt()<26.)
                         {
                           _l1tEgPt2=l1tEG.pt();
-                          _l1tEgEta2=l1tEG.Eta();
-                          _l1tEgPhi2=l1tEG.Phi();
+                          _l1tEgEta2=l1tEG.eta();
+                          _l1tEgPhi2=l1tEG.phi();
                           _l1tEgIso2=l1tEG.hwIso();
                           _l1tEgQual2=l1tEG.hwQual();
                           _l1tEgIsMatched2=1;
@@ -852,14 +859,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                     }
                 }
             }
-/*
-            edm::Handle<edm::ValueMap<bool> > eleTightIdHandle;
-            edm::Handle<edm::ValueMap<bool> > eleMediumIdHandle;
-            edm::Handle<edm::ValueMap<bool> > eleLooseIdHandle;
-            iEvent.getByToken(_eleTightIdTag,  eleTightIdHandle); 
-            iEvent.getByToken(_eleMediumIdTag, eleMediumIdHandle);
-            iEvent.getByToken(_eleLooseIdTag,  eleLooseIdHandle);
-  */          
+       
             
         }
 

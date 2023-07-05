@@ -750,114 +750,6 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
       _runNumber = iEvent.id().run();
       _lumi = iEvent.luminosityBlock();
 
-/*      edm::Handle<GlobalAlgBlkBxCollection> ugtHandle;
-      try {iEvent.getByToken(_ugtTag, ugtHandle);}  catch (...) {;}
-      if(ugtHandle.isValid())
-        {
-          for (int ibx = ugtHandle->getFirstBX(); ibx <= ugtHandle->getLastBX(); ++ibx)
-            {
-              for (BXVector<GlobalAlgBlk>::const_iterator bxUgtIt = ugtHandle->begin(ibx); bxUgtIt != ugtHandle->end(ibx) ; bxUgtIt++)
-                {
-                  const GlobalAlgBlk& ugt =  *bxUgtIt;
-
-                  this -> _bit21.push_back(  ugt.getAlgoDecisionFinal(21) );  // L1_SingleMu22
-                  this -> _bit25.push_back(  ugt.getAlgoDecisionFinal(25) );  // L1_SingleMu25
-                  this -> _bit168.push_back( ugt.getAlgoDecisionFinal(168) ); // L1_SingleEG36er2p5
-                  this -> _bit169.push_back( ugt.getAlgoDecisionFinal(169) ); // L1_SingleEG38er2p5
-                  this -> _bit170.push_back( ugt.getAlgoDecisionFinal(170) ); // L1_SingleEG40er2p5
-                  this -> _bit171.push_back( ugt.getAlgoDecisionFinal(171) ); // L1_SingleEG42er2p5
-                  this -> _bit172.push_back( ugt.getAlgoDecisionFinal(172) ); // L1_SingleEG45er2p5
-                  this -> _bit178.push_back( ugt.getAlgoDecisionFinal(178) ); // L1_SingleLooseIsoEG28er2p5
-                  this -> _bit192.push_back( ugt.getAlgoDecisionFinal(192) ); // L1_SingleIsoEG30er2p5
-                  this -> _bit194.push_back( ugt.getAlgoDecisionFinal(194) ); // L1_SingleIsoEG32er2p5
-                  this -> _bit196.push_back( ugt.getAlgoDecisionFinal(196) ); // L1_SingleIsoEG34er2p5
-                  this -> _bit218.push_back( ugt.getAlgoDecisionFinal(218) ); // L1_DoubleEG_25_12_er2p5
-                  this -> _bit219.push_back( ugt.getAlgoDecisionFinal(219) ); // L1_DoubleEG_25_12_er2p5
-                  this -> _bit220.push_back( ugt.getAlgoDecisionFinal(220) ); // L1_DoubleEG_25_12_er2p5
-                  this -> _bit262.push_back( ugt.getAlgoDecisionFinal(262) ); // L1_SingleIsoTau32er2p1
-                  this -> _bit263.push_back( ugt.getAlgoDecisionFinal(263) ); // L1_SingleTau70er2p1
-                  this -> _bit264.push_back( ugt.getAlgoDecisionFinal(264) ); // L1_SingleTau120er2p1
-                  this -> _bit267.push_back( ugt.getAlgoDecisionFinal(267) ); // L1_DoubleTau70er2p1
-                  this -> _bit270.push_back( ugt.getAlgoDecisionFinal(270) ); // L1_DoubleIsoTau32er2p1
-                  this -> _bit271.push_back( ugt.getAlgoDecisionFinal(271) ); // L1_DoubleIsoTau34er2p1
-                  this -> _bit272.push_back( ugt.getAlgoDecisionFinal(272) ); // L1_DoubleIsoTau35er2p1
-                  this -> _bit273.push_back( ugt.getAlgoDecisionFinal(273) ); // L1_DoubleIsoTau36er2p1
-                  this -> _bit309.push_back( ugt.getAlgoDecisionFinal(309) ); // L1_SingleJet35
-                  this -> _bit310.push_back( ugt.getAlgoDecisionFinal(310) ); // L1_SingleJet60
-                  this -> _bit398.push_back( ugt.getAlgoDecisionFinal(398) ); // L1_HTT120er
-                  this -> _bit418.push_back( ugt.getAlgoDecisionFinal(418) ); // L1_ETMHF70
-                  this -> _bit420.push_back( ugt.getAlgoDecisionFinal(420) ); // L1_ETMHF90
-                  this -> _bit459.push_back( ugt.getAlgoDecisionFinal(459) ); // L1_ZeroBias
-                  this -> _bit478.push_back( ugt.getAlgoDecisionFinal(478) ); // L1_LastCollisionInTrain
-                  this -> _bit479.push_back( ugt.getAlgoDecisionFinal(479) ); // L1_FirstCollisionInTrain
-                  this -> _bit480.push_back( ugt.getAlgoDecisionFinal(480) ); // L1_FirstCollisionInOrbit
-                }
-            }
-        }*/
-
-      //------------------------------------------------------------------------------------------------
-
-      edm::Handle<pat::TauRefVector>  tauHandle;
-      try {iEvent.getByToken(_tauTag, tauHandle);}  catch (...) {;}
-      
-      edm::Handle< BXVector<l1t::Tau> >  L1TauHandle;
-      try {iEvent.getByToken(_L1TauTag, L1TauHandle);}  catch (...) {;}
-
-      if(L1TauHandle.isValid() && tauHandle.isValid())
-        {
-          for (int ibx = L1TauHandle->getFirstBX(); ibx <= L1TauHandle->getLastBX(); ++ibx)
-            {
-              std::vector<float> tmp_l1tTauPt;
-              std::vector<float> tmp_l1tTauEta;
-              std::vector<float> tmp_l1tTauPhi;
-              std::vector<int>   tmp_l1tTauIso;
-              std::vector<int>   tmp_l1tTauQual;
-              std::vector<int>   tmp_l1tTauIsMatched;
-
-              for (l1t::TauBxCollection::const_iterator bxTauIt = L1TauHandle->begin(ibx); bxTauIt != L1TauHandle->end(ibx) ; bxTauIt++)
-                {
-                  const l1t::Tau& l1tTau = *bxTauIt;
-                  
-                  tmp_l1tTauPt   . push_back(l1tTau.pt());
-                  tmp_l1tTauEta  . push_back(l1tTau.eta());
-                  tmp_l1tTauPhi  . push_back(l1tTau.phi());
-                  tmp_l1tTauIso  . push_back(l1tTau.hwIso());
-                  tmp_l1tTauQual . push_back(l1tTau.hwQual());
-
-                  bool matchFound = false;
-                  for (pat::TauRefVector::const_iterator tauIt = tauHandle->begin(); tauIt != tauHandle->end(); ++tauIt)
-                  {
-                    const pat::TauRef& tau = *tauIt;
-                    if (deltaR(*tau, l1tTau)<0.5)
-                      {
-                        matchFound = true;
-                        _tauBxMatched->Fill(ibx);
-                        break;
-                      }
-                  }
-
-                  if (matchFound) { tmp_l1tTauIsMatched.push_back(1); }
-                  else            { tmp_l1tTauIsMatched.push_back(0); }
-                }
-
-              this -> _l1tTauPt        . push_back(tmp_l1tTauPt);
-              this -> _l1tTauEta       . push_back(tmp_l1tTauEta);
-              this -> _l1tTauPhi       . push_back(tmp_l1tTauPhi);
-              this -> _l1tTauIso       . push_back(tmp_l1tTauIso);
-              this -> _l1tTauQual      . push_back(tmp_l1tTauQual);
-              this -> _l1tTauIsMatched . push_back(tmp_l1tTauIsMatched);
-            }
-
-            for (pat::TauRefVector::const_iterator tauIt = tauHandle->begin(); tauIt != tauHandle->end(); ++tauIt)
-              {
-                const pat::TauRef& tau = *tauIt;
-                
-                _tauPt  . push_back(tau->pt());
-                _tauEta . push_back(tau->eta());
-                _tauPhi . push_back(tau->phi());
-              }
-        }
-
       //------------------------------------------------------------------------------------------------
 
       edm::Handle<edm::View<pat::Jet>>  jetHandle;
@@ -870,29 +762,14 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
         {
           for (int ibx = l1tJetHandle->getFirstBX(); ibx <= l1tJetHandle->getLastBX(); ++ibx)
             {
-             /* std::vector<float> tmp_l1tJetPt;
-              std::vector<float> tmp_l1tJetEta;
-              std::vector<float> tmp_l1tJetPhi;
-              std::vector<int>   tmp_l1tJetIso;
-              std::vector<int>   tmp_l1tJetQual;
-              std::vector<int>   tmp_l1tJetIsMatched;
-              */
-              
+           
               for(BXVector<l1t::Jet>::const_iterator bxJetIt = l1tJetHandle -> begin(ibx); bxJetIt != l1tJetHandle -> end(ibx) ; bxJetIt++)
                 {
                   const l1t::Jet& l1tJet = *bxJetIt;
-/*
-                  tmp_l1tJetPt   . push_back(l1tJet.pt());
-                  tmp_l1tJetEta  . push_back(l1tJet.eta());
-                  tmp_l1tJetPhi  . push_back(l1tJet.phi());
-                  tmp_l1tJetIso  . push_back(l1tJet.hwIso());
-                  tmp_l1tJetQual . push_back(l1tJet.hwQual());
-*/
-                 // bool matchFound = false;
+
                   for (edm::View<pat::Jet>::const_iterator jetIt = jetHandle->begin(); jetIt != jetHandle->end(); ++jetIt)
                     {
                       const pat::Jet& jet = *jetIt;
-
                       if (deltaR(jet, l1tJet)<0.5)
                         { 
 
@@ -907,78 +784,16 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _l1tJetIso2=l1tJet.hwIso();
                           _l1tJetIsMatched2=1;
                           _l1tJetBx2=ibx;
-                        //  matchFound = true;
                           this -> _tree4 -> Fill();
                            if(jet.pt()>90. && jet.pt()<160. && l1tJet.pt()>100. && l1tJet.pt()<150.)_jetBxMatched->Fill(ibx);
                           break;
                         }
                     }
-
-//                  if (matchFound) { tmp_l1tJetIsMatched.push_back(1); }
-  //                else            { tmp_l1tJetIsMatched.push_back(0); }
                 }
-/*
-              this -> _l1tJetPt        . push_back(tmp_l1tJetPt);
-              this -> _l1tJetEta       . push_back(tmp_l1tJetEta);
-              this -> _l1tJetPhi       . push_back(tmp_l1tJetPhi);
-              this -> _l1tJetIso       . push_back(tmp_l1tJetIso);
-              this -> _l1tJetQual      . push_back(tmp_l1tJetQual);
-              this -> _l1tJetIsMatched . push_back(tmp_l1tJetIsMatched);
-              */
+
             }
 
-    /*        for (edm::View<pat::Jet>::const_iterator jetIt = jetHandle->begin(); jetIt != jetHandle->end(); ++jetIt)
-              {
-                const pat::Jet& jet = *jetIt;
-                
-                _jetPt  . push_back(jet.pt());
-                _jetEta . push_back(jet.eta());
-                _jetPhi . push_back(jet.phi());
-              }
-        */
-        }
-
-      //------------------------------------------------------------------------------------------------
-/*
-      edm::Handle<pat::METCollection> metHandle;
-      try {iEvent.getByToken (_metTag, metHandle); }  catch (...) {;}
-      const pat::MET met = (*metHandle)[0];
-
-      _metEt  = met.pt();
-      _metPhi = met.phi();
-
-      edm::Handle<BXVector<l1t::EtSum>> l1tSumHandle;
-      try {iEvent.getByToken(this -> _l1tSumTag, l1tSumHandle);}  catch (...) {;}
-
-      if(l1tSumHandle.isValid())
-        {
-          for (int ibx = l1tSumHandle->getFirstBX(); ibx <= l1tSumHandle->getLastBX(); ++ibx)
-            {
-              std::vector<short int> tmp_l1tSumType;
-              std::vector<float>     tmp_l1tSumEt;
-              std::vector<float>     tmp_l1tSumPhi;
-              std::vector<float>     tmp_l1tSumIEt;
-              std::vector<float>     tmp_l1tSumIPhi;
-
-              for(BXVector<l1t::EtSum>::const_iterator bxSumIt = l1tSumHandle->begin(ibx); bxSumIt != l1tSumHandle->end(ibx) ; bxSumIt++)
-                {
-                  const l1t::EtSum& l1tSum = *bxSumIt;
-
-                  tmp_l1tSumType  . push_back(l1tSum.getType());
-                  tmp_l1tSumEt    . push_back(l1tSum.et());
-                  tmp_l1tSumPhi   . push_back(l1tSum.phi());
-                  tmp_l1tSumIEt   . push_back(l1tSum.hwPt());
-                  tmp_l1tSumIPhi  . push_back(l1tSum.hwPhi());
-                }
-              
-              this -> _l1tSumType      . push_back(tmp_l1tSumType);
-              this -> _l1tSumEt        . push_back(tmp_l1tSumEt);
-              this -> _l1tSumPhi       . push_back(tmp_l1tSumPhi);
-              this -> _l1tSumIEt       . push_back(tmp_l1tSumIEt);
-              this -> _l1tSumIPhi      . push_back(tmp_l1tSumIPhi);
-            }
-        }
-
+    
       //------------------------------------------------------------------------------------------------
 
       edm::Handle<edm::View<reco::GsfElectron> > eleHandle;
@@ -989,91 +804,54 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
 
       if(L1EGHandle.isValid() && eleHandle.isValid())
         {
-          int counter_bx_haris=0;
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)
             {
-              counter_bx_haris++;
-             // std::cout << std::endl << "OUT: bxCount= "<< counter_bx_haris;
-              std::vector<float>  tmp_l1tEGPt;
-              std::vector<float>  tmp_l1tEGEta;
-              std::vector<float>  tmp_l1tEGPhi;
-              std::vector<int>    tmp_l1tEGIso;
-              std::vector<int>    tmp_l1tEGQual;
-              std::vector<int>    tmp_l1tEGIsMatched;
-              std::vector<int>    tmp_l1tEGBx;
+             
               for (l1t::EGammaBxCollection::const_iterator bxEGIt = L1EGHandle->begin(ibx); bxEGIt != L1EGHandle->end(ibx) ; bxEGIt++)
                 {
                   const l1t::EGamma& l1tEG = *bxEGIt;
-                  tmp_l1tEGPt   . push_back(l1tEG.pt());
-                  tmp_l1tEGEta  . push_back(l1tEG.eta());
-                  tmp_l1tEGPhi  . push_back(l1tEG.phi());
-                  tmp_l1tEGIso  . push_back(l1tEG.hwIso());
-                  tmp_l1tEGQual . push_back(l1tEG.hwQual());
-                  tmp_l1tEGBx   . push_back(ibx);
-                
-                  std::cout << std::endl << "OUT: The pt of eg is " << l1tEG.pt();
-                  std::cout << std::endl << "OUT: The eta of eg is " << l1tEG.eta();
-                  std::cout << std::endl << "OUT: The phi of eg is " << l1tEG.phi();
-                  std::cout << std::endl << "OUT: The iso of eg is " << l1tEG.hwIso();
-                  std::cout << std::endl << "OUT: The qual of eg is " << l1tEG.hwQual();
-                  std::cout << std::endl << "OUT: The BX of eg is " << ibx;
-
-
-                  bool matchFound = false;
+                  
+                 
                   for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
                     {
                       const reco::GsfElectron& ele = *eleIt;
                       if (deltaR(ele, l1tEG)<0.5 && l1tEG.pt()>15. && l1tEG.pt()<26.)
                         {
-                          matchFound = true;
+                          _l1tEgPt2=l1tEG.pt();
+                          _l1tEgEta2=l1tEG.Eta();
+                          _l1tEgPhi2=l1tEG.Phi();
+                          _l1tEgIso2=l1tEG.hwIso();
+                          _l1tEgQual2=l1tEG.hwQual();
+                          _l1tEgIsMatched2=1;
+                            _l1tEgBx2=ibx;
                           
-                       
-                          if(ibx==-1)_egBxMin1Matched_eta->Fill(ele.eta());
-                          if(ibx==0)_egBx0Matched_eta->Fill(ele.eta());
-                          if(ibx==1)_egBxPlus1Matched_eta->Fill(ele.eta() );
+                          _egIsTight2=(*eleTightIdHandle)[*elePtr];
+                          _egIsMedium2=(*eleMediumIdHandle)[*elePtr];
+                          _egIsLoose2=(*eleLooseIdHandle)[*elePtr]; 
+                          _egPt2=ele.pt();
+                          _egEta2=ele.eta();
+                            _egPhi2=ele.phi();  
                           
-                          _egBxMatched->Fill(ibx);
-
+                          if(l1tEG.pt()>15. && l1tEG.pt()<26. && ele.pt()>12. && ele.pt()<23.){
+                              _egBxMatched->Fill(ibx);
+                              if(ibx==-1)_egBxMin1Matched_eta->Fill(ele.eta());
+                              if(ibx==0)_egBx0Matched_eta->Fill(ele.eta());
+                              if(ibx==1)_egBxPlus1Matched_eta->Fill(ele.eta() );
+                          }
                           break;
                         }
                     }
-
-                  if (matchFound) { tmp_l1tEGIsMatched.push_back(1); }
-                  else            { tmp_l1tEGIsMatched.push_back(0); }
                 }
-
-              this -> _l1tEgPt          . push_back(tmp_l1tEGPt);
-              this -> _l1tEgEta         . push_back(tmp_l1tEGEta);
-              this -> _l1tEgPhi         . push_back(tmp_l1tEGPhi);
-              this -> _l1tEgIso         . push_back(tmp_l1tEGIso);
-              this -> _l1tEgQual        . push_back(tmp_l1tEGQual);
-              this -> _l1tEgIsMatched   . push_back(tmp_l1tEGIsMatched);
-              this -> _l1tEgBx   . push_back(tmp_l1tEGBx);
-      
-              
             }
-
+/*
             edm::Handle<edm::ValueMap<bool> > eleTightIdHandle;
             edm::Handle<edm::ValueMap<bool> > eleMediumIdHandle;
             edm::Handle<edm::ValueMap<bool> > eleLooseIdHandle;
             iEvent.getByToken(_eleTightIdTag,  eleTightIdHandle); 
             iEvent.getByToken(_eleMediumIdTag, eleMediumIdHandle);
             iEvent.getByToken(_eleLooseIdTag,  eleLooseIdHandle);
+  */          
             
-            // short int idx = 0;
-            for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
-              {
-                const reco::GsfElectron& ele = *eleIt;
-                // const auto elePtr = eleHandle->ptrAt(idx); ++idx;
-
-                _egPt  . push_back(ele.pt());
-                _egEta . push_back(ele.eta());
-                _egPhi . push_back(ele.phi());
-
-                // _egIsTight  . push_back( (*eleTightIdHandle)[*elePtr] );
-                // _egIsMedium . push_back( (*eleMediumIdHandle)[*elePtr] );
-                // _egIsLoose  . push_back( (*eleLooseIdHandle)[*elePtr] );
-              }
         }
 
       //------------------------------------------------------------------------------------------------
@@ -1089,47 +867,39 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
         {
           for (int ibx = L1MuHandle->getFirstBX(); ibx <= L1MuHandle->getLastBX(); ++ibx)
             {
-              std::vector<float> tmp_l1tMuPt;
-              std::vector<float> tmp_l1tMuEta;
-              std::vector<float> tmp_l1tMuPhi;
-              std::vector<int>   tmp_l1tMuQual;
-              std::vector<int>   tmp_l1tMuIsMatched;
-
+            
               for (l1t::MuonBxCollection::const_iterator bx0MuIt = L1MuHandle->begin(ibx); bx0MuIt != L1MuHandle->end(ibx) ; bx0MuIt++)
                 {
                   const l1t::Muon& l1tMu = *bx0MuIt;
                   
                   if (l1tMu.hwQual()!=12) { continue; }
-
-                  tmp_l1tMuPt   . push_back(l1tMu.pt());
-                  tmp_l1tMuEta  . push_back(l1tMu.eta());
-                  tmp_l1tMuPhi  . push_back(l1tMu.phi());
-                  tmp_l1tMuQual . push_back(l1tMu.hwQual());
-
-                  bool matchFound = false;
                   for (pat::MuonRefVector::const_iterator muIt = muonHandle->begin(); muIt != muonHandle->end(); ++muIt)
                   {
                     const pat::MuonRef& mu = *muIt;
-                    if (deltaR(*mu, l1tMu)<0.5 && (l1tMu.pt()>10. && l1tMu.pt()<21.) && (mu->pt()<25.) )
+                    if (deltaR(*mu, l1tMu)<0.5)
                       {
-                        matchFound = true;
-                        _muBxMatched_8_25->Fill(ibx);
+                          _l1tMuPt2=l1tMu.pt();
+                            _l1tMuEta2=l1tMu.eta();
+                        _l1tMuPhi2=l1tMu.phi();
+                            _l1tMuQual2=l1tMu.hwQual();
+                        _l1tMuIsMatched2=1;
+                        _l1tMuBx=ibx;
+                        
+                        _muPt2=mu->pt();
+                        _muEta2=mu->eta();
+                        _muPhi2=mu->phi();
+
+  
+
+                        
+                        if(l1tMu.pt()>10. && l1tMu.pt()<21. && mu->pt()>8. && mu->pt()<25. )_muBxMatched_8_25->Fill(ibx);
+                        if(l1tMu.pt()>22.) && (mu->pt()>20.))_muBxMatched_g20->Fill(ibx);
+
                         break;
                       }                   
                   }
                   
-                  for (pat::MuonRefVector::const_iterator muIt = muonHandle->begin(); muIt != muonHandle->end(); ++muIt)
-                  {
-                    const pat::MuonRef& mu = *muIt;
-                    if (deltaR(*mu, l1tMu)<0.5 && (l1tMu.pt()>22.) && (mu->pt()>20.))
-                      {
-                        matchFound = true;
-                        _muBxMatched_g20->Fill(ibx);
-                        break;
-                      }
-                    
-                      
-                  }
+                  
 
                   if (matchFound) { tmp_l1tMuIsMatched.push_back(1); }
                   else            { tmp_l1tMuIsMatched.push_back(0); }
@@ -1142,17 +912,8 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
               this -> _l1tMuIsMatched . push_back(tmp_l1tMuIsMatched);
             }
 
-            for (pat::MuonRefVector::const_iterator muIt = muonHandle->begin(); muIt != muonHandle->end(); ++muIt)
-              {
-                const pat::MuonRef& mu = *muIt;
-                
-                _muPt  . push_back(mu->pt());
-                _muEta . push_back(mu->eta());
-                _muPhi . push_back(mu->phi());
-              }
+           }
 
-        }
-*/
      // this -> _tree -> Fill();
     }
 }

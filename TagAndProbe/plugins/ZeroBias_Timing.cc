@@ -801,6 +801,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                 }
 
             }
+        }
 
     
       //------------------------------------------------------------------------------------------------
@@ -903,13 +904,9 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
 
                         break;
                       }                   
-                  }
-                  
+                  }     
                 }
-
-            
             }
-
            }
 
      // this -> _tree -> Fill();

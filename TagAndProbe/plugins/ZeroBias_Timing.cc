@@ -918,13 +918,14 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
 //                  if (matchFound) { tmp_l1tJetIsMatched.push_back(1); }
   //                else            { tmp_l1tJetIsMatched.push_back(0); }
                 }
-
+/*
               this -> _l1tJetPt        . push_back(tmp_l1tJetPt);
               this -> _l1tJetEta       . push_back(tmp_l1tJetEta);
               this -> _l1tJetPhi       . push_back(tmp_l1tJetPhi);
               this -> _l1tJetIso       . push_back(tmp_l1tJetIso);
               this -> _l1tJetQual      . push_back(tmp_l1tJetQual);
               this -> _l1tJetIsMatched . push_back(tmp_l1tJetIsMatched);
+              */
             }
 
     /*        for (edm::View<pat::Jet>::const_iterator jetIt = jetHandle->begin(); jetIt != jetHandle->end(); ++jetIt)

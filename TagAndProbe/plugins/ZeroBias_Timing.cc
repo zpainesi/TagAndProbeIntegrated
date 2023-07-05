@@ -242,6 +242,7 @@ ULong64_t _indexevents4;
   Int_t  _l1tJetQual2;
   Int_t   _l1tJetIso2;
   Int_t  _l1tJetIsMatched2;
+   Int_t    _l1tJetBx2;
 
   float _metEt2;
   float _metPhi2;
@@ -277,6 +278,7 @@ ULong64_t _indexevents4;
   float _l1tMuPhi2;
   Int_t   _l1tMuQual2;
   Int_t  _l1tMuIsMatched2;
+   Int_t    _l1tMuBx2;
 
 //// histos to be filled in the output
   TH1F* _muBxMatched_g20  = new TH1F("muBxMatched_g20",  "muBxMatched_g20",  5, -2.5, 2.5);
@@ -906,11 +908,13 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _l1tJetIsMatched2=1;
                           _l1tJetBx2=ibx;
                           matchFound = true;
-
+                          std::cout<<"I'm in 1";
                           _tree4->Fill();
                            if(jet.pt()>90. && jet.pt()<160. && l1tJet.pt()>100. && l1tJet.pt()<150.)_jetBxMatched->Fill(ibx);
                           break;
                         }
+                                                std::cout<<"I'm in 2";
+
                     }
 
 //                  if (matchFound) { tmp_l1tJetIsMatched.push_back(1); }
@@ -1151,7 +1155,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
               }
 
         }
-
+*/
      // this -> _tree -> Fill();
     }
 }

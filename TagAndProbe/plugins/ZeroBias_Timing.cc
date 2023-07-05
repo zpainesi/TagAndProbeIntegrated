@@ -908,13 +908,10 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _l1tJetIsMatched2=1;
                           _l1tJetBx2=ibx;
                         //  matchFound = true;
-                          std::cout<<"I'm in 1";
-                          _tree4->Fill();
+                          this -> _tree4 -> Fill();
                            if(jet.pt()>90. && jet.pt()<160. && l1tJet.pt()>100. && l1tJet.pt()<150.)_jetBxMatched->Fill(ibx);
                           break;
                         }
-                                                std::cout<<"I'm in 2";
-
                     }
 
 //                  if (matchFound) { tmp_l1tJetIsMatched.push_back(1); }

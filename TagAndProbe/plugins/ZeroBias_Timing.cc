@@ -552,6 +552,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tMuPhi2       = 0;
   this -> _l1tMuQual2      = 0;
   this -> _l1tMuIsMatched2 = 0;
+  this -> _l1tMuBx2 = 0;
 }
 
 
@@ -693,6 +694,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree3 -> Branch("l1tMuPhi", &_l1tMuPhi2);
   this -> _tree3 -> Branch("l1tMuQual", &_l1tMuQual2);
   this -> _tree3 -> Branch("l1tMuIsMatched", &_l1tMuIsMatched2);
+  this -> _tree3 -> Branch("l1tMuBx", &_l1tMuBx2);
 
   //branches of fourth tree (jet)
   this -> _tree4 -> Branch("EventNumber",  &_indexevents4);

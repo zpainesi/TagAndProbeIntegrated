@@ -28,7 +28,7 @@ def main():
     parser.add_argument("-e","--ext", help="job tag extension", default='' )
     parser.add_argument("-u","--unitsPerJob", help="Lumi Per Job", type=int ,default=20000 )
     parser.add_argument("--crabCmdOpts", help="commadline option for the carb cmd", default="" )
-    parser.add_argument("--splitting", help="splitting type of the job", default="EventLumiBased" )
+    parser.add_argument("--splitting", help="splitting type of the job", default="EventAwareLumiBased" )
     parser.add_argument("--lumiMask", help="Lumi Mask", default=None )
     parser.add_argument("--runRange", help="Choose a run range", default=None )
     options=parser.parse_args()

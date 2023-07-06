@@ -26,10 +26,11 @@ def main():
     parser.add_argument("-i","--cmsconfig", help="configuration to use")
     parser.add_argument("-o","--dest", help="stageout destination", default='CERN' )
     parser.add_argument("-e","--ext", help="job tag extension", default='' )
-    parser.add_argument("-u","--unitsPerJob", help="Lumi Per Job", type=int ,default=5 )
+    parser.add_argument("-u","--unitsPerJob", help="Lumi Per Job", type=int ,default=20000 )
     parser.add_argument("--crabCmdOpts", help="commadline option for the carb cmd", default="" )
-    parser.add_argument("--splitting", help="splitting type of the job", default="LumiBased" )
+    parser.add_argument("--splitting", help="splitting type of the job", default="EventLumiBased" )
     parser.add_argument("--lumiMask", help="Lumi Mask", default=None )
+    parser.add_argument("--runRange", help="Choose a run range", default=None )
     options=parser.parse_args()
 
   # The submit command needs special treatment.
@@ -42,7 +43,7 @@ def main():
         config = config()
 
         config.General.requestName = None
-        config.General.workArea = 'workarea'
+        config.General.workArea = 'DefaultCrab3Area'
 
         config.JobType.pluginName = 'Analysis'
         config.JobType.psetName = options.cmsconfig
@@ -52,7 +53,7 @@ def main():
         config.Data.unitsPerJob = options.unitsPerJob
         config.Data.totalUnits = None
         config.Data.outputDatasetTag = None
-        config.Data.outLFNDirBase = '/store/group/dpg_trigger/comm_trigger/L1Trigger/athachay/crabOutputStorage/L1RawRecoPerformance2023'
+        config.Data.outLFNDirBase = '/store/group/dpg_trigger/comm_trigger/L1Trigger/zpainesi/Timing/EphZB'
         config.Data.lumiMask = options.lumiMask
         config.Site.storageSite = "T2_CH_CERN" # Choose your site. 
         
@@ -60,11 +61,27 @@ def main():
 
         # Will submit one task for each of these input datasets.
         inputDatasets = [
-                            "/EGamma0/Run2023B-ZElectron-PromptReco-v1/RAW-RECO",
-                            "/EGamma1/Run2023B-ZElectron-PromptReco-v1/RAW-RECO",
-                            "/EGamma0/Run2023C-ZElectron-PromptReco-v1/RAW-RECO",
-                            "/EGamma1/Run2023C-ZElectron-PromptReco-v1/RAW-RECO",
-                        ]
+                            "/EphemeralZeroBias0/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias1/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias2/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias3/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias4/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias5/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias6/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias7/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias8/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias9/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias10/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias11/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias12/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias13/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias14/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias15/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias16/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias17/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias18/Run2023B-PromptReco-v1/MINIAOD",
+                            "/EphemeralZeroBias19/Run2023B-PromptReco-v1/MINIAOD"
+           ]
 
         for inDS in inputDatasets:
             # inDS is of the form /A/B/C. Since B is unique for each inDS, use this in the CRAB request name.

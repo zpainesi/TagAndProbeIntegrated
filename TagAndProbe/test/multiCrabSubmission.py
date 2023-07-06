@@ -51,7 +51,8 @@ def main():
         config.Data.inputDataset = None
         config.Data.splitting =  options.splitting
         config.Data.unitsPerJob = options.unitsPerJob
-        config.Data.totalUnits = None
+        config.Data.totalUnits = -1
+        config.Data.runRange = options.runRange
         config.Data.outputDatasetTag = None
         config.Data.outLFNDirBase = '/store/group/dpg_trigger/comm_trigger/L1Trigger/zpainesi/Timing/EphZB'
         config.Data.lumiMask = options.lumiMask

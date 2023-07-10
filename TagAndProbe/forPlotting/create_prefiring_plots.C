@@ -24,10 +24,20 @@ TH1I *histo_mu_BX_cut1=new TH1I("","",5,-2.5,2.5);
 TH1I *histo_mu_BX_cut2=new TH1I("","",5,-2.5,2.5);
 TH1I *histo_jet_BX_cut1=new TH1I("","",5,-2.5,2.5);
 
+TH1I *histo_eg_BX_cut1_EB=new TH1I("","",5,-2.5,2.5);
+TH1I *histo_mu_BX_cut1_EB=new TH1I("","",5,-2.5,2.5);
+TH1I *histo_mu_BX_cut2_EB=new TH1I("","",5,-2.5,2.5);
+TH1I *histo_jet_BX_cut1_EB=new TH1I("","",5,-2.5,2.5);
+
 histo_eg_BX_cut1->SetStats(0);
 histo_mu_BX_cut1->SetStats(0);
 histo_mu_BX_cut2->SetStats(0);
 histo_jet_BX_cut1->SetStats(0);
+
+histo_eg_BX_cut1_EB->SetStats(0);
+histo_mu_BX_cut1_EB->SetStats(0);
+histo_mu_BX_cut2_EB->SetStats(0);
+histo_jet_BX_cut1_EB->SetStats(0);
 
 
 TH1D *histo_eg_eta_cut1[5];
@@ -170,7 +180,6 @@ Mu->SetBranchAddress("l1tMuPt",&l1tMuPt);
 Mu->SetBranchAddress("l1tMuEta",&l1tMuEta);
 Mu->SetBranchAddress("l1tMuPhi",&l1tMuPhi);
 Mu->SetBranchAddress("l1tMuQual",&l1tMuQual);
-Mu->SetBranchAddress("l1tMuIso",&l1tMuIso);
 Mu->SetBranchAddress("l1tMuBx",&l1tMuBx);
 Mu->SetBranchAddress("muPt",&muPt);
 Mu->SetBranchAddress("muEta",&muEta);
@@ -198,6 +207,7 @@ for (int i=0; i<entries_eg; i++)
 	if( egPt>12. && egPt<23. && l1tEgPt>15. && l1tEgPt<26.)
 	{
 		histo_eg_BX_cut1->Fill(l1tEgBx,1.);
+		if(egEta<1.5)histo_eg_BX_cut1_EB->Fill(l1tEgBx,1.);
 		if(l1tEgBx==-2)histo_eg_eta_cut1[0]->Fill(egEta,1.);
 		if(l1tEgBx==-1)
 		{
@@ -232,6 +242,7 @@ for (int i=0; i<entries_mu; i++)
 	if( muPt>8. && muPt<25. && l1tMuPt>10. && l1tMuPt<21.)
 	{
 		histo_mu_BX_cut1->Fill(l1tMuBx,1.);
+		if(muEta<1.5)histo_mu_BX_cut1_EB->Fill(l1tMuBx,1.);
 		if(l1tMuBx==-2)histo_mu_eta_cut1[0]->Fill(muEta,1.);
 		if(l1tMuBx==-1)
 		{
@@ -249,6 +260,7 @@ for (int i=0; i<entries_mu; i++)
 	if( muPt>20. && l1tMuPt>22.)
 	{
 		histo_mu_BX_cut2->Fill(l1tMuBx,1.);
+		if(muEta<1.5)histo_mu_BX_cut2_EB->Fill(l1tMuBx,1.);
 		if(l1tMuBx==-2)histo_mu_eta_cut2[0]->Fill(muEta,1.);
 		if(l1tMuBx==-1)
 		{
@@ -295,6 +307,7 @@ for (int i=0; i<entries_jet; i++)
 	if( jetPt>90. && jetPt<160. && l1tJetPt>100. && l1tJetPt<150.)
 	{
 		histo_jet_BX_cut1->Fill(l1tJetBx,1.);
+		if(jetEta<1.5)histo_jet_BX_cut1_EB->Fill(l1tJetBx,1.);
 		if(l1tJetBx==-2)histo_jet_eta_cut1[0]->Fill(jetEta,1.);
 		if(l1tJetBx==-1)
 		{
@@ -330,7 +343,7 @@ float total_eg_post_rate_cut1=(histo_eg_BX_cut1->GetBinContent(4))/(histo_eg_BX_
 cout<<endl<<"The total post-firing rate for EG is "<<total_eg_post_rate_cut1*100.<<"%"<<endl;
 
 float total_mu_pre_rate_cut1=(histo_mu_BX_cut1->GetBinContent(2))/(histo_mu_BX_cut1->GetBinContent(2)+histo_mu_BX_cut1->GetBinContent(3));
-cout<<endl<<"The total pre-firing rate for MU(g20) is "<<total_mu_pre_rate_cut1*100.<<"%"<<endl;
+cout<<"The total pre-firing rate for MU(g20) is "<<total_mu_pre_rate_cut1*100.<<"%"<<endl;
 float total_mu_post_rate_cut1=(histo_mu_BX_cut1->GetBinContent(4))/(histo_mu_BX_cut1->GetBinContent(4)+histo_mu_BX_cut1->GetBinContent(3));
 cout<<endl<<"The total post-firing rate for MU(g20) is "<<total_mu_post_rate_cut1*100.<<"%"<<endl;
 
@@ -343,6 +356,29 @@ float total_jet_pre_rate_cut1=(histo_jet_BX_cut1->GetBinContent(2))/(histo_jet_B
 cout<<endl<<"The total pre-firing rate for JET is "<<total_jet_pre_rate_cut1*100.<<"%"<<endl;
 float total_jet_post_rate_cut1=(histo_jet_BX_cut1->GetBinContent(4))/(histo_jet_BX_cut1->GetBinContent(4)+histo_jet_BX_cut1->GetBinContent(3));
 cout<<"The total post-firing rate for JET is "<<total_jet_post_rate_cut1*100.<<"%"<<endl<<endl;
+
+
+/////// EB region
+cout <<endl<<endl<< "\033[1;33m---> For era: \033[0m" << era << "\033[1;33m // Barrel region  \033[0m";
+float total_eg_pre_rate_cut1_EB=(histo_eg_BX_cut1_EB->GetBinContent(2))/(histo_eg_BX_cut1_EB->GetBinContent(2)+histo_eg_BX_cut1_EB->GetBinContent(3));
+cout<<endl<<"The total pre-firing rate for EG is "<<total_eg_pre_rate_cut1_EB*100.<<"%";
+float total_eg_post_rate_cut1_EB=(histo_eg_BX_cut1_EB->GetBinContent(4))/(histo_eg_BX_cut1_EB->GetBinContent(4)+histo_eg_BX_cut1_EB->GetBinContent(3));
+cout<<endl<<"The total post-firing rate for EG is "<<total_eg_post_rate_cut1_EB*100.<<"%"<<endl;
+
+float total_mu_pre_rate_cut1_EB=(histo_mu_BX_cut1_EB->GetBinContent(2))/(histo_mu_BX_cut1_EB->GetBinContent(2)+histo_mu_BX_cut1_EB->GetBinContent(3));
+cout<<endl<<"The total pre-firing rate for MU(g20) is "<<total_mu_pre_rate_cut1_EB*100.<<"%"<<endl;
+float total_mu_post_rate_cut1_EB=(histo_mu_BX_cut1_EB->GetBinContent(4))/(histo_mu_BX_cut1_EB->GetBinContent(4)+histo_mu_BX_cut1_EB->GetBinContent(3));
+cout<<"The total post-firing rate for MU(g20) is "<<total_mu_post_rate_cut1_EB*100.<<"%"<<endl;
+
+float total_mu_pre_rate_cut2_EB=(histo_mu_BX_cut2_EB->GetBinContent(2))/(histo_mu_BX_cut2_EB->GetBinContent(2)+histo_mu_BX_cut2_EB->GetBinContent(3));
+cout<<endl<<"The total pre-firing rate for MU(8_25) is "<<total_mu_pre_rate_cut2_EB*100.<<"%"<<endl;
+float total_mu_post_rate_cut2_EB=(histo_mu_BX_cut2_EB->GetBinContent(4))/(histo_mu_BX_cut2_EB->GetBinContent(4)+histo_mu_BX_cut2_EB->GetBinContent(3));
+cout<<"The total post-firing rate for MU(8_25) is "<<total_mu_post_rate_cut2_EB*100.<<"%"<<endl;
+
+float total_jet_pre_rate_cut1_EB=(histo_jet_BX_cut1_EB->GetBinContent(2))/(histo_jet_BX_cut1_EB->GetBinContent(2)+histo_jet_BX_cut1_EB->GetBinContent(3));
+cout<<endl<<"The total pre-firing rate for JET is "<<total_jet_pre_rate_cut1_EB*100.<<"%"<<endl;
+float total_jet_post_rate_cut1_EB=(histo_jet_BX_cut1_EB->GetBinContent(4))/(histo_jet_BX_cut1_EB->GetBinContent(4)+histo_jet_BX_cut1_EB->GetBinContent(3));
+cout<<"The total post-firing rate for JET is "<<total_jet_post_rate_cut1_EB*100.<<"%"<<endl<<endl;
 
 TPaveText *paveCMS = new TPaveText(0.05,0.9,0.93,0.95,"NDC");
 	paveCMS->AddText("#bf{CMS #it{Preliminary}}              		                   (13.6 TeV)");
@@ -452,6 +488,19 @@ TPaveText *pave_eg_cut1 = new TPaveText(0.6,0.6,0.85,0.85,"NDC");
 	pave_eg_cut1->SetTextSize(0.03);
 	pave_eg_cut1->SetTextColor(kRed);
 	pave_eg_cut1->SetTextFont(42);
+	
+TPaveText *pave_eg_cut1_EB = new TPaveText(0.6,0.6,0.85,0.85,"NDC");
+	pave_eg_cut1_EB->AddText("Electrons - "+era);
+	pave_eg_cut1_EB->AddText("p_{T}^{L1}>15 & p_{T}^{L1}<26GeV");
+	pave_eg_cut1_EB->AddText("p_{T}^{offl}>12GeV & p_{T}^{offl}<23GeV");
+	pave_eg_cut1_EB->AddText("#color[4]{ECAL Barrel region}");
+	pave_eg_cut1_EB->AddText(Form("Total pre-firing  rate %1.3f %%",total_eg_pre_rate_cut1_EB*100.));
+	pave_eg_cut1_EB->AddText(Form("Total post-firing rate %1.3f %%",total_eg_post_rate_cut1_EB*100.));
+	pave_eg_cut1_EB->SetFillColor(0);
+	pave_eg_cut1_EB->SetBorderSize(0);
+	pave_eg_cut1_EB->SetTextSize(0.03);
+	pave_eg_cut1_EB->SetTextColor(kRed);
+	pave_eg_cut1_EB->SetTextFont(42);
 
 TPaveText *pave_mu_cut1 = new TPaveText(0.6,0.6,0.85,0.85,"NDC");
 	pave_mu_cut1->AddText("Muons - "+era);
@@ -464,6 +513,19 @@ TPaveText *pave_mu_cut1 = new TPaveText(0.6,0.6,0.85,0.85,"NDC");
 	pave_mu_cut1->SetTextSize(0.03);
 	pave_mu_cut1->SetTextColor(kRed);
 	pave_mu_cut1->SetTextFont(42);
+	
+TPaveText *pave_mu_cut1_EB = new TPaveText(0.6,0.6,0.85,0.85,"NDC");
+	pave_mu_cut1_EB->AddText("Muons - "+era);
+	pave_mu_cut1_EB->AddText("p_{T}^{L1}>10 & p_{T}^{L1}<21GeV");
+	pave_mu_cut1_EB->AddText("p_{T}^{offl}>8GeV & p_{T}^{offl}<25GeV");
+	pave_mu_cut1_EB->AddText("#color[4]{ECAL Barrel region}");
+	pave_mu_cut1_EB->AddText(Form("Total pre-firing  rate %1.3f %%",total_mu_pre_rate_cut1_EB*100.));
+	pave_mu_cut1_EB->AddText(Form("Total post-firing rate %1.3f %%",total_mu_post_rate_cut1_EB*100.));
+	pave_mu_cut1_EB->SetFillColor(0);
+	pave_mu_cut1_EB->SetBorderSize(0);
+	pave_mu_cut1_EB->SetTextSize(0.03);
+	pave_mu_cut1_EB->SetTextColor(kRed);
+	pave_mu_cut1_EB->SetTextFont(42);	
 
 TPaveText *pave_mu_cut2 = new TPaveText(0.6,0.4,0.85,0.65,"NDC");
 	pave_mu_cut2->AddText("Muons - "+era);
@@ -476,6 +538,19 @@ TPaveText *pave_mu_cut2 = new TPaveText(0.6,0.4,0.85,0.65,"NDC");
 	pave_mu_cut2->SetTextSize(0.03);
 	pave_mu_cut2->SetTextColor(kRed);
 	pave_mu_cut2->SetTextFont(42);
+	
+TPaveText *pave_mu_cut2_EB = new TPaveText(0.6,0.4,0.85,0.65,"NDC");
+	pave_mu_cut2_EB->AddText("Muons - "+era);
+	pave_mu_cut2_EB->AddText("p_{T}^{L1}>22GeV");
+	pave_mu_cut2_EB->AddText("p_{T}^{offl}>20GeV");
+	pave_mu_cut2_EB->AddText("#color[4]{ECAL Barrel region}");
+	pave_mu_cut2_EB->AddText(Form("Total pre-firing  rate %1.3f %%",total_mu_pre_rate_cut2_EB*100.));
+	pave_mu_cut2_EB->AddText(Form("Total post-firing rate %1.3f %%",total_mu_post_rate_cut2_EB*100.));
+	pave_mu_cut2_EB->SetFillColor(0);
+	pave_mu_cut2_EB->SetBorderSize(0);
+	pave_mu_cut2_EB->SetTextSize(0.03);
+	pave_mu_cut2_EB->SetTextColor(kRed);
+	pave_mu_cut2_EB->SetTextFont(42);
 		
 TPaveText *pave_jet_cut1 = new TPaveText(0.6,0.6,0.85,0.85,"NDC");
 	pave_jet_cut1->AddText("Jets - "+era);
@@ -488,6 +563,19 @@ TPaveText *pave_jet_cut1 = new TPaveText(0.6,0.6,0.85,0.85,"NDC");
 	pave_jet_cut1->SetTextSize(0.03);
 	pave_jet_cut1->SetTextColor(kRed);
 	pave_jet_cut1->SetTextFont(42);
+	
+TPaveText *pave_jet_cut1_EB = new TPaveText(0.6,0.6,0.85,0.85,"NDC");
+	pave_jet_cut1_EB->AddText("Jets - "+era);
+	pave_jet_cut1_EB->AddText("p_{T}^{L1}>100 & p_{T}^{L1}<150GeV");
+	pave_jet_cut1_EB->AddText("p_{T}^{offl}>90GeV & p_{T}^{offl}<160GeV");
+	pave_jet_cut1_EB->AddText("#color[4]{ECAL Barrel region}");
+	pave_jet_cut1_EB->AddText(Form("Total pre-firing  rate %1.4f %%",total_jet_pre_rate_cut1_EB*100.));
+	pave_jet_cut1_EB->AddText(Form("Total post-firing rate %1.4f %%",total_jet_post_rate_cut1_EB*100.));
+	pave_jet_cut1_EB->SetFillColor(0);
+	pave_jet_cut1_EB->SetBorderSize(0);
+	pave_jet_cut1_EB->SetTextSize(0.03);
+	pave_jet_cut1_EB->SetTextColor(kRed);
+	pave_jet_cut1_EB->SetTextFont(42);
 
 /// BX histos
 TCanvas *c1=new TCanvas("c1","",800,600);
@@ -721,6 +809,67 @@ c20->SetRightMargin(0.17);
 map_eta_phi_jet_cut1[1]->DrawNormalized("colz");
 paveCMS->Draw("Same");
 c20->Print("../plots/"+era+"/jet_post_map_eta_phi.png");
+
+TCanvas *c21=new TCanvas("c21","",800,600);
+c21->cd();
+c21->SetLogy();
+histo_eg_BX_cut1_EB->GetXaxis()->SetTitleOffset(1.2); 
+histo_eg_BX_cut1_EB->SetFillColor(0);
+histo_eg_BX_cut1_EB->SetLineWidth(2);
+histo_eg_BX_cut1_EB->SetLineColor(kBlue);
+histo_eg_BX_cut1_EB->SetMarkerSize(0.1);
+histo_eg_BX_cut1_EB->GetXaxis()->SetTitle("BX");
+histo_eg_BX_cut1_EB->GetYaxis()->SetTitle("Entries");
+histo_eg_BX_cut1_EB->Draw();
+paveCMS->Draw("Same");
+pave_eg_cut1_EB->Draw("same");
+c21->Print("../plots/"+era+"/eg_bx_EB.png");
+
+TCanvas *c22=new TCanvas("c22","",800,600);
+c22->cd();
+c22->SetLogy();
+histo_mu_BX_cut1_EB->GetXaxis()->SetTitleOffset(1.2); 
+histo_mu_BX_cut1_EB->SetFillColor(0);
+histo_mu_BX_cut1_EB->SetLineWidth(2);
+histo_mu_BX_cut1_EB->SetLineColor(kBlue);
+histo_mu_BX_cut1_EB->SetMarkerSize(0.1);
+histo_mu_BX_cut1_EB->GetXaxis()->SetTitle("BX");
+histo_mu_BX_cut1_EB->GetYaxis()->SetTitle("Entries");
+histo_mu_BX_cut1_EB->Draw();
+paveCMS->Draw("Same");
+pave_mu_cut1_EB->Draw("same");
+c22->Print("../plots/"+era+"/mu_8_25_bx_EB.png");
+
+TCanvas *c23=new TCanvas("c23","",800,600);
+c23->cd();
+c23->SetLogy();
+histo_mu_BX_cut2_EB->GetXaxis()->SetTitleOffset(1.2); 
+histo_mu_BX_cut2_EB->SetFillColor(0);
+histo_mu_BX_cut2_EB->SetLineWidth(2);
+histo_mu_BX_cut2_EB->SetLineColor(kBlue);
+histo_mu_BX_cut2_EB->SetMarkerSize(0.1);
+histo_mu_BX_cut2_EB->GetXaxis()->SetTitle("BX");
+histo_mu_BX_cut2_EB->GetYaxis()->SetTitle("Entries");
+histo_mu_BX_cut2_EB->Draw();
+paveCMS->Draw("Same");
+pave_mu_cut2_EB->Draw("same");
+c23->Print("../plots/"+era+"/mu_g20_bx_EB.png");
+
+TCanvas *c24=new TCanvas("c24","",800,600);
+c24->cd();
+c24->SetLogy();
+histo_jet_BX_cut1_EB->GetXaxis()->SetTitleOffset(1.2); 
+histo_jet_BX_cut1_EB->SetFillColor(0);
+histo_jet_BX_cut1_EB->SetLineWidth(2);
+histo_jet_BX_cut1_EB->SetLineColor(kBlue);
+histo_jet_BX_cut1_EB->SetMarkerSize(0.1);
+histo_jet_BX_cut1_EB->GetXaxis()->SetTitle("BX");
+histo_jet_BX_cut1_EB->GetYaxis()->SetTitle("Entries");
+histo_jet_BX_cut1_EB->Draw();
+paveCMS->Draw("Same");
+pave_jet_cut1_EB->Draw("same");
+c24->Print("../plots/"+era+"/jet_bx_EB.png");
+
 }
 
 ////////////////////////////////////////////////////////

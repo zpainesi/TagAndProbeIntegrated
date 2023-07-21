@@ -236,6 +236,7 @@ ULong64_t _indexevents5;
   Int_t   _l1tTauQual2;
   Int_t   _l1tTauIso2;
   Int_t   _l1tTauIsMatched2;
+Int_t _l1tTauBx2;
 
   float _jetPt2;
   float _jetEta2;

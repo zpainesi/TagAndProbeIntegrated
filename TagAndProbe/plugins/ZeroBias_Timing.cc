@@ -79,6 +79,7 @@ private:
   TTree *_tree2;
   TTree *_tree3;
   TTree *_tree4;
+  TTree *_tree5;
   std::string _treeName;
 
   // -------------------------------------
@@ -189,6 +190,10 @@ ULong64_t _indexevents4;
   Int_t     _runNumber4;
   Int_t     _lumi4;
 
+ULong64_t _indexevents5;
+  Int_t     _runNumber5;
+  Int_t     _lumi5;
+
   Int_t _bit21_;  // L1_SingleMu22
   Int_t _bit25_;  // L1_SingleMu25
   Int_t _bit168_; // L1_SingleEG36er2p5
@@ -279,6 +284,7 @@ ULong64_t _indexevents4;
   Int_t   _l1tMuQual2;
   Int_t  _l1tMuIsMatched2;
    Int_t    _l1tMuBx2;
+
 
 //// histos to be filled in the output
   TH1F* _muBxMatched_g20  = new TH1F("muBxMatched_g20",  "muBxMatched_g20",  5, -2.5, 2.5);
@@ -464,6 +470,10 @@ void ZeroBias_Timing::Initialize()
   this -> _indexevents4 = 0;
   this -> _runNumber4   = 0;
   this -> _lumi4        = 0;
+
+  this -> _indexevents5 = 0;
+  this -> _runNumber5   = 0;
+  this -> _lumi5        = 0;
 /*
   this -> _bit21_  = 0;
   this -> _bit25_  = 0;
@@ -553,6 +563,17 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tMuQual2      = 0;
   this -> _l1tMuIsMatched2 = 0;
   this -> _l1tMuBx2 = 0;
+
+  this -> _tauPt2  = 0;
+  this -> _tauEta2 = 0;
+  this -> _tauPhi2 = 0;
+
+  this -> _l1tTauPt2        = 0;
+  this -> _l1tTauEta2     = 0;
+  this -> _l1tTauPhi2       = 0;
+  this -> _l1tTauQual2      = 0;
+  this -> _l1tTauIsMatched2 = 0;
+  this -> _l1tTauBx2 = 0;
 }
 
 
@@ -563,6 +584,8 @@ void ZeroBias_Timing::beginJob()
   this -> _tree2 = fs -> make<TTree>("EG","EG");
   this -> _tree3 = fs -> make<TTree>("Mu","Mu");
   this -> _tree4 = fs -> make<TTree>("Jet","Jet");
+    this -> _tree5 = fs -> make<TTree>("Tau","Tau");
+
 
 
 
@@ -713,6 +736,24 @@ void ZeroBias_Timing::beginJob()
   this -> _tree4 -> Branch("l1tJetIsMatched", &_l1tJetIsMatched2);
   this -> _tree4 -> Branch("l1tJetBx", &_l1tJetBx2);
 
+
+  //branches of fifth tree (taus)
+  this -> _tree5 -> Branch("EventNumber",  &_indexevents4);
+  this -> _tree5 -> Branch("RunNumber",  &_runNumber4);
+  this -> _tree5 -> Branch("lumi",  &_lumi4);
+
+  this -> _tree5 -> Branch("tauPt",  &_tauPt2);
+  this -> _tree5 -> Branch("tauEta", &_tauEta2);
+  this -> _tree5 -> Branch("tauPhi", &_tauPhi2);
+
+  this -> _tree5 -> Branch("l1tTauPt",  &_l1tTauPt2);
+  this -> _tree5 -> Branch("l1tTauEta", &_l1tTauEta2);
+  this -> _tree5 -> Branch("l1tTauPhi", &_l1tTauPhi2);
+  this -> _tree5 -> Branch("l1tTauQual", &_l1tTauQual2);
+  this -> _tree5 -> Branch("l1tTauIso", &_l1tTauIso2);
+  this -> _tree5 -> Branch("l1tTauIsMatched", &_l1tTauIsMatched2);
+  this -> _tree5 -> Branch("l1tTauBx", &_l1tTauBx2);
+
   return;
 }
 
@@ -763,6 +804,52 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
 
       //------------------------------------------------------------------------------------------------
 
+
+      // Taus
+      edm::Handle<pat::TauRefVector>  tauHandle;
+      try {iEvent.getByToken(_tauTag, tauHandle);}  catch (...) {;}
+      
+      edm::Handle< BXVector<l1t::Tau> >  L1TauHandle;
+      try {iEvent.getByToken(_L1TauTag, L1TauHandle);}  catch (...) {;}
+
+      if(L1TauHandle.isValid() && tauHandle.isValid())
+        {
+          for (int ibx = L1TauHandle->getFirstBX(); ibx <= L1TauHandle->getLastBX(); ++ibx)
+            {
+            
+              for (l1t::TauBxCollection::const_iterator bxTauIt = L1TauHandle->begin(ibx); bxTauIt != L1TauHandle->end(ibx) ; bxTauIt++)
+                {
+                  const l1t::Tau& l1tTau = *bxTauIt;
+               
+                  bool matchFound = false;
+                  for (pat::TauRefVector::const_iterator tauIt = tauHandle->begin(); tauIt != tauHandle->end(); ++tauIt)
+                  {
+                    const pat::TauRef& tau = *tauIt;
+                    if (deltaR(*tau, l1tTau)<0.5)
+                      {
+                        _tauPt2=tau.pt();
+                          _tauEta2=tau.eta();
+                          _tauPhi2=tau.phi();
+                          
+                          _l1tTauPt2=l1tTau.pt();
+                          _l1tTauEta2=l1tTau.eta();
+                            _l1tTauPhi2=l1tTau.phi();
+                            _l1tTauQual2=l1tTau.hwQual();
+                          _l1tTauIso2=l1tTau.hwIso();
+                          _l1tTauIsMatched2=1;
+                          _l1tTauBx2=ibx;
+                          this -> _tree5 -> Fill();
+                           if(tau.pt()>40. && tau.pt()<60. && l1tTau.pt()>43. && l1tTau.pt()<63. && tau.eta()<2.1)_tauBxMatched->Fill(ibx); /////////// SOS  ////////////////
+                          break;
+                      }
+                  }         
+                }
+            }
+        }
+
+      
+      //// Jets
+     
       edm::Handle<edm::View<pat::Jet>>  jetHandle;
       try {iEvent.getByToken(_jetTag, jetHandle);}  catch (...) {;}
       
@@ -789,7 +876,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _jetPhi2=jet.phi();
                           
                           _l1tJetPt2=l1tJet.pt();
-                          _jetEta2=l1tJet.eta();
+                          _l1tJetEta2=l1tJet.eta();
                             _l1tJetPhi2=l1tJet.phi();
                             _l1tJetQual2=l1tJet.hwQual();
                           _l1tJetIso2=l1tJet.hwIso();

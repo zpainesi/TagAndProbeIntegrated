@@ -828,9 +828,9 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                     const pat::TauRef& tau = *tauIt;
                     if (deltaR(*tau, l1tTau)<0.5)
                       {
-                        _tauPt2=tau.pt();
-                          _tauEta2=tau.eta();
-                          _tauPhi2=tau.phi();
+                        _tauPt2=tau->pt();
+                          _tauEta2=tau->eta();
+                          _tauPhi2=tau->phi();
                           
                           _l1tTauPt2=l1tTau.pt();
                           _l1tTauEta2=l1tTau.eta();
@@ -840,7 +840,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _l1tTauIsMatched2=1;
                           _l1tTauBx2=ibx;
                           this -> _tree5 -> Fill();
-                           if(tau.pt()>40. && tau.pt()<60. && l1tTau.pt()>43. && l1tTau.pt()<63. && tau.eta()<2.1)_tauBxMatched->Fill(ibx); /////////// SOS  ////////////////
+                           if(tau->pt()>40. && tau->pt()<60. && l1tTau.pt()>43. && l1tTau.pt()<63. && tau->eta()<2.1)_tauBxMatched->Fill(ibx); /////////// SOS  ////////////////
                           break;
                       }
                   }         

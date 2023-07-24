@@ -80,6 +80,8 @@ private:
   TTree *_tree3;
   TTree *_tree4;
   TTree *_tree5;
+  TTree *_tree6;
+  TTree *_tree7;
   std::string _treeName;
 
   // -------------------------------------
@@ -236,7 +238,20 @@ ULong64_t _indexevents5;
   Int_t   _l1tTauQual2;
   Int_t   _l1tTauIso2;
   Int_t   _l1tTauIsMatched2;
-Int_t _l1tTauBx2;
+  Int_t _l1tTauBx2;
+
+
+  float _tauPt3;
+  float _tauEta3;
+  float _tauPhi3;
+
+  float _l1tTauPt3;
+  float _l1tTauEta3;
+  float _l1tTauPhi3;
+  Int_t   _l1tTauQual3;
+  Int_t   _l1tTauIso3;
+  Int_t   _l1tTauIsMatched3;
+  Int_t _l1tTauBx3;
 
   float _jetPt2;
   float _jetEta2;
@@ -248,7 +263,7 @@ Int_t _l1tTauBx2;
   Int_t  _l1tJetQual2;
   Int_t   _l1tJetIso2;
   Int_t  _l1tJetIsMatched2;
-   Int_t    _l1tJetBx2;
+  Int_t    _l1tJetBx2;
 
   float _metEt2;
   float _metPhi2;
@@ -274,6 +289,20 @@ Int_t _l1tTauBx2;
   Int_t   _l1tEgIsMatched2;
   Int_t    _l1tEgBx2;
 
+  float _egPt3;
+  float _egEta3;
+  float _egPhi3;
+  Int_t   _egIsTight3;
+  Int_t  _egIsMedium3;
+  Int_t  _egIsLoose3;
+
+  float  _l1tEgPt3;
+  float  _l1tEgEta3;
+  float  _l1tEgPhi3;
+  Int_t   _l1tEgIso3;
+  Int_t   _l1tEgQual3;
+  Int_t   _l1tEgIsMatched3;
+  Int_t    _l1tEgBx3;
 
   float _muPt2;
   float _muEta2;
@@ -284,7 +313,7 @@ Int_t _l1tTauBx2;
   float _l1tMuPhi2;
   Int_t   _l1tMuQual2;
   Int_t  _l1tMuIsMatched2;
-   Int_t    _l1tMuBx2;
+  Int_t    _l1tMuBx2;
 
 
 //// histos to be filled in the output
@@ -554,6 +583,23 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tEgIsMatched2 = 0;
   this -> _l1tEgBx2        = 0;
 
+
+  this -> _egPt3       = 0;
+  this -> _egEta3     = 0;
+  this -> _egPhi3     = 0;
+  this -> _egIsTight3  = 0;
+  this -> _egIsMedium3 = 0;
+  this -> _egIsLoose3  = 0;
+
+  this -> _l1tEgPt3       = 0;
+  this -> _l1tEgEta3     = 0;
+  this -> _l1tEgPhi3      = 0;
+  this -> _l1tEgQual3    = 0;
+  this -> _l1tEgIso3   = 0;
+  this -> _l1tEgIsMatched3 = 0;
+  this -> _l1tEgBx3        = 0;
+
+
   this -> _muPt2  = 0;
   this -> _muEta2 = 0;
   this -> _muPhi2 = 0;
@@ -575,6 +621,17 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tTauQual2      = 0;
   this -> _l1tTauIsMatched2 = 0;
   this -> _l1tTauBx2 = 0;
+
+  this -> _tauPt3  = 0;
+  this -> _tauEta3 = 0;
+  this -> _tauPhi3 = 0;
+
+  this -> _l1tTauPt3        = 0;
+  this -> _l1tTauEta3     = 0;
+  this -> _l1tTauPhi3       = 0;
+  this -> _l1tTauQual3      = 0;
+  this -> _l1tTauIsMatched3 = 0;
+  this -> _l1tTauBx3 = 0;
 }
 
 
@@ -585,7 +642,10 @@ void ZeroBias_Timing::beginJob()
   this -> _tree2 = fs -> make<TTree>("EG","EG");
   this -> _tree3 = fs -> make<TTree>("Mu","Mu");
   this -> _tree4 = fs -> make<TTree>("Jet","Jet");
-    this -> _tree5 = fs -> make<TTree>("Tau","Tau");
+  this -> _tree5 = fs -> make<TTree>("Tau","Tau");
+  this -> _tree6 = fs -> make<TTree>("unprefirableEG","unprefirableEG");
+  this -> _tree7 = fs -> make<TTree>("unprefirableTau","unprefirableTau");
+  
 
 
 
@@ -913,6 +973,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
         {
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)
             {
+              std::cout<<" The BX = " << ibx << std::endl;
              
               for (l1t::EGammaBxCollection::const_iterator bxEGIt = L1EGHandle->begin(ibx); bxEGIt != L1EGHandle->end(ibx) ; bxEGIt++)
                 {
@@ -922,7 +983,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
                     {
                       const reco::GsfElectron& ele = *eleIt;
-                      if (deltaR(ele, l1tEG)<0.5 && l1tEG.pt()>15. && l1tEG.pt()<26.)
+                      if (deltaR(ele, l1tEG)<0.5)
                         {
                           _l1tEgPt2=l1tEG.pt();
                           _l1tEgEta2=l1tEG.eta();

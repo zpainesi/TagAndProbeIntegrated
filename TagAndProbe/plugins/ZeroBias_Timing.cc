@@ -969,11 +969,12 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
             iEvent.getByToken(_eleMediumIdTag, eleMediumIdHandle);
             iEvent.getByToken(_eleLooseIdTag,  eleLooseIdHandle);
   */        
+      int counter_eg=0;
       if(L1EGHandle.isValid() && eleHandle.isValid())
         {
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)
             {
-              if(ibx<-2 || ibx>2)std::cout<<" The BX = " << ibx << std::endl;
+              if(ibx<-2 || ibx>2)counter_eg++;
              
               for (l1t::EGammaBxCollection::const_iterator bxEGIt = L1EGHandle->begin(ibx); bxEGIt != L1EGHandle->end(ibx) ; bxEGIt++)
                 {
@@ -1015,7 +1016,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
        
             
         }
-
+std::cout<<std::endl<<"The BX not in (-2,2) are : "<<counter_eg<<std::endl;
       //------------------------------------------------------------------------------------------------
 
       edm::Handle<pat::MuonRefVector> muonHandle;

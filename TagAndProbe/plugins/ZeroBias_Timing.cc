@@ -973,7 +973,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
         {
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)
             {
-              std::cout<<" The BX = " << ibx << std::endl;
+              if(ibx<-2 || ibx>2)std::cout<<" The BX = " << ibx << std::endl;
              
               for (l1t::EGammaBxCollection::const_iterator bxEGIt = L1EGHandle->begin(ibx); bxEGIt != L1EGHandle->end(ibx) ; bxEGIt++)
                 {

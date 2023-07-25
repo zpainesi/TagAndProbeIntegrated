@@ -333,6 +333,8 @@ ULong64_t _indexevents5;
   edm::EDGetTokenT<edm::TriggerResults> metFiltersRecoTag_;
 
  bool Flag_IsUnprefirable;
+
+Int_t counter_unprefEvents=0;
 };
 
 /*
@@ -572,7 +574,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tEgIsMatched2 = 0;
   this -> _l1tEgBx2        = 0;
 
-    this -> _IsUnpref_Eg2 =0;
+  this -> _IsUnpref_Eg2 =0;
 
 
   this -> _muPt2  = 0;
@@ -586,7 +588,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tMuIsMatched2 = 0;
   this -> _l1tMuBx2 = 0;
 
-    this -> _IsUnpref_Mu2 =0;
+  this -> _IsUnpref_Mu2 =0;
 
 
   this -> _tauPt2  = 0;
@@ -600,8 +602,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tTauIsMatched2 = 0;
   this -> _l1tTauBx2 = 0;
 
-    this -> _IsUnpref_Tau2 =0;
-
+  this -> _IsUnpref_Tau2 =0;
 
 }
 
@@ -842,6 +843,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
         }
       }
 
+        if(Flag_IsUnprefirable)counter_unprefEvents++;
       std::cout<<"IsUnprefirableEvent = "<<Flag_IsUnprefirable<<std::endl;
 
       // Taus
@@ -952,13 +954,9 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
         {
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)
             {
-              if(ibx<-2 || ibx>2)counter_eg++;
-             
               for (l1t::EGammaBxCollection::const_iterator bxEGIt = L1EGHandle->begin(ibx); bxEGIt != L1EGHandle->end(ibx) ; bxEGIt++)
                 {
                   const l1t::EGamma& l1tEG = *bxEGIt;
-                  
-                 
                   for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
                     {
                       const reco::GsfElectron& ele = *eleIt;
@@ -990,11 +988,8 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                         }
                     }
                 }
-            }
-       
-            
+            }         
         }
-std::cout<<std::endl<<"The BX not in (-2,2) are : "<<counter_eg<<std::endl;
       //------------------------------------------------------------------------------------------------
 
       edm::Handle<pat::MuonRefVector> muonHandle;
@@ -1044,6 +1039,7 @@ std::cout<<std::endl<<"The BX not in (-2,2) are : "<<counter_eg<<std::endl;
 
      // this -> _tree -> Fill();
     }
+  std::cout<<"Sum if Unpref Events = "<<counter_unprefEvents <<std::endl;
 }
 
 bool ZeroBias_Timing::GetMETFilterDecision(const edm::Event& iEvent,edm::Handle<edm::TriggerResults> METFilterResults, TString studiedfilter){

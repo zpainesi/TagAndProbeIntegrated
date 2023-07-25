@@ -844,7 +844,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
       }
 
         if(Flag_IsUnprefirable)counter_unprefEvents++;
-      std::cout<<"IsUnprefirableEvent = "<<Flag_IsUnprefirable<<std::endl;
+   //   std::cout<<"IsUnprefirableEvent = "<<Flag_IsUnprefirable<<std::endl;
 
       // Taus
       edm::Handle<pat::TauRefVector>  tauHandle;
@@ -879,6 +879,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _l1tTauIso2=l1tTau.hwIso();
                           _l1tTauIsMatched2=1;
                           _l1tTauBx2=ibx;
+                         _IsUnpref_Tau2=Flag_IsUnprefirable;
                           this -> _tree5 -> Fill();
                            if(tau->pt()>40. && tau->pt()<60. && l1tTau.pt()>43. && l1tTau.pt()<63. && tau->eta()<2.1)_tauBxMatched->Fill(ibx); /////////// SOS  ////////////////
                           break;
@@ -923,6 +924,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _l1tJetIso2=l1tJet.hwIso();
                           _l1tJetIsMatched2=1;
                           _l1tJetBx2=ibx;
+                          _IsUnpref_Jet2=Flag_IsUnprefirable;
                           this -> _tree4 -> Fill();
                            if(jet.pt()>90. && jet.pt()<160. && l1tJet.pt()>100. && l1tJet.pt()<150.)_jetBxMatched->Fill(ibx);
                           break;
@@ -968,6 +970,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _l1tEgIso2=l1tEG.hwIso();
                           _l1tEgQual2=l1tEG.hwQual();
                           _l1tEgIsMatched2=1;
+                           _IsUnpref_Eg2=Flag_IsUnprefirable;
                             _l1tEgBx2=ibx;
                           
                        //   _egIsTight2=(*eleTightIdHandle)[*elePtr];
@@ -1020,6 +1023,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                             _l1tMuQual2=l1tMu.hwQual();
                         _l1tMuIsMatched2=1;
                         _l1tMuBx2=ibx;
+                         _IsUnpref_Mu2=Flag_IsUnprefirable;
                         
                         _muPt2=mu->pt();
                         _muEta2=mu->eta();
@@ -1039,8 +1043,9 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
 
      // this -> _tree -> Fill();
     }
-  std::cout<<"Sum if Unpref Events = "<<counter_unprefEvents <<std::endl;
 }
+  std::cout<<"Sum if Unpref Events = "<<counter_unprefEvents <<std::endl;
+
 
 bool ZeroBias_Timing::GetMETFilterDecision(const edm::Event& iEvent,edm::Handle<edm::TriggerResults> METFilterResults, TString studiedfilter){
   

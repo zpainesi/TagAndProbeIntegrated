@@ -869,7 +869,6 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                 {
                   const l1t::Tau& l1tTau = *bxTauIt;
                
-                  bool matchFound = false;
                   for (pat::TauRefVector::const_iterator tauIt = tauHandle->begin(); tauIt != tauHandle->end(); ++tauIt)
                   {
                     const pat::TauRef& tau = *tauIt;
@@ -958,7 +957,6 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
             iEvent.getByToken(_eleMediumIdTag, eleMediumIdHandle);
             iEvent.getByToken(_eleLooseIdTag,  eleLooseIdHandle);
   */        
-      int counter_eg=0;
       if(L1EGHandle.isValid() && eleHandle.isValid())
         {
           for (int ibx = L1EGHandle->getFirstBX(); ibx <= L1EGHandle->getLastBX(); ++ibx)

@@ -811,6 +811,9 @@ void ZeroBias_Timing::endRun(edm::Run const& iRun, edm::EventSetup const& iSetup
   this -> _egBx0Matched_eta -> Write();
   this -> _egBxPlus1Matched_eta -> Write();
 
+  std::cout<<"Sum if Unpref Events = "<<counter_unprefEvents <<std::endl;
+
+
   return;
 }
 
@@ -1049,8 +1052,6 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
      // this -> _tree -> Fill();
     }
 }
-  std::cout<<"Sum if Unpref Events = "<<counter_unprefEvents <<std::endl;
-
 
 bool ZeroBias_Timing::GetMETFilterDecision(const edm::Event& iEvent,edm::Handle<edm::TriggerResults> METFilterResults, TString studiedfilter){
   

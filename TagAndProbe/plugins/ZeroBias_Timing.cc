@@ -80,8 +80,7 @@ private:
   TTree *_tree3;
   TTree *_tree4;
   TTree *_tree5;
-  TTree *_tree6;
-  TTree *_tree7;
+
   std::string _treeName;
 
   // -------------------------------------
@@ -240,18 +239,8 @@ ULong64_t _indexevents5;
   Int_t   _l1tTauIsMatched2;
   Int_t _l1tTauBx2;
 
+  Int_t _IsUnpref_Tau2;
 
-  float _tauPt3;
-  float _tauEta3;
-  float _tauPhi3;
-
-  float _l1tTauPt3;
-  float _l1tTauEta3;
-  float _l1tTauPhi3;
-  Int_t   _l1tTauQual3;
-  Int_t   _l1tTauIso3;
-  Int_t   _l1tTauIsMatched3;
-  Int_t _l1tTauBx3;
 
   float _jetPt2;
   float _jetEta2;
@@ -264,6 +253,8 @@ ULong64_t _indexevents5;
   Int_t   _l1tJetIso2;
   Int_t  _l1tJetIsMatched2;
   Int_t    _l1tJetBx2;
+
+  Int_t _IsUnpref_Jet2;
 
   float _metEt2;
   float _metPhi2;
@@ -289,20 +280,7 @@ ULong64_t _indexevents5;
   Int_t   _l1tEgIsMatched2;
   Int_t    _l1tEgBx2;
 
-  float _egPt3;
-  float _egEta3;
-  float _egPhi3;
-  Int_t   _egIsTight3;
-  Int_t  _egIsMedium3;
-  Int_t  _egIsLoose3;
-
-  float  _l1tEgPt3;
-  float  _l1tEgEta3;
-  float  _l1tEgPhi3;
-  Int_t   _l1tEgIso3;
-  Int_t   _l1tEgQual3;
-  Int_t   _l1tEgIsMatched3;
-  Int_t    _l1tEgBx3;
+  Int_t _IsUnpref_Eg2;
 
   float _muPt2;
   float _muEta2;
@@ -314,6 +292,8 @@ ULong64_t _indexevents5;
   Int_t   _l1tMuQual2;
   Int_t  _l1tMuIsMatched2;
   Int_t    _l1tMuBx2;
+
+  Int_t _IsUnpref_Mu2;
 
 
 //// histos to be filled in the output
@@ -330,6 +310,8 @@ ULong64_t _indexevents5;
   //TH2F* _jetBxMatched_eta_phi = new TH2F("jetBxMatched_eta_phi","jetBxMatched_eta_phi", 100, -5 , 5, 72,-3.1416,3.1416);
 
   edm::EDGetTokenT<GlobalAlgBlkBxCollection> _ugtTag;
+
+  edm::EDGetTokenT<GlobalExtBlkBxCollection> _UnprefirableEventToken;
 
   edm::EDGetTokenT<l1t::MuonBxCollection>   _L1MuTag;
   edm::EDGetTokenT<l1t::EGammaBxCollection> _L1EGTag;
@@ -349,6 +331,8 @@ ULong64_t _indexevents5;
 
   edm::EDGetTokenT<edm::TriggerResults> metFiltersPatTag_;
   edm::EDGetTokenT<edm::TriggerResults> metFiltersRecoTag_;
+
+ bool Flag_IsUnprefirable;
 };
 
 /*
@@ -362,6 +346,8 @@ ULong64_t _indexevents5;
 // ----Constructor and Destructor -----
 ZeroBias_Timing::ZeroBias_Timing(const edm::ParameterSet& iConfig) :
   _ugtTag    (consumes<GlobalAlgBlkBxCollection>     (iConfig.getParameter<edm::InputTag>("l1uGT"))),
+
+  _UnprefirableEventToken(consumes<GlobalExtBlkBxCollection>(edm::InputTag("simGtExtUnprefireable"))),
   
   _L1MuTag   (consumes<l1t::MuonBxCollection>        (iConfig.getParameter<edm::InputTag>("l1Mu"))),
   _L1EGTag   (consumes<l1t::EGammaBxCollection>      (iConfig.getParameter<edm::InputTag>("l1EG"))),
@@ -559,6 +545,9 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tJetIso2     = 0;
   this -> _l1tJetIsMatched2 = 0;
 
+  this -> _IsUnpref_Jet2 =0;
+
+
   this -> _metEt2  = -1.;
   this -> _metPhi2 = -1.;
 
@@ -583,21 +572,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tEgIsMatched2 = 0;
   this -> _l1tEgBx2        = 0;
 
-
-  this -> _egPt3       = 0;
-  this -> _egEta3     = 0;
-  this -> _egPhi3     = 0;
-  this -> _egIsTight3  = 0;
-  this -> _egIsMedium3 = 0;
-  this -> _egIsLoose3  = 0;
-
-  this -> _l1tEgPt3       = 0;
-  this -> _l1tEgEta3     = 0;
-  this -> _l1tEgPhi3      = 0;
-  this -> _l1tEgQual3    = 0;
-  this -> _l1tEgIso3   = 0;
-  this -> _l1tEgIsMatched3 = 0;
-  this -> _l1tEgBx3        = 0;
+    this -> _IsUnpref_Eg2 =0;
 
 
   this -> _muPt2  = 0;
@@ -611,6 +586,9 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tMuIsMatched2 = 0;
   this -> _l1tMuBx2 = 0;
 
+    this -> _IsUnpref_Mu2 =0;
+
+
   this -> _tauPt2  = 0;
   this -> _tauEta2 = 0;
   this -> _tauPhi2 = 0;
@@ -622,16 +600,9 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tTauIsMatched2 = 0;
   this -> _l1tTauBx2 = 0;
 
-  this -> _tauPt3  = 0;
-  this -> _tauEta3 = 0;
-  this -> _tauPhi3 = 0;
+    this -> _IsUnpref_Tau2 =0;
 
-  this -> _l1tTauPt3        = 0;
-  this -> _l1tTauEta3     = 0;
-  this -> _l1tTauPhi3       = 0;
-  this -> _l1tTauQual3      = 0;
-  this -> _l1tTauIsMatched3 = 0;
-  this -> _l1tTauBx3 = 0;
+
 }
 
 
@@ -643,11 +614,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree3 = fs -> make<TTree>("Mu","Mu");
   this -> _tree4 = fs -> make<TTree>("Jet","Jet");
   this -> _tree5 = fs -> make<TTree>("Tau","Tau");
-  this -> _tree6 = fs -> make<TTree>("unprefirableEG","unprefirableEG");
-  this -> _tree7 = fs -> make<TTree>("unprefirableTau","unprefirableTau");
-  
-
-
+ 
 
 
   //Branches of first tree (ZeroBias_Timing)
@@ -839,7 +806,7 @@ void ZeroBias_Timing::endRun(edm::Run const& iRun, edm::EventSetup const& iSetup
   return;
 }
 
-
+// ------------ method called for each event  ------------
 void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& eSetup)
 {
   this -> Initialize();
@@ -865,6 +832,17 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
 
       //------------------------------------------------------------------------------------------------
 
+      //Unprefirable
+      Flag_IsUnprefirable = false;
+      edm::Handle<GlobalExtBlkBxCollection> handleUnprefEventResults;
+      iEvent.getByToken(_UnprefirableEventToken, handleUnprefEventResults);
+      if(handleUnprefEventResults.isValid()){
+        if (handleUnprefEventResults->size() != 0) {
+          Flag_IsUnprefirable = handleUnprefEventResults->at(0, 0).getExternalDecision(GlobalExtBlk::maxExternalConditions-1);
+        }
+      }
+
+      std::cout<<"IsUnprefirableEvent = "<<Flag_IsUnprefirable<<std::endl;
 
       // Taus
       edm::Handle<pat::TauRefVector>  tauHandle;

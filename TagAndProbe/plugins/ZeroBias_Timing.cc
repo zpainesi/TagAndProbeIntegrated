@@ -840,6 +840,10 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
       _indexevents4 = iEvent.id().event();
       _runNumber4 = iEvent.id().run();
       _lumi4 = iEvent.luminosityBlock();
+       _indexevents5 = iEvent.id().event();
+      _runNumber5 = iEvent.id().run();
+      _lumi5 = iEvent.luminosityBlock();
+      
 
       //------------------------------------------------------------------------------------------------
 

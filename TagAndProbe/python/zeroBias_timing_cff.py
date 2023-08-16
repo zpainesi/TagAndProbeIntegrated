@@ -7,7 +7,7 @@ print("Running on data")
 goodTaus = cms.EDFilter("PATTauRefSelector",
     src = cms.InputTag("slimmedTaus"),
     cut = cms.string(
-        'pt>10 && abs(eta)<2.1 '
+        'pt>10 && (abs(eta)<1.305 || ( abs(eta)>1.479 && abs(eta)<2.1 ) )'
         # '&& abs(charge)>0 && abs(charge)<2 ' #sometimes 2 prongs have charge != 1
         # '&& tauID("decayModeFinding")>0.5 '
         # '&& tauID("byMediumDeepTau2017v2p1VSjet")>0.5 '

@@ -879,7 +879,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   for (pat::TauRefVector::const_iterator tauIt = tauHandle->begin(); tauIt != tauHandle->end(); ++tauIt)
                   {
                     const pat::TauRef& tau = *tauIt;
-                    if (deltaR(*tau, l1tTau)<0.5)
+                    if (deltaR(*tau, l1tTau)<0.3)
                       {
                         _tauPt2=tau->pt();
                           _tauEta2=tau->eta();
@@ -923,7 +923,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   for (edm::View<pat::Jet>::const_iterator jetIt = jetHandle->begin(); jetIt != jetHandle->end(); ++jetIt)
                     {
                       const pat::Jet& jet = *jetIt;
-                      if (deltaR(jet, l1tJet)<0.5)
+                      if (deltaR(jet, l1tJet)<0.3)
                         { 
 
                           _jetPt2=jet.pt();
@@ -974,7 +974,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   for (edm::View<reco::GsfElectron>::const_iterator eleIt = eleHandle->begin(); eleIt != eleHandle->end(); ++eleIt)
                     {
                       const reco::GsfElectron& ele = *eleIt;
-                      if (deltaR(ele, l1tEG)<0.5)
+                      if (deltaR(ele, l1tEG)<0.3)
                         {
                           _l1tEgPt2=l1tEG.pt();
                           _l1tEgEta2=l1tEG.eta();
@@ -1027,7 +1027,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                   for (pat::MuonRefVector::const_iterator muIt = muonHandle->begin(); muIt != muonHandle->end(); ++muIt)
                   {
                     const pat::MuonRef& mu = *muIt;
-                    if (deltaR(*mu, l1tMu)<0.5)
+                    if (deltaR(*mu, l1tMu)<0.3)
                       {
                           _l1tMuPt2=l1tMu.pt();
                             _l1tMuEta2=l1tMu.eta();

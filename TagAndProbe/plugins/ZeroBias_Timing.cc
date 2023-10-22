@@ -616,7 +616,8 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                             for(int indeX=0; indeX<=506; indeX++)
                               {
                                 this -> _bit_tau[indeX] =  ugt.getAlgoDecisionFinal(indeX);  // L1_SingleMu22
-                        
+                                std::cout<<" index= "<<indeX<<std::endl;
+                                std::cout<<"Bit= "<<ugt.getAlgoDecisionFinal(indeX)<<std::endl;
                               }
                         }
                       

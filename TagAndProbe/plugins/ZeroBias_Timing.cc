@@ -480,7 +480,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree3 -> Branch("l1tMuIsMatched", &_l1tMuIsMatched2);
   this -> _tree3 -> Branch("l1tMuBx", &_l1tMuBx2);
   this -> _tree3 -> Branch("IsUnprefirableEvent", &_IsUnpref_Mu2);
-  this -> _tree3 -> Branch("L1t_bit",&_bit_mu), "_bit_mu[506]/I";
+  this -> _tree3 -> Branch("L1t_bit",&_bit_mu), "_bit_mu[506]/I");
 
 
   //branches of fourth tree (jet)

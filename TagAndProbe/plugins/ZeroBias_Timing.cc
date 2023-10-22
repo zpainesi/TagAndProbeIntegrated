@@ -285,7 +285,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tJetIso2     = 0;
   this -> _l1tJetIsMatched2 = 0;
   this -> _IsUnpref_Jet2 =0;
-  this -> _bit_jet . clear();
+//  this -> _bit_jet . clear();
 
 
   this -> _metEt2  = -1.;
@@ -310,7 +310,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tEgIsMatched2 = 0;
   this -> _l1tEgBx2        = 0;
   this -> _IsUnpref_Eg2 =0;
- this -> _bit_eg . clear();
+// this -> _bit_eg . clear();
 
 
   this -> _muPt2  = 0;
@@ -323,7 +323,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tMuIsMatched2 = 0;
   this -> _l1tMuBx2 = 0;
   this -> _IsUnpref_Mu2 =0;
-  this -> _bit_mu . clear();
+//  this -> _bit_mu . clear();
 
 
   this -> _tauPt2  = 0;
@@ -336,7 +336,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tTauIsMatched2 = 0;
   this -> _l1tTauBx2 = 0;
   this -> _IsUnpref_Tau2 =0;
-  this -> _bit_tau . clear();
+//  this -> _bit_tau . clear();
 
 }
 

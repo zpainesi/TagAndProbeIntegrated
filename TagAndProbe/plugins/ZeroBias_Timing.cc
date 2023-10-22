@@ -616,7 +616,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                             const GlobalAlgBlk& ugt =  *bxUgtIt;
                             for(int indeX=0; indeX<506; indeX++)
                               {
-                                _bit_tau[indeX] =  ugt.getAlgoDecisionFinal(indeX);
+                                _bit_tau{indeX} =  ugt.getAlgoDecisionFinal(indeX);
                                 if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
                               }
                         }                 

@@ -285,7 +285,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tJetIso2     = 0;
   this -> _l1tJetIsMatched2 = 0;
   this -> _IsUnpref_Jet2 =0;
-  this -> _bit_jet =0;
+  this -> _bit_jet . clear();
 
 
   this -> _metEt2  = -1.;
@@ -310,7 +310,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tEgIsMatched2 = 0;
   this -> _l1tEgBx2        = 0;
   this -> _IsUnpref_Eg2 =0;
- this -> _bit_eg =0;
+ this -> _bit_eg . clear();
 
 
   this -> _muPt2  = 0;
@@ -323,7 +323,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tMuIsMatched2 = 0;
   this -> _l1tMuBx2 = 0;
   this -> _IsUnpref_Mu2 =0;
-  this -> _bit_mu =0;
+  this -> _bit_mu . clear();
 
 
   this -> _tauPt2  = 0;
@@ -336,7 +336,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tTauIsMatched2 = 0;
   this -> _l1tTauBx2 = 0;
   this -> _IsUnpref_Tau2 =0;
-  this -> _bit_tau =0;
+  this -> _bit_tau . clear();
 
 }
 
@@ -616,7 +616,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                             const GlobalAlgBlk& ugt =  *bxUgtIt;
                             for(int indeX=0; indeX<506; indeX++)
                               {
-                                _bit_tau{indeX} =  ugt.getAlgoDecisionFinal(indeX);
+                                _bit_tau[indeX] =  ugt.getAlgoDecisionFinal(indeX);
                                 if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
                               }
                         }                 

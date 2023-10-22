@@ -336,7 +336,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tTauIsMatched2 = 0;
   this -> _l1tTauBx2 = 0;
   this -> _IsUnpref_Tau2 =0;
-  this -> _bit_tau . clear();
+ // this -> _bit_tau . clear();
 
 }
 

@@ -115,7 +115,7 @@ ULong64_t _indexevents5;
   Int_t   _l1tTauIsMatched2;
   Int_t _l1tTauBx2;
   Int_t _IsUnpref_Tau2;
-  Int_t _bit_tau{506};
+  Int_t _bit_tau[506];
 
 
   float _jetPt2;
@@ -129,7 +129,7 @@ ULong64_t _indexevents5;
   Int_t  _l1tJetIsMatched2;
   Int_t    _l1tJetBx2;
   Int_t _IsUnpref_Jet2;
-  Int_t _bit_jet{506};
+  Int_t _bit_jet[506];
 
   float _metEt2;
   float _metPhi2;
@@ -154,7 +154,7 @@ ULong64_t _indexevents5;
   Int_t   _l1tEgIsMatched2;
   Int_t    _l1tEgBx2;
   Int_t _IsUnpref_Eg2;
-  Int_t _bit_eg{506};
+  Int_t _bit_eg[506];
 
 
   float _muPt2;
@@ -167,7 +167,7 @@ ULong64_t _indexevents5;
   Int_t  _l1tMuIsMatched2;
   Int_t    _l1tMuBx2;
   Int_t _IsUnpref_Mu2;
-  Int_t _bit_mu{506};
+  Int_t _bit_mu[506];
 
 
 //// histos to be filled in the output

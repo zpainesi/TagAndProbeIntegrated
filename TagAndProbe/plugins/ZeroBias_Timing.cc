@@ -617,7 +617,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                             for(int indeX=0; indeX<506; indeX++)
                               {
                                 _bit_tau[indeX] =  ugt.getAlgoDecisionFinal(indeX);
-                                if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
+                            //    if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
                               }
                         }                 
                         _tauPt2=tau->pt();
@@ -664,6 +664,16 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                       const pat::Jet& jet = *jetIt;
                       if (deltaR(jet, l1tJet)<0.3)
                         { 
+
+                          for (BXVector<GlobalAlgBlk>::const_iterator bxUgtIt = ugtHandle->begin(ibx); bxUgtIt != ugtHandle->end(ibx) ; bxUgtIt++)
+                        {
+                            const GlobalAlgBlk& ugt =  *bxUgtIt;
+                            for(int indeX=0; indeX<506; indeX++)
+                              {
+                                _bit_jet[indeX] =  ugt.getAlgoDecisionFinal(indeX);
+                               // if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
+                              }
+                        }
 
                           _jetPt2=jet.pt();
                           _jetEta2=jet.eta();
@@ -715,6 +725,16 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                       const reco::GsfElectron& ele = *eleIt;
                       if (deltaR(ele, l1tEG)<0.3)
                         {
+
+                          for (BXVector<GlobalAlgBlk>::const_iterator bxUgtIt = ugtHandle->begin(ibx); bxUgtIt != ugtHandle->end(ibx) ; bxUgtIt++)
+                        {
+                            const GlobalAlgBlk& ugt =  *bxUgtIt;
+                            for(int indeX=0; indeX<506; indeX++)
+                              {
+                                _bit_eg[indeX] =  ugt.getAlgoDecisionFinal(indeX);
+                              //  if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
+                              }
+                        }
                           _l1tEgPt2=l1tEG.pt();
                           _l1tEgEta2=l1tEG.eta();
                           _l1tEgPhi2=l1tEG.phi();
@@ -768,6 +788,17 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                     const pat::MuonRef& mu = *muIt;
                     if (deltaR(*mu, l1tMu)<0.3)
                       {
+
+
+                        for (BXVector<GlobalAlgBlk>::const_iterator bxUgtIt = ugtHandle->begin(ibx); bxUgtIt != ugtHandle->end(ibx) ; bxUgtIt++)
+                        {
+                            const GlobalAlgBlk& ugt =  *bxUgtIt;
+                            for(int indeX=0; indeX<506; indeX++)
+                              {
+                                _bit_mu[indeX] =  ugt.getAlgoDecisionFinal(indeX);
+                              //  if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
+                              }
+                        }
                           _l1tMuPt2=l1tMu.pt();
                             _l1tMuEta2=l1tMu.eta();
                         _l1tMuPhi2=l1tMu.phi();

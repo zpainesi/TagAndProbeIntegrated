@@ -614,8 +614,10 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                         {
                             const GlobalAlgBlk& ugt =  *bxUgtIt;
                             for(int indeX=0; indeX<=506; indeX++)
-                              
-                            this -> _bit21(  ugt.getAlgoDecisionFinal(21) );  // L1_SingleMu22
+                              {
+                                this -> _bit_tau[indeX] =  ugt.getAlgoDecisionFinal(indeX);  // L1_SingleMu22
+                        
+                              }
                         }
                       }
                         _tauPt2=tau->pt();

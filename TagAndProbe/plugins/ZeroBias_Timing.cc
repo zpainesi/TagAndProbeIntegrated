@@ -619,7 +619,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                         
                               }
                         }
-                      }
+                      
                         _tauPt2=tau->pt();
                           _tauEta2=tau->eta();
                           _tauPhi2=tau->phi();

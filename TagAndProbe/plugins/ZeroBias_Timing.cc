@@ -336,7 +336,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tTauIsMatched2 = 0;
   this -> _l1tTauBx2 = 0;
   this -> _IsUnpref_Tau2 =0;
- // this -> _bit_tau . clear();
+  this -> _bit_tau . clear();
 
 }
 
@@ -610,17 +610,16 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                     const pat::TauRef& tau = *tauIt;
                     if (deltaR(*tau, l1tTau)<0.3)
                       {
+                      
                         for (BXVector<GlobalAlgBlk>::const_iterator bxUgtIt = ugtHandle->begin(ibx); bxUgtIt != ugtHandle->end(ibx) ; bxUgtIt++)
                         {
                             const GlobalAlgBlk& ugt =  *bxUgtIt;
-                            for(int indeX=0; indeX<=506; indeX++)
+                            for(int indeX=0; indeX<506; indeX++)
                               {
-                                this -> _bit_tau[indeX] =  ugt.getAlgoDecisionFinal(indeX);  // L1_SingleMu22
-                                std::cout<<" index= "<<indeX<<std::endl;
-                                std::cout<<"Bit= "<<ugt.getAlgoDecisionFinal(indeX)<<std::endl;
+                                _bit_tau[indeX] =  ugt.getAlgoDecisionFinal(indeX);
+                                if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
                               }
-                        }
-                      
+                        }                 
                         _tauPt2=tau->pt();
                           _tauEta2=tau->eta();
                           _tauPhi2=tau->phi();

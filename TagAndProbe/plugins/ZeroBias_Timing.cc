@@ -115,7 +115,7 @@ ULong64_t _indexevents5;
   Int_t   _l1tTauIsMatched2;
   Int_t _l1tTauBx2;
   Int_t _IsUnpref_Tau2;
-  std::vector<int> _bit_tau{506};
+  Int_t _bit_tau{506};
 
 
   float _jetPt2;
@@ -129,7 +129,7 @@ ULong64_t _indexevents5;
   Int_t  _l1tJetIsMatched2;
   Int_t    _l1tJetBx2;
   Int_t _IsUnpref_Jet2;
-  std::vector<int> _bit_jet{506};
+  Int_t _bit_jet{506};
 
   float _metEt2;
   float _metPhi2;
@@ -154,7 +154,7 @@ ULong64_t _indexevents5;
   Int_t   _l1tEgIsMatched2;
   Int_t    _l1tEgBx2;
   Int_t _IsUnpref_Eg2;
-  std::vector<int> _bit_eg{506};
+  Int_t _bit_eg{506};
 
 
   float _muPt2;
@@ -167,7 +167,7 @@ ULong64_t _indexevents5;
   Int_t  _l1tMuIsMatched2;
   Int_t    _l1tMuBx2;
   Int_t _IsUnpref_Mu2;
-  std::vector<int> _bit_mu{506};
+  Int_t _bit_mu{506};
 
 
 //// histos to be filled in the output
@@ -285,7 +285,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tJetIso2     = 0;
   this -> _l1tJetIsMatched2 = 0;
   this -> _IsUnpref_Jet2 =0;
-  this -> _bit_jet . clear();
+  this -> _bit_jet =0;
 
 
   this -> _metEt2  = -1.;
@@ -310,7 +310,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tEgIsMatched2 = 0;
   this -> _l1tEgBx2        = 0;
   this -> _IsUnpref_Eg2 =0;
-  this -> _bit_eg . clear();
+ this -> _bit_eg =0;
 
 
   this -> _muPt2  = 0;
@@ -323,7 +323,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tMuIsMatched2 = 0;
   this -> _l1tMuBx2 = 0;
   this -> _IsUnpref_Mu2 =0;
-  this -> _bit_mu . clear();
+  this -> _bit_mu =0;
 
 
   this -> _tauPt2  = 0;
@@ -336,7 +336,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tTauIsMatched2 = 0;
   this -> _l1tTauBx2 = 0;
   this -> _IsUnpref_Tau2 =0;
-  this -> _bit_tau . clear();
+  this -> _bit_tau =0;
 
 }
 

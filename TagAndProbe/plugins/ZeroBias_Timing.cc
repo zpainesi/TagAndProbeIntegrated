@@ -464,7 +464,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree2 -> Branch("l1tEgIsMatched", &_l1tEgIsMatched2);
   this -> _tree2 -> Branch("l1tEgBx", &_l1tEgBx2);
   this -> _tree2 -> Branch("IsUnprefirableEvent", &_IsUnpref_Eg2);
-  this -> _tree2 -> Branch("L1t_bit",&_bit_eg);
+  this -> _tree2 -> Branch("L1t_bit",_bit_eg);
 
   //branches of third tree (mu)
   this -> _tree3 -> Branch("EventNumber",  &_indexevents3);
@@ -480,7 +480,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree3 -> Branch("l1tMuIsMatched", &_l1tMuIsMatched2);
   this -> _tree3 -> Branch("l1tMuBx", &_l1tMuBx2);
   this -> _tree3 -> Branch("IsUnprefirableEvent", &_IsUnpref_Mu2);
-  this -> _tree3 -> Branch("L1t_bit",&_bit_mu);
+  this -> _tree3 -> Branch("L1t_bit",_bit_mu);
 
 
   //branches of fourth tree (jet)
@@ -498,7 +498,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree4 -> Branch("l1tJetIsMatched", &_l1tJetIsMatched2);
   this -> _tree4 -> Branch("l1tJetBx", &_l1tJetBx2);
   this -> _tree4 -> Branch("IsUnprefirableEvent", &_IsUnpref_Jet2);
-  this -> _tree4 -> Branch("L1t_bit",&_bit_jet);
+  this -> _tree4 -> Branch("L1t_bit",_bit_jet);
 
 
   //branches of fifth tree (taus)
@@ -516,7 +516,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree5 -> Branch("l1tTauIsMatched", &_l1tTauIsMatched2);
   this -> _tree5 -> Branch("l1tTauBx", &_l1tTauBx2);
   this -> _tree5 -> Branch("IsUnprefirableEvent", &_IsUnpref_Tau2);
-  this -> _tree5 -> Branch("L1t_bit",&_bit_tau);
+  this -> _tree5 -> Branch("L1t_bit",_bit_tau);
 
 
   return;

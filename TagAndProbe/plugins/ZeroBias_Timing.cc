@@ -75,7 +75,7 @@ private:
   virtual bool GetMETFilterDecision(const edm::Event& iEvent, edm::Handle<edm::TriggerResults> METFilterResults, TString studiedfilter);
   void Initialize();
 
-  TTree *_tree;
+ // TTree *_tree;
   TTree *_tree2;
   TTree *_tree3;
   TTree *_tree4;
@@ -85,98 +85,6 @@ private:
 
   // -------------------------------------
   // variables to be filled in output tree
-  ULong64_t _indexevents;
-  Int_t     _runNumber;
-  Int_t     _lumi;
-
-  std::vector<int> _bit21;  // L1_SingleMu22
-  std::vector<int> _bit25;  // L1_SingleMu25
-  std::vector<int> _bit168; // L1_SingleEG36er2p5
-  std::vector<int> _bit169; // L1_SingleEG38er2p5
-  std::vector<int> _bit170; // L1_SingleEG40er2p5
-  std::vector<int> _bit171; // L1_SingleEG42er2p5
-  std::vector<int> _bit172; // L1_SingleEG45er2p5
-  std::vector<int> _bit178; // L1_SingleLooseIsoEG28er2p5
-  std::vector<int> _bit192; // L1_SingleIsoEG30er2p5
-  std::vector<int> _bit194; // L1_SingleIsoEG32er2p5
-  std::vector<int> _bit196; // L1_SingleIsoEG34er2p5
-  std::vector<int> _bit218; // L1_DoubleEG_25_12_er2p5
-  std::vector<int> _bit219; // L1_DoubleEG_25_12_er2p5
-  std::vector<int> _bit220; // L1_DoubleEG_25_12_er2p5
-  std::vector<int> _bit262; // L1_SingleIsoTau32er2p1
-  std::vector<int> _bit263; // L1_SingleTau70er2p1
-  std::vector<int> _bit264; // L1_SingleTau120er2p1
-  std::vector<int> _bit267; // L1_DoubleTau70er2p1
-  std::vector<int> _bit270; // L1_DoubleIsoTau32er2p1
-  std::vector<int> _bit271; // L1_DoubleIsoTau34er2p1
-  std::vector<int> _bit272; // L1_DoubleIsoTau35er2p1
-  std::vector<int> _bit273; // L1_DoubleIsoTau36er2p1
-  std::vector<int> _bit309; // L1_SingleJet35
-  std::vector<int> _bit310; // L1_SingleJet60
-  std::vector<int> _bit398; // L1_HTT120er
-  std::vector<int> _bit418; // L1_ETMHF70
-  std::vector<int> _bit420; // L1_ETMHF90
-  std::vector<int> _bit459; // L1_ZeroBias
-  std::vector<int> _bit478; // L1_LastCollisionInTrain
-  std::vector<int> _bit479; // L1_FirstCollisionInTrain
-  std::vector<int> _bit480; // L1_FirstCollisionInOrbit
-
-  std::vector<float> _tauPt;
-  std::vector<float> _tauEta;
-  std::vector<float> _tauPhi;
-
-  std::vector< std::vector<float> > _l1tTauPt;
-  std::vector< std::vector<float> > _l1tTauEta;
-  std::vector< std::vector<float> > _l1tTauPhi;
-  std::vector< std::vector<int> >   _l1tTauQual;
-  std::vector< std::vector<int> >   _l1tTauIso;
-  std::vector< std::vector<int> >   _l1tTauIsMatched;
-
-  std::vector<float> _jetPt;
-  std::vector<float> _jetEta;
-  std::vector<float> _jetPhi;
-
-  std::vector< std::vector<float> > _l1tJetPt;
-  std::vector< std::vector<float> > _l1tJetEta;
-  std::vector< std::vector<float> > _l1tJetPhi;
-  std::vector< std::vector<int> >   _l1tJetQual;
-  std::vector< std::vector<int> >   _l1tJetIso;
-  std::vector< std::vector<int> >   _l1tJetIsMatched;
-
-  float _metEt;
-  float _metPhi;
-
-  std::vector< std::vector<short int> > _l1tSumType;
-  std::vector< std::vector<float> >     _l1tSumEt;
-  std::vector< std::vector<float> >     _l1tSumPhi;
-  std::vector< std::vector<float> >     _l1tSumIEt;
-  std::vector< std::vector<float> >     _l1tSumIPhi;
-
-  std::vector<float> _egPt;
-  std::vector<float> _egEta;
-  std::vector<float> _egPhi;
-  std::vector<int>   _egIsTight;
-  std::vector<int>   _egIsMedium;
-  std::vector<int>   _egIsLoose;
-
-  std::vector< std::vector<float> >  _l1tEgPt;
-  std::vector< std::vector<float> >  _l1tEgEta;
-  std::vector< std::vector<float> >  _l1tEgPhi;
-  std::vector< std::vector<int> >    _l1tEgIso;
-  std::vector< std::vector<int> >    _l1tEgQual;
-  std::vector< std::vector<int> >    _l1tEgIsMatched;
-  std::vector< std::vector<int> >    _l1tEgBx;
-
-
-  std::vector<float> _muPt;
-  std::vector<float> _muEta;
-  std::vector<float> _muPhi;
-
-  std::vector< std::vector<float> > _l1tMuPt;
-  std::vector< std::vector<float> > _l1tMuEta;
-  std::vector< std::vector<float> > _l1tMuPhi;
-  std::vector< std::vector<int> >   _l1tMuQual;
-  std::vector< std::vector<int> >   _l1tMuIsMatched;
 
 ///// variables to be filled in the second/third/fourth trees
 ULong64_t _indexevents2;
@@ -195,42 +103,10 @@ ULong64_t _indexevents5;
   Int_t     _runNumber5;
   Int_t     _lumi5;
 
-  Int_t _bit21_;  // L1_SingleMu22
-  Int_t _bit25_;  // L1_SingleMu25
-  Int_t _bit168_; // L1_SingleEG36er2p5
-  Int_t _bit169_; // L1_SingleEG38er2p5
-  Int_t _bit170_; // L1_SingleEG40er2p5
-  Int_t _bit171_; // L1_SingleEG42er2p5
-  Int_t _bit172_; // L1_SingleEG45er2p5
-  Int_t _bit178_; // L1_SingleLooseIsoEG28er2p5
-  Int_t _bit192_; // L1_SingleIsoEG30er2p5
-  Int_t _bit194_; // L1_SingleIsoEG32er2p5
-  Int_t _bit196_; // L1_SingleIsoEG34er2p5
-  Int_t _bit218_; // L1_DoubleEG_25_12_er2p5
-  Int_t _bit219_; // L1_DoubleEG_25_12_er2p5
-  Int_t _bit220_; // L1_DoubleEG_25_12_er2p5
-  Int_t _bit262_; // L1_SingleIsoTau32er2p1
-  Int_t _bit263_; // L1_SingleTau70er2p1
-  Int_t _bit264_; // L1_SingleTau120er2p1
-  Int_t _bit267_; // L1_DoubleTau70er2p1
-  Int_t _bit270_; // L1_DoubleIsoTau32er2p1
-  Int_t _bit271_; // L1_DoubleIsoTau34er2p1
-  Int_t _bit272_; // L1_DoubleIsoTau35er2p1
-  Int_t _bit273_; // L1_DoubleIsoTau36er2p1
-  Int_t _bit309_; // L1_SingleJet35
-  Int_t _bit310_; // L1_SingleJet60
-  Int_t _bit398_; // L1_HTT120er
-  Int_t _bit418_; // L1_ETMHF70
-  Int_t _bit420_; // L1_ETMHF90
-  Int_t _bit459_; // L1_ZeroBias
-  Int_t _bit478_; // L1_LastCollisionInTrain
-  Int_t _bit479_; // L1_FirstCollisionInTrain
-  Int_t _bit480_; // L1_FirstCollisionInOrbit
 
   float _tauPt2;
   float _tauEta2;
   float _tauPhi2;
-
   float _l1tTauPt2;
   float _l1tTauEta2;
   float _l1tTauPhi2;
@@ -238,14 +114,13 @@ ULong64_t _indexevents5;
   Int_t   _l1tTauIso2;
   Int_t   _l1tTauIsMatched2;
   Int_t _l1tTauBx2;
-
   Int_t _IsUnpref_Tau2;
+  std::vector<int> _bit_tau{506};
 
 
   float _jetPt2;
   float _jetEta2;
   float _jetPhi2;
-
   float _l1tJetPt2;
   float _l1tJetEta2;
   float _l1tJetPhi2;
@@ -253,8 +128,8 @@ ULong64_t _indexevents5;
   Int_t   _l1tJetIso2;
   Int_t  _l1tJetIsMatched2;
   Int_t    _l1tJetBx2;
-
   Int_t _IsUnpref_Jet2;
+  std::vector<int> _bit_jet{506};
 
   float _metEt2;
   float _metPhi2;
@@ -271,7 +146,6 @@ ULong64_t _indexevents5;
   Int_t   _egIsTight2;
   Int_t  _egIsMedium2;
   Int_t  _egIsLoose2;
-
   float  _l1tEgPt2;
   float  _l1tEgEta2;
   float  _l1tEgPhi2;
@@ -279,21 +153,21 @@ ULong64_t _indexevents5;
   Int_t   _l1tEgQual2;
   Int_t   _l1tEgIsMatched2;
   Int_t    _l1tEgBx2;
-
   Int_t _IsUnpref_Eg2;
+  std::vector<int> _bit_eg{506};
+
 
   float _muPt2;
   float _muEta2;
   float _muPhi2;
-
   float _l1tMuPt2;
   float _l1tMuEta2;
   float _l1tMuPhi2;
   Int_t   _l1tMuQual2;
   Int_t  _l1tMuIsMatched2;
   Int_t    _l1tMuBx2;
-
   Int_t _IsUnpref_Mu2;
+  std::vector<int> _bit_mu{506};
 
 
 //// histos to be filled in the output
@@ -384,99 +258,7 @@ void ZeroBias_Timing::beginRun(edm::Run const& iRun, edm::EventSetup const& iSet
 
 void ZeroBias_Timing::Initialize()
 {
-  this -> _indexevents = 0;
-  this -> _runNumber   = 0;
-  this -> _lumi        = 0;
-
-  this -> _bit21  . clear();
-  this -> _bit25  . clear();
-  this -> _bit168 . clear();
-  this -> _bit169 . clear();
-  this -> _bit170 . clear();
-  this -> _bit171 . clear();
-  this -> _bit172 . clear();
-  this -> _bit178 . clear();
-  this -> _bit192 . clear();
-  this -> _bit194 . clear();
-  this -> _bit196 . clear();
-  this -> _bit218 . clear();
-  this -> _bit219 . clear();
-  this -> _bit220 . clear();
-  this -> _bit262 . clear();
-  this -> _bit263 . clear();
-  this -> _bit264 . clear();
-  this -> _bit267 . clear();
-  this -> _bit270 . clear();
-  this -> _bit271 . clear();
-  this -> _bit272 . clear();
-  this -> _bit273 . clear();
-  this -> _bit309 . clear();
-  this -> _bit310 . clear();
-  this -> _bit398 . clear();
-  this -> _bit418 . clear();
-  this -> _bit420 . clear();
-  this -> _bit459 . clear();
-  this -> _bit478 . clear();
-  this -> _bit479 . clear();
-  this -> _bit480 . clear();
-
-  this -> _tauPt  . clear();
-  this -> _tauEta . clear();
-  this -> _tauPhi . clear();
-
-  this -> _l1tTauPt        . clear();
-  this -> _l1tTauEta       . clear();
-  this -> _l1tTauPhi       . clear();
-  this -> _l1tTauQual      . clear();
-  this -> _l1tTauIso       . clear();
-  this -> _l1tTauIsMatched . clear();
-
-  this -> _jetPt  . clear();
-  this -> _jetEta . clear();
-  this -> _jetPhi . clear();
-
-  this -> _l1tJetPt        . clear();
-  this -> _l1tJetEta       . clear();
-  this -> _l1tJetPhi       . clear();
-  this -> _l1tJetQual      . clear();
-  this -> _l1tJetIso       . clear();
-  this -> _l1tJetIsMatched . clear();
-
-  this -> _metEt  = -1.;
-  this -> _metPhi = -1.;
-
-  this -> _l1tSumType.clear();
-  this -> _l1tSumEt.clear();
-  this -> _l1tSumPhi.clear();
-  this -> _l1tSumIEt.clear();
-  this -> _l1tSumIPhi.clear();
-
-  this -> _egPt       . clear();
-  this -> _egEta      . clear();
-  this -> _egPhi      . clear();
-  this -> _egIsTight  . clear();
-  this -> _egIsMedium . clear();
-  this -> _egIsLoose  . clear();
-
-  this -> _l1tEgPt        . clear();
-  this -> _l1tEgEta       . clear();
-  this -> _l1tEgPhi       . clear();
-  this -> _l1tEgQual      . clear();
-  this -> _l1tEgIso       . clear();
-  this -> _l1tEgIsMatched . clear();
-  this -> _l1tEgBx        . clear();
-
-  this -> _muPt  . clear();
-  this -> _muEta . clear();
-  this -> _muPhi . clear();
-
-  this -> _l1tMuPt        . clear();
-  this -> _l1tMuEta       . clear();
-  this -> _l1tMuPhi       . clear();
-  this -> _l1tMuQual      . clear();
-  this -> _l1tMuIsMatched . clear();
-
-  //second tree (L1BX)
+  //second/third/fourth/fifth tree (L1BX)
   this -> _indexevents2 = 0;
   this -> _runNumber2   = 0;
   this -> _lumi2        = 0;
@@ -492,67 +274,22 @@ void ZeroBias_Timing::Initialize()
   this -> _indexevents5 = 0;
   this -> _runNumber5   = 0;
   this -> _lumi5        = 0;
-/*
-  this -> _bit21_  = 0;
-  this -> _bit25_  = 0;
-  this -> _bit168_ = 0;
-  this -> _bit169_ = 0;
-  this -> _bit170_ = 0;
-  this -> _bit171_ = 0;
-  this -> _bit172_ = 0;
-  this -> _bit178_ = 0;
-  this -> _bit192_ = 0;
-  this -> _bit194_ = 0;
-  this -> _bit196_ = 0;
-  this -> _bit218_ = 0;
-  this -> _bit219_ = 0;
-  this -> _bit220_ = 0;
-  this -> _bit262_ = 0;
-  this -> _bit263_ = 0;
-  this -> _bit264_ = 0;
-  this -> _bit267_ = 0;
-  this -> _bit270_ = 0;
-  this -> _bit271_ = 0;
-  this -> _bit272_ = 0;
-  this -> _bit273_ = 0;
-  this -> _bit309_ = 0;
-  this -> _bit310_ = 0;
-  this -> _bit398_ = 0;
-  this -> _bit418_ = 0;
-  this -> _bit420_ = 0;
-  this -> _bit459_ = 0;
-  this -> _bit478_ = 0;
-  this -> _bit479_ = 0;
-  this -> _bit480_ = 0;
 
-  this -> _tauPt2  = 0;
-  this -> _tauEta2 = 0;
-  this -> _tauPhi2 = 0;
-
-  this -> _l1tTauPt2       = 0;
-  this -> _l1tTauEta2      = 0;
-  this -> _l1tTauPhi2      = 0;
-  this -> _l1tTauQual2    = 0;
-  this -> _l1tTauIso2     = 0;
-  this -> _l1tTauIsMatched2 = 0;
-*/
   this -> _jetPt2  = 0;
   this -> _jetEta2 = 0;
   this -> _jetPhi2 = 0;
-
   this -> _l1tJetPt2        = 0;
   this -> _l1tJetEta2      = 0;
   this -> _l1tJetPhi2       = 0;
   this -> _l1tJetQual2   = 0;
   this -> _l1tJetIso2     = 0;
   this -> _l1tJetIsMatched2 = 0;
-
   this -> _IsUnpref_Jet2 =0;
+  this -> _bit_jet . clear();
 
 
   this -> _metEt2  = -1.;
   this -> _metPhi2 = -1.;
-
   this -> _l1tSumType2= 0;
   this -> _l1tSumEt2= 0;
   this -> _l1tSumPhi2= 0;
@@ -565,7 +302,6 @@ void ZeroBias_Timing::Initialize()
   this -> _egIsTight2  = 0;
   this -> _egIsMedium2 = 0;
   this -> _egIsLoose2  = 0;
-
   this -> _l1tEgPt2       = 0;
   this -> _l1tEgEta2     = 0;
   this -> _l1tEgPhi2       = 0;
@@ -573,36 +309,34 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tEgIso2   = 0;
   this -> _l1tEgIsMatched2 = 0;
   this -> _l1tEgBx2        = 0;
-
   this -> _IsUnpref_Eg2 =0;
+  this -> _bit_eg . clear();
 
 
   this -> _muPt2  = 0;
   this -> _muEta2 = 0;
   this -> _muPhi2 = 0;
-
   this -> _l1tMuPt2        = 0;
   this -> _l1tMuEta2     = 0;
   this -> _l1tMuPhi2       = 0;
   this -> _l1tMuQual2      = 0;
   this -> _l1tMuIsMatched2 = 0;
   this -> _l1tMuBx2 = 0;
-
   this -> _IsUnpref_Mu2 =0;
+  this -> _bit_mu . clear();
 
 
   this -> _tauPt2  = 0;
   this -> _tauEta2 = 0;
   this -> _tauPhi2 = 0;
-
   this -> _l1tTauPt2        = 0;
   this -> _l1tTauEta2     = 0;
   this -> _l1tTauPhi2       = 0;
   this -> _l1tTauQual2      = 0;
   this -> _l1tTauIsMatched2 = 0;
   this -> _l1tTauBx2 = 0;
-
   this -> _IsUnpref_Tau2 =0;
+  this -> _bit_tau . clear();
 
 }
 
@@ -716,14 +450,12 @@ void ZeroBias_Timing::beginJob()
   this -> _tree2 -> Branch("EventNumber",  &_indexevents2);
   this -> _tree2 -> Branch("RunNumber",  &_runNumber2);
   this -> _tree2 -> Branch("lumi",  &_lumi2);
-
   this -> _tree2 -> Branch("egPt",       &_egPt2);
   this -> _tree2 -> Branch("egEta",      &_egEta2);
   this -> _tree2 -> Branch("egPhi",      &_egPhi2);
   //this -> _tree2 -> Branch("egIsTight",  &_egIsTight2);
   //this -> _tree2 -> Branch("egIsMedium", &_egIsMedium2);
   //this -> _tree2 -> Branch("egIsLoose",  &_egIsLoose2);
-
   this -> _tree2 -> Branch("l1tEgPt",        &_l1tEgPt2);
   this -> _tree2 -> Branch("l1tEgEta",       &_l1tEgEta2);
   this -> _tree2 -> Branch("l1tEgPhi",       &_l1tEgPhi2);
@@ -732,16 +464,15 @@ void ZeroBias_Timing::beginJob()
   this -> _tree2 -> Branch("l1tEgIsMatched", &_l1tEgIsMatched2);
   this -> _tree2 -> Branch("l1tEgBx", &_l1tEgBx2);
   this -> _tree2 -> Branch("IsUnprefirableEvent", &_IsUnpref_Eg2);
+  this -> _tree2 -> Branch("L1t_bit",&_bit_eg);
 
   //branches of third tree (mu)
   this -> _tree3 -> Branch("EventNumber",  &_indexevents3);
   this -> _tree3 -> Branch("RunNumber",  &_runNumber3);
   this -> _tree3 -> Branch("lumi",  &_lumi3);
-
   this -> _tree3 -> Branch("muPt",  &_muPt2);
   this -> _tree3 -> Branch("muEta", &_muEta2);
   this -> _tree3 -> Branch("muPhi", &_muPhi2);
-
   this -> _tree3 -> Branch("l1tMuPt",  &_l1tMuPt2);
   this -> _tree3 -> Branch("l1tMuEta", &_l1tMuEta2);
   this -> _tree3 -> Branch("l1tMuPhi", &_l1tMuPhi2);
@@ -749,17 +480,16 @@ void ZeroBias_Timing::beginJob()
   this -> _tree3 -> Branch("l1tMuIsMatched", &_l1tMuIsMatched2);
   this -> _tree3 -> Branch("l1tMuBx", &_l1tMuBx2);
   this -> _tree3 -> Branch("IsUnprefirableEvent", &_IsUnpref_Mu2);
+  this -> _tree3 -> Branch("L1t_bit",&_bit_mu);
 
 
   //branches of fourth tree (jet)
   this -> _tree4 -> Branch("EventNumber",  &_indexevents4);
   this -> _tree4 -> Branch("RunNumber",  &_runNumber4);
   this -> _tree4 -> Branch("lumi",  &_lumi4);
-
   this -> _tree4 -> Branch("jetPt",  &_jetPt2);
   this -> _tree4 -> Branch("jetEta", &_jetEta2);
   this -> _tree4 -> Branch("jetPhi", &_jetPhi2);
-
   this -> _tree4 -> Branch("l1tJetPt",  &_l1tJetPt2);
   this -> _tree4 -> Branch("l1tJetEta", &_l1tJetEta2);
   this -> _tree4 -> Branch("l1tJetPhi", &_l1tJetPhi2);
@@ -768,18 +498,16 @@ void ZeroBias_Timing::beginJob()
   this -> _tree4 -> Branch("l1tJetIsMatched", &_l1tJetIsMatched2);
   this -> _tree4 -> Branch("l1tJetBx", &_l1tJetBx2);
   this -> _tree4 -> Branch("IsUnprefirableEvent", &_IsUnpref_Jet2);
-
+  this -> _tree4 -> Branch("L1t_bit",&_bit_jet);
 
 
   //branches of fifth tree (taus)
   this -> _tree5 -> Branch("EventNumber",  &_indexevents4);
   this -> _tree5 -> Branch("RunNumber",  &_runNumber4);
   this -> _tree5 -> Branch("lumi",  &_lumi4);
-
   this -> _tree5 -> Branch("tauPt",  &_tauPt2);
   this -> _tree5 -> Branch("tauEta", &_tauEta2);
   this -> _tree5 -> Branch("tauPhi", &_tauPhi2);
-
   this -> _tree5 -> Branch("l1tTauPt",  &_l1tTauPt2);
   this -> _tree5 -> Branch("l1tTauEta", &_l1tTauEta2);
   this -> _tree5 -> Branch("l1tTauPhi", &_l1tTauPhi2);
@@ -788,6 +516,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree5 -> Branch("l1tTauIsMatched", &_l1tTauIsMatched2);
   this -> _tree5 -> Branch("l1tTauBx", &_l1tTauBx2);
   this -> _tree5 -> Branch("IsUnprefirableEvent", &_IsUnpref_Tau2);
+  this -> _tree5 -> Branch("L1t_bit",&_bit_tau);
 
 
   return;
@@ -828,9 +557,6 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
 
   if (GetMETFilterDecision(iEvent,METFilterResults,"Flag_goodVertices"))
     {
-      //_indexevents = iEvent.id().event();
-      //_runNumber = iEvent.id().run();
-      //_lumi = iEvent.luminosityBlock();
       _indexevents2 = iEvent.id().event();
       _runNumber2 = iEvent.id().run();
       _lumi2 = iEvent.luminosityBlock();
@@ -867,7 +593,10 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
       edm::Handle< BXVector<l1t::Tau> >  L1TauHandle;
       try {iEvent.getByToken(_L1TauTag, L1TauHandle);}  catch (...) {;}
 
-      if(L1TauHandle.isValid() && tauHandle.isValid())
+      edm::Handle<GlobalAlgBlkBxCollection> ugtHandle;
+      try {iEvent.getByToken(_ugtTag, ugtHandle);}  catch (...) {;}
+
+      if(L1TauHandle.isValid() && tauHandle.isValid() && ugtHandle.isValid())
         {
           for (int ibx = L1TauHandle->getFirstBX(); ibx <= L1TauHandle->getLastBX(); ++ibx)
             {
@@ -881,6 +610,14 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                     const pat::TauRef& tau = *tauIt;
                     if (deltaR(*tau, l1tTau)<0.3)
                       {
+                        for (BXVector<GlobalAlgBlk>::const_iterator bxUgtIt = ugtHandle->begin(ibx); bxUgtIt != ugtHandle->end(ibx) ; bxUgtIt++)
+                        {
+                            const GlobalAlgBlk& ugt =  *bxUgtIt;
+                            for(int indeX=0; indeX<=506; indeX++)
+                              
+                            this -> _bit21(  ugt.getAlgoDecisionFinal(21) );  // L1_SingleMu22
+                        }
+                      }
                         _tauPt2=tau->pt();
                           _tauEta2=tau->eta();
                           _tauPhi2=tau->phi();

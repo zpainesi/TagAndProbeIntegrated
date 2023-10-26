@@ -234,7 +234,7 @@ ZeroBias_Timing::ZeroBias_Timing(const edm::ParameterSet& iConfig) :
   _muTag     (consumes<pat::MuonRefVector>           (iConfig.getParameter<edm::InputTag>("mu"))),
   _eleTag    (consumes<edm::View<reco::GsfElectron>> (iConfig.getParameter<edm::InputTag>("eG"))),
   _tauTag    (consumes<pat::TauRefVector>            (iConfig.getParameter<edm::InputTag>("tau"))),
-  _jetTag    (consumes<edm::View<pat::Jet>>          (iConfig.getParameter<edm::InputTag>("jet"))),
+  _jetTag    (consumes<edm::View<pat::Jet>>          (iConfig.getParameter<edm::InputTag>("slimmedJetsPuppi"))),
   _metTag    (consumes<pat::METCollection>           (iConfig.getParameter<edm::InputTag>("sum"))),
 
   _eleTightIdTag  (consumes<edm::ValueMap<bool>>     (iConfig.getParameter<edm::InputTag>("eleTightId"))),

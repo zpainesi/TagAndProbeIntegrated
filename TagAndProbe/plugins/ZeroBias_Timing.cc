@@ -116,6 +116,7 @@ ULong64_t _indexevents5;
   Int_t _l1tTauBx2;
   Int_t _IsUnpref_Tau2;
   Int_t _bit_tau[506];
+  Int_t L1FinalORtau;
 
 
   float _jetPt2;
@@ -130,6 +131,7 @@ ULong64_t _indexevents5;
   Int_t    _l1tJetBx2;
   Int_t _IsUnpref_Jet2;
   Int_t _bit_jet[506];
+  Int_t L1FinalORjet;
 
   float _metEt2;
   float _metPhi2;
@@ -155,6 +157,7 @@ ULong64_t _indexevents5;
   Int_t    _l1tEgBx2;
   Int_t _IsUnpref_Eg2;
   Int_t _bit_eg[506];
+  Int_t L1FinalOReg;
 
 
   float _muPt2;
@@ -168,6 +171,7 @@ ULong64_t _indexevents5;
   Int_t    _l1tMuBx2;
   Int_t _IsUnpref_Mu2;
   Int_t _bit_mu[506];
+  Int_t L1FinalORmu;
 
 
 //// histos to be filled in the output
@@ -234,7 +238,7 @@ ZeroBias_Timing::ZeroBias_Timing(const edm::ParameterSet& iConfig) :
   _muTag     (consumes<pat::MuonRefVector>           (iConfig.getParameter<edm::InputTag>("mu"))),
   _eleTag    (consumes<edm::View<reco::GsfElectron>> (iConfig.getParameter<edm::InputTag>("eG"))),
   _tauTag    (consumes<pat::TauRefVector>            (iConfig.getParameter<edm::InputTag>("tau"))),
-  _jetTag    (consumes<edm::View<pat::Jet>>          (iConfig.getParameter<edm::InputTag>("slimmedJetsPuppi"))),
+  _jetTag    (consumes<edm::View<pat::Jet>>          (iConfig.getParameter<edm::InputTag>("jet"))),
   _metTag    (consumes<pat::METCollection>           (iConfig.getParameter<edm::InputTag>("sum"))),
 
   _eleTightIdTag  (consumes<edm::ValueMap<bool>>     (iConfig.getParameter<edm::InputTag>("eleTightId"))),
@@ -285,6 +289,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tJetIso2     = 0;
   this -> _l1tJetIsMatched2 = 0;
   this -> _IsUnpref_Jet2 =0;
+  this -> L1FinalORjet =0;
 //  this -> _bit_jet . clear();
 
 
@@ -310,6 +315,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tEgIsMatched2 = 0;
   this -> _l1tEgBx2        = 0;
   this -> _IsUnpref_Eg2 =0;
+  this -> L1FinalOReg =0;
 // this -> _bit_eg . clear();
 
 
@@ -323,6 +329,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tMuIsMatched2 = 0;
   this -> _l1tMuBx2 = 0;
   this -> _IsUnpref_Mu2 =0;
+  this -> L1FinalORmu =0;
 //  this -> _bit_mu . clear();
 
 
@@ -336,6 +343,7 @@ void ZeroBias_Timing::Initialize()
   this -> _l1tTauIsMatched2 = 0;
   this -> _l1tTauBx2 = 0;
   this -> _IsUnpref_Tau2 =0;
+  this -> L1FinalORtau =0;
 //  this -> _bit_tau . clear();
 
 }
@@ -465,6 +473,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree2 -> Branch("l1tEgBx", &_l1tEgBx2);
   this -> _tree2 -> Branch("IsUnprefirableEvent", &_IsUnpref_Eg2);
   this -> _tree2 -> Branch("L1t_bit",&_bit_eg, "L1t_bit[506]/I");
+  this -> _tree2 -> Branch("L1FinalOR",&L1FinalOReg);
 
   //branches of third tree (mu)
   this -> _tree3 -> Branch("EventNumber",  &_indexevents3);
@@ -481,6 +490,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree3 -> Branch("l1tMuBx", &_l1tMuBx2);
   this -> _tree3 -> Branch("IsUnprefirableEvent", &_IsUnpref_Mu2);
   this -> _tree3 -> Branch("L1t_bit",&_bit_mu, "L1t_bit[506]/I");
+  this -> _tree3 -> Branch("L1FinalOR",&L1FinalORmu);
 
 
   //branches of fourth tree (jet)
@@ -499,6 +509,8 @@ void ZeroBias_Timing::beginJob()
   this -> _tree4 -> Branch("l1tJetBx", &_l1tJetBx2);
   this -> _tree4 -> Branch("IsUnprefirableEvent", &_IsUnpref_Jet2);
   this -> _tree4 -> Branch("L1t_bit",&_bit_jet, "L1t_bit[506]/I");
+  this -> _tree4 -> Branch("L1FinalOR",&L1FinalORjet);
+
 
 
   //branches of fifth tree (taus)
@@ -517,6 +529,7 @@ void ZeroBias_Timing::beginJob()
   this -> _tree5 -> Branch("l1tTauBx", &_l1tTauBx2);
   this -> _tree5 -> Branch("IsUnprefirableEvent", &_IsUnpref_Tau2);
   this -> _tree5 -> Branch("L1t_bit",&_bit_tau, "L1t_bit[506]/I");
+  this -> _tree5 -> Branch("L1FinalOR",&L1FinalORtau);
 
 
   return;
@@ -610,7 +623,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                     const pat::TauRef& tau = *tauIt;
                     if (deltaR(*tau, l1tTau)<0.3)
                       {
-                      
+                        bool L1FinalORtau=false;
                         for (BXVector<GlobalAlgBlk>::const_iterator bxUgtIt = ugtHandle->begin(ibx); bxUgtIt != ugtHandle->end(ibx) ; bxUgtIt++)
                         {
                             const GlobalAlgBlk& ugt =  *bxUgtIt;
@@ -618,6 +631,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                               {
                                 _bit_tau[indeX] =  ugt.getAlgoDecisionFinal(indeX);
                             //    if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
+                                L1FinalORtau = (L1FinalORtau || ugt.getAlgoDecisionFinal(indeX));
                               }
                         }                 
                         _tauPt2=tau->pt();
@@ -664,13 +678,14 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                       const pat::Jet& jet = *jetIt;
                       if (deltaR(jet, l1tJet)<0.3)
                         { 
-
+                          bool L1FinalORjet=false;
                           for (BXVector<GlobalAlgBlk>::const_iterator bxUgtIt = ugtHandle->begin(ibx); bxUgtIt != ugtHandle->end(ibx) ; bxUgtIt++)
                         {
                             const GlobalAlgBlk& ugt =  *bxUgtIt;
                             for(int indeX=0; indeX<506; indeX++)
                               {
                                 _bit_jet[indeX] =  ugt.getAlgoDecisionFinal(indeX);
+                                L1FinalORjet= (L1FinalORjet || ugt.getAlgoDecisionFinal(indeX));
                                // if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
                               }
                         }
@@ -725,13 +740,14 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                       const reco::GsfElectron& ele = *eleIt;
                       if (deltaR(ele, l1tEG)<0.3)
                         {
-
+                          bool L1FinalOReg=false;
                           for (BXVector<GlobalAlgBlk>::const_iterator bxUgtIt = ugtHandle->begin(ibx); bxUgtIt != ugtHandle->end(ibx) ; bxUgtIt++)
                         {
                             const GlobalAlgBlk& ugt =  *bxUgtIt;
                             for(int indeX=0; indeX<506; indeX++)
                               {
                                 _bit_eg[indeX] =  ugt.getAlgoDecisionFinal(indeX);
+                                L1FinalOReg= (L1FinalOReg || ugt.getAlgoDecisionFinal(indeX));
                               //  if(ugt.getAlgoDecisionFinal(indeX)==1) std::cout<<" index - bit = "<<indeX<<std::endl;
                               }
                         }

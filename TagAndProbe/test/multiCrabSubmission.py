@@ -62,26 +62,10 @@ def main():
 
         # Will submit one task for each of these input datasets.
         inputDatasets = [
-                            "/EphemeralZeroBias0/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias1/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias2/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias3/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias4/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias5/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias6/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias7/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias8/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias9/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias10/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias11/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias12/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias13/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias14/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias15/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias16/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias17/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias18/Run2023B-PromptReco-v1/MINIAOD",
-                            "/EphemeralZeroBias19/Run2023B-PromptReco-v1/MINIAOD"
+                            "/EGamma0/Run2024C-PromptReco-v1/MINIAOD",
+                            "/EGamma1/Run2024C-PromptReco-v1/MINIAOD",
+                            "/EGamma0/Run2024D-PromptReco-v1/MINIAOD",
+                            "/EGamma1/Run2024D-PromptReco-v1/MINIAOD"
            ]
 
         for inDS in inputDatasets:

@@ -41,6 +41,8 @@ process.load("RecoEgamma.ElectronIdentification.egmGsfElectronIDs_cff")
 process.egmGsfElectronIDs.physicsObjectSrc = cms.InputTag('slimmedElectrons')
 
 process.GlobalTag.globaltag = options.globalTag
+process.GlobalTag.globaltag = '140X_dataRun3_Prompt_v2'
+
 
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(

@@ -1,3 +1,6 @@
+!!!!!
+For Timing studies go to brach: prfi_bits
+
 # TagAndProbe
 Set of tools to evaluate eg/tau trigger performance on T&amp;P, and produce Layer-2 calibrations
 This is based on the following two prior tools:

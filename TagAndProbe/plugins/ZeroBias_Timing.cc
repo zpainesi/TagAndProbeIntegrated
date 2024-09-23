@@ -639,7 +639,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _l1tTauIsMatched2=1;
                           _l1tTauBx2=ibx;
                          _IsUnpref_Tau2=Flag_IsUnprefirable;
-     //                     this -> _tree5 -> Fill();
+                          this -> _tree5 -> Fill();
                            if(tau->pt()>40. && tau->pt()<60. && l1tTau.pt()>43. && l1tTau.pt()<63. && tau->eta()<2.1)_tauBxMatched->Fill(ibx); /////////// SOS  ////////////////
                           break;
                       }
@@ -695,7 +695,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                           _l1tJetIsMatched2=1;
                           _l1tJetBx2=ibx;
                           _IsUnpref_Jet2=Flag_IsUnprefirable;
-              //            this -> _tree4 -> Fill();
+                          this -> _tree4 -> Fill();
                            if(jet.pt()>90. && jet.pt()<160. && l1tJet.pt()>100. && l1tJet.pt()<150.)_jetBxMatched->Fill(ibx);
                           break;
                         }
@@ -820,7 +820,7 @@ void ZeroBias_Timing::analyze(const edm::Event& iEvent, const edm::EventSetup& e
                         _muEta2=mu->eta();
                         _muPhi2=mu->phi();
 
-     //                   this -> _tree3 -> Fill();
+                        this -> _tree3 -> Fill();
 
                         if(l1tMu.pt()>10. && l1tMu.pt()<21. && mu->pt()>8. && mu->pt()<25. )_muBxMatched_8_25->Fill(ibx);
                         if(l1tMu.pt()>22. && mu->pt()>20.)_muBxMatched_g20->Fill(ibx);
